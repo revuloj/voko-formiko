@@ -5,7 +5,7 @@ por instali kaj funkciigi la vortaron necesas:
 - publikaj programaroj: 
      o el la Apache-projekto: ant
      o el la Jakarta-projekto por la ftp-tasko: jakarta-oro, commons-net
-     o XSLT-transformilo, kiu komprenas XSLT 1.0 kaj 2.0: saxon8
+     o XSLT-transformilo, kiu komprenas XSLT 1.0 kaj 2.0: saxon8 aŭ saxon9
 
 - Vi kreu dosierujon por via vortaro, ekz. mia_vortaro/ kaj estas konsilinde, 
   agordeti tie per dosiero mia_vortaro/cfg/agordo kun la sekva enhavo:
