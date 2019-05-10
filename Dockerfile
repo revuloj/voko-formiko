@@ -6,8 +6,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 #   openssh-server 	&& mkdir -p /var/run/sshd 
 
+COPY bin/* /usr/local/bin/
+
 RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
+ENV REVO /home/formiko/revo
+ENV VOKO /home/formiko/voko
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 
@@ -17,7 +21,8 @@ RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && ln -s voko-grundo-master voko && rm master.zip 
 
 #USER formiko:users
-
+COPY ant ${VOKO}/ant
+COPY cfg ${REVO}/cfg
 
 # FARENDA:
 # uzu ant-regulon por krei respiro.jar...?

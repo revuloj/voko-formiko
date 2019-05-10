@@ -16,7 +16,7 @@
    <property name="v.voko.bin" location="${v.voko}/bin"/>
    <property name="v.bazo" location="${user.dir}"/>
    <property name="poshtprotokolo" location="${v.log}/processmail.log"/>
-
+   <property name="ssh-key" location="/run/secret/voko-formiko.ssh_key"/>
    <!-- speciala agordo por la redaktoservo -->
    <property file="${v.etc}/redaktoservo-agordo" prefix="srv."/>
 
@@ -75,28 +75,31 @@
 
    <target name="srv-preni-poshton" description="Prenas la retposhton de la redaktantoj ">
 
-     <!-- prenu liston de redaktantoj -->
+<!-- la sekvaj estas farataj intervale de tomocero, do ni forigos... 
+     redaktanto-listo eniru per docker-sekreto aŭ alivoje...
+-->
+
+     <!-- prenu liston de redaktantoj 
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">
        <property name="v.bazo" location="${v.bazo}"/>
        <target name="revo-redaktantoj"/>
-     </ant>
+     </ant -->
 
-     <!-- tushu poshtservilon -->
+     <!-- tushu poshtservilon 
      <exec dir="${v.bazo}" executable="${srv.ping}">
        <arg value="-qc5"/>
        <arg value="-i1"/>
        <arg value="${srv.poshtoservilo}"/>
-     </exec>
+     </exec -->
 
-     <!-- prenu retposhton kaj shovu al loka poshtfako -->
+     <!-- prenu retposhton kaj shovu al loka poshtfako 
      <exec dir="${v.bazo}" executable="${srv.fetchmail}"/>
      <exec dir="${v.bazo}" executable="${srv.sudo}">
        <arg value="${srv.sendmail}"/>
        <arg value="-q"/>
      </exec> 
-<!--     <exec dir="${v.bazo}" command="sudo /usr/sbin/sendmail -q"/> -->
 
-     <sleep seconds="3"/>
+     <sleep seconds="3"/ -->
 
      <available property="user-mail-file-exists" file="${srv.loka-poshto-dosiero}"/>
 
@@ -106,14 +109,21 @@
         if="user-mail-file-exists"
         description="Traktas retposhton de la redaktantoj post preno">
       
+      <!-- processmail estas en afido, do ni bezonas nun ssh por lanĉi 
       <exec dir="${v.bazo}" executable="${v.voko.bin}/processmail.pl"
-         output="${poshtprotokolo}" append="true"/>
+         output="${poshtprotokolo}" append="true"/ -->
 <!-- 
       <loadfile srcFile="${srv.poshtprotokolo}" property="poshtprotokolo"/>
       <echo>
          ${poshtprotokolo}
       </echo>
 -->
+    <sshexec host="afido"
+         username="afido"
+         keyfile="${ssh-key}"
+         commend="ls -l"/>
+         <!-- command="processmail.pl"/ -->
+
    </target>
 
    <target name="srv-refari-vortaron" depends="srv-preparo,srv-trakti-poshton"

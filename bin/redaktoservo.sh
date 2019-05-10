@@ -4,8 +4,8 @@ datetime=$(date +%Y%m%d_%H%M%S)
 
 cd ${REVO}
 
-while getopts "r:a:p:" OPT; do
-  case $OPT in
+while getopts "rap" OPT; do
+  case ${OPT} in
     r)
       command="ant -file ${VOKO}/ant/redaktoservo.xml srv-resumo 2>&1"
       echo -e "${command}\nTIME:" $(date)"\n"
@@ -24,7 +24,7 @@ while getopts "r:a:p:" OPT; do
   esac
 done
 
-log = "${HOME}/revolog/redsrv-${datetime}.log"
+log="${HOME}/revolog/redsrv-${datetime}.log"
 command="ant -file ${VOKO}/ant/redaktoservo.xml ${target} 2>&1 | tee ${log}"
 echo -e "${command}\nTIME:" $(date)"\n"
 exec ${command}
