@@ -1,0 +1,60 @@
+#!/bin/bash
+
+if [ $1 == '--help' ] || [ $1 == '-h' ] || [ $1 == '' ]
+then
+  cat << EOF
+
+  Formiko vokas la programon 'ant' kun la ĝusta dosiero depende
+  de la donita celo, kiu konsistas el prefikso kaj sufikso. Ekz.
+  
+    formiko inx-ordigo
+  
+  kreas la ordigitan indekson per la komando
+  
+    /usr/bin/ant -f ~/voko/ant/indeksoj inx-ordigo
+
+  Konataj prefiksoj estas inx- tez- art- med- red- .
+  Per sufikso '?' aŭ 'helpo' vi povas demandi liston
+  de celoj, ekz.:
+
+    formiko art-helpo
+  
+EOF
+  exit
+fi
+
+prefix=${1%%-*}
+suffix=${1#*-}
+echo "sufikso: '$suffix'"
+
+if [ $suffix == 'helpo' ] || [ $suffix == '?' ]
+then
+  #echo "help"
+  target=-projecthelp
+else
+  #echo "ne help"
+  target=$1
+fi  
+
+echo "celo: $target"
+
+case $prefix in
+inx)
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/indeksoj.xml $target
+  ;;
+tez)
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/tezauro.xml $target
+  ;;
+art)
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/artikoloj.xml $target
+  ;;
+med)
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/medio.xml $target
+  ;;
+red)
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/redaktilo.xml $target
+  ;;
+*)
+  echo "ERARO: Nekonata aŭ mankanta prefikso en celo '$1'!"
+  echo "Konataj prefiksoj estas inx- tez- art- med- red- ."
+esac
