@@ -16,7 +16,7 @@
    <property name="v.voko.bin" location="${v.voko}/bin"/>
    <property name="v.bazo" location="${user.dir}"/>
    <property name="poshtprotokolo" location="${v.log}/processmail.log"/>
-   <property name="ssh-key" location="/run/secret/voko-formiko.ssh_key"/>
+   <property name="ssh-key" location="/run/secrets/voko-formiko.ssh_key"/>
    <!-- speciala agordo por la redaktoservo -->
    <property file="${v.etc}/redaktoservo-agordo" prefix="srv."/>
 
@@ -26,14 +26,15 @@
    <property name="grep" location="/usr/bin/grep"/>
    <property name="resumo-filtro" value="1 message|messages|no mail|copy|tar-file-size|length|ftp|get|failed|total|dauxro"/>
 
+
    <target name="srv-agordo" description="eligas la agordeblajn variablojn por kontrolo">
       <echoproperties prefix="v."/>
       <echoproperties prefix="srv."/>
    </target>
 
 
-   <target name="srv-shlosu" description="shlosas la servon dum ghi laboras por eviti konkurencajn procedojn">
-     <fail message="La redaktoservo estas shlosita. Atendu ghis ghi finighis. Esceptokaze vi povas forigi ${srv.seruro}.">
+   <target name="srv-shlosu" description="shlosas la servon dum ĝi laboras por eviti konkurencajn procedojn">
+     <fail message="La redaktoservo estas shlosita. Atendu ĝis ĝi finiĝis. Esceptokaze vi povas forigi ${srv.seruro}.">
        <condition>
            <available file="${srv.seruro}"/>
        </condition>
@@ -193,17 +194,17 @@
    </target>
 
    <target name="srv-upload"
-      description="alshutas kaj malpakas la antauefaritajn tar-dosierojn che reta-vortaro.de">
+      description="alŝutas kaj malpakas la antaŭe faritajn tar-dosierojn ĉe reta-vortaro.de">
 
      <!-- forsendi respondojn al redaktantoj, necesas poshtkontrolo antau forsendo pro legitimigo! -->
       <!-- <exec dir="${v.bazo}" executable="${srv.fetchmail}">
         <arg value="-c"/>
         <arg value="post.strato.de"/>
       </exec> -->
-      <exec dir="${v.bazo}" executable="${srv.sudo}">
+      <!-- exec dir="${v.bazo}" executable="${srv.sudo}">
         <arg value="${srv.sendmail}"/>
         <arg value="-q"/>
-      </exec>
+      </exec -->
 
       <!-- sendi shanghojn de arhhivo al servilo -->
       <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">

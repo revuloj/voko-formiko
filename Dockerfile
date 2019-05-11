@@ -2,7 +2,7 @@ FROM openjdk:jre-slim
 MAINTAINER <diestel@steloj.de>
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    cron curl unzip ant libxalan2-java libsaxonhe-java \
+    cron ssh curl unzip ant libxalan2-java libsaxonhe-java \
 	&& rm -rf /var/lib/apt/lists/*
 #   openssh-server 	&& mkdir -p /var/run/sshd 
 
@@ -18,7 +18,8 @@ ENV VOKO /home/formiko/voko
 RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && unzip master.zip voko-grundo-master/xsl/* voko-grundo-master/dtd/* voko-grundo-master/cfg/* \
      voko-grundo-master/owl/voko.rdf \
-  && ln -s voko-grundo-master voko && rm master.zip 
+  && ln -s voko-grundo-master voko && rm master.zip  \
+  && mkdir -p revo && mkdir -p tmp/inx_tmp && mkdir -p log && chown -R formiko:users revo tmp log 
 
 #USER formiko:users
 COPY ant ${VOKO}/ant
@@ -34,6 +35,8 @@ COPY cfg ${REVO}/cfg
 
 ## https://stackoverflow.com/questions/37458287/how-to-run-a-cron-job-inside-a-docker-container
 RUN touch /var/log/cron.log
+
+HEALTHCHECK --interval=5m --timeout=3s CMD health_check_cron.sh 
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["cron","-f"]

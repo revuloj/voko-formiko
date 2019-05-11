@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+  sut: # test container
+    image: gcr.io/gcp-runtimes/container-structure-test
+    #build: https://github.com/GoogleContainerTools/container-structure-test.git#:deploy
+    command: test --image voko-formiko --config voko-formiko-test.yaml -v debug
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./tst/voko-formiko-test.yaml:/voko-formiko-test.yaml
+
+  formiko:
+    image: voko-formiko
+    build: https://github.com/revuloj/voko-formiko.git
+      # restart: always
+    volumes:
+      - formiko-revo:/home/formiko/revo 
+      - formiko-tmp:/home/formiko/tmp
+      - formiko-log:/home/formiko/log
+    secrets:
+      - voko-formiko.ssh_key
+    configs:
+      - source: voko-formiko.agordo-cron
+        #uid: '1001'
+        mode: 0644
+      - source: voko-formiko.agordo-redaktoservo
+        target: /home/formiko/etc/redaktoservo-agordo
+        mode: 0444
+
+secrets:
+
+  voko-formiko.ssh_key:
+    external: true
+
+  voko.redaktantoj:
+    #external: true
+    file: ${HOME}/etc/redaktantoj
+    
+configs:
+  # alternatice uzu file: ...
+  # por rekte lasi la agordon sur la docker-gastiganto
+  voko-formiko.agordo-cron:
+    external: true
+  voko-formiko.agordo-redaktoservo:
+    external: true
+
+volumes:
+  formiko-revo:
+  formiko-tmp:
+  formiko-log:
+  
+
+
