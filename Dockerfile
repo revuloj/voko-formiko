@@ -1,8 +1,8 @@
 FROM openjdk:jre-slim
-MAINTAINER <diestel@steloj.de>
+LABEL Author=<diestel@steloj.de>
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    cron ssh curl unzip ant libxalan2-java libsaxonhe-java \
+    curl unzip cron ssh libjsch-java ant ant-optional libxalan2-java libsaxonhe-java \
 	&& rm -rf /var/lib/apt/lists/*
 #   openssh-server 	&& mkdir -p /var/run/sshd 
 

@@ -24,6 +24,7 @@
    <property name="srv.seruro" location="${v.tmp}/redaktoservo-laboranta-do-shlosita"/>
    <property name="bash" location="/bin/bash"/>
    <property name="grep" location="/usr/bin/grep"/>
+   <property name="processmail" value="processmail.pl"/>
    <property name="resumo-filtro" value="1 message|messages|no mail|copy|tar-file-size|length|ftp|get|failed|total|dauxro"/>
 
 
@@ -34,7 +35,7 @@
 
 
    <target name="srv-shlosu" description="shlosas la servon dum ĝi laboras por eviti konkurencajn procedojn">
-     <fail message="La redaktoservo estas shlosita. Atendu ĝis ĝi finiĝis. Esceptokaze vi povas forigi ${srv.seruro}.">
+     <fail message="La redaktoservo estas ŝlosita. Atendu ĝis ĝi finiĝis. Esceptokaze vi povas forigi ${srv.seruro}.">
        <condition>
            <available file="${srv.seruro}"/>
        </condition>
@@ -50,11 +51,11 @@
      <touch file="${srv.seruro}"/>
    </target>
 
-   <target name="srv-malshlosu" description="malshlosas la servon post la laboro kaj permesas rekomencadon">
+   <target name="srv-malshlosu" description="malŝlosas la servon post la laboro kaj permesas rekomencadon">
      <delete file="${srv.seruro}" verbose="true"/>
    </target>
 
-   <target name="srv-malshlosu-postnokte" description="malshlosas la servon post kiam ghi ne malshlosighis post noktomezo. Tio okazas neregule pro eraroj ekz. nefunkcianta retkonekto." depends="srv-preparo">
+   <target name="srv-malshlosu-postnokte" description="malŝlosas la servon post kiam ĝi ne malŝlosighis post noktomezo. Tio okazas neregule pro eraroj ekz. nefunkcianta retkonekto." depends="srv-preparo">
      <delete verbose="true">
 	<fileset file="${srv.seruro}">
 	    <date datetime="${v.dato}" pattern="yyyyMMdd" when="before"/>
@@ -119,12 +120,17 @@
          ${poshtprotokolo}
       </echo>
 -->
-    <sshexec host="afido"
+    <!-- sshexec host="afido"
          username="afido"
          keyfile="${ssh-key}"
-         commend="ls -l"/>
-         <!-- command="processmail.pl"/ -->
+         command="${processmail}" / -->
 
+    <exec executable="ssh">
+      <arg value="-i"/>
+      <arg file="${ssh-key}"/>
+      <arg value="afido@afido"/>
+      <arg value="${processmail}"/>
+    </exec>
    </target>
 
    <target name="srv-refari-vortaron" depends="srv-preparo,srv-trakti-poshton"
