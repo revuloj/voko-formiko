@@ -23,8 +23,9 @@ EOF
   exit
 fi
 
-prefix=${1%%-*}
-suffix=${1#*-}
+last=${@: -1}
+prefix=${last%%-*}
+suffix=${last#*-}
 echo "sufikso: '$suffix'"
 
 if [ $suffix == 'helpo' ] || [ $suffix == '?' ]
@@ -33,7 +34,7 @@ then
   target=-projecthelp
 else
   #echo "ne help"
-  target=$1
+  target=$@
 fi  
 
 echo "celo: $target"

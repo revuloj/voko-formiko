@@ -177,26 +177,28 @@
    <target name="srv-refari-nur-artikolojn" depends="srv-preparo,srv-trakti-poshton"
       if="user-mail-file-exists"
       description = "refaras nur la redaktitajn artikolojn, ne la indeksojn post poshtotrakto">
-
+<!-->
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="cvs.dato" value="${v.dato}"/>
         <property name="cvs.tempo" value="${v.tempo}"/>
         <target name="cvs-tar"/>
      </ant>
-
+-->
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="artikoloj"/>
      </ant>
 
+<!--
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="revo.dato" value="${v.dato}"/>
-        <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo de la arkivo, do devas koincidi en revo-tar kaj revo-upload -->
+        <property name="revo.tempo" value="${v.tempo}"/> - uzata en la dosiernomo de la arkivo, do devas koincidi en revo-tar kaj revo-upload 
         <target name="revo-resendu-malplenajn"/>
         <target name="revo-tar"/>
      </ant>
+     -->
    </target>
 
    <target name="srv-upload"
