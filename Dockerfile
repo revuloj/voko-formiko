@@ -12,6 +12,7 @@ RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
 ENV REVO /home/formiko/revo
 ENV VOKO /home/formiko/voko
+ENV SAXONJAR /usr/share/java/Saxon-HE.jar
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 
