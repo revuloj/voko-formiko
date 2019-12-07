@@ -23,6 +23,7 @@
   <property name="v.outputformat" value="html"/>
 
   <property name="saxon" location="${ENV.SAXONJAR}"/>
+  <property name="git" location="/usr/bin/git"/>
 
   <!-- ial Formiko foje ne trovas Saxon per klaspado donita en la tasko mem,
       tial difinu mediovariablon CLASSPATH aldonante la Saxon-arkivon antau voki Formikon -->
@@ -97,7 +98,20 @@
     <cvs command="rm ${dosiero}.xml" dest="${v.bazo.xml}"/>
     <cvs command="ci -m&quot;forigo de ${dosiero}&quot; ${dosiero}.xml" dest="${v.bazo.xml}"/>
     <!-- -->
-    
+
+    <!-- forigu el git -->
+    <exec executable="${git}" dir="${v.fonto}">
+      <arg value="rm"/>
+      <arg value="${dosiero}.xml"/>
+    </exec>
+    <exec executable="${git}" dir="${v.fonto}">
+      <arg value="commit"/>
+      <arg value="-m"/>
+      <arg value="forigo de ${dosiero}"/>
+      <arg value="${dosiero}.xml"/>
+    </exec>
+    <!-- git push...: ni povas lasi tion al redaktoservo, kiu puŝos sekvafoje -->
+
     <delete file="${v.tmp}/art/${dosiero}.xml"/>
     <delete file="${v.tmp}/art/${dosiero}.html"/>
     <delete file="${v.bazo.art}/${dosiero}.html"/>
@@ -193,7 +207,7 @@ delete FROM art WHERE art_amrk = 'singult';
     </copy>
 
     <!-- kopiu plurajn el la shanghitaj -->
-    <copy todir="${v.bazo.art}">
+    <copy force="true" todir="${v.bazo.art}">
       <fileset dir="${v.tmp}/art" includes="*.html">
         <custom classname="de.steloj.respiro.DiffMaxFilesSelector" classpath="${v.voko.ant}/respiro.jar">
           <param name="targetDir" value="${v.bazo.art}"/>
