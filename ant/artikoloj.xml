@@ -87,6 +87,20 @@
 
   </target>
 
+
+
+  <target name="art-listo" depends="art-preparo" if="art-listo"
+    description="rekreas plurajn artikolojn laŭ listo legita el dosiero">
+    <loadfile property="artikoloj" srcFile="${art-listo}"/>
+
+    <xslt destdir="${v.tmp}/art" extension=".xml" useImplicitFileset="false"
+       force="true" style="${v.voko.xsl}/revo_tez.xsl" classpathref="saxon.classpath">
+       <filelist dir="${v.bazo.xml}" files="${artikoloj}"/>
+       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>    
+  </target>
+
+
   
   <target name="art-forigu-unu" depends="art-preparo" 
        description="forigas artikolon surdiske kaj el-db-e, donu $dosiero (sen '.xml') sur komandlinio"
@@ -167,7 +181,7 @@ delete FROM art WHERE art_amrk = 'singult';
        style="${v.voko.xsl}/revo_tez.xsl" force="true" classpathref="saxon.classpath">
         <custom classname="de.steloj.respiro.DateMaxFilesSelector" classpath="${v.voko.ant}/respiro.jar">
           <param name="datetime" value="${v.antau_jaro}"/>
-	  <param name="pattern" value="yyyy-MM-dd HH:mm"/>
+	        <param name="pattern" value="yyyy-MM-dd HH:mm"/>
           <param name="when" value="before"/>
           <param name="maxFiles" value="50"/> <!-- aktualigu maksimume 50 malnovajn dosierojn -->
         </custom>
