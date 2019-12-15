@@ -27,7 +27,7 @@ RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
 COPY ant ${VOKO}/ant
 # ni poste kopios tion al ${REVO}/cfg
 # ĉar ${REVO} estos injektita nur ĉe lanĉo de Formiko
-COPY cfg/agordo /etc/revo.cfg
+COPY cfg/* /etc/
 
 # FARENDA:
 # uzu ant-regulon por krei respiro.jar...?

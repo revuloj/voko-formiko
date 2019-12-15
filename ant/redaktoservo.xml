@@ -201,6 +201,24 @@
      -->
    </target>
 
+   <target name="srv-art-listo" depends="srv-preparo"
+      if="art-listo"
+      description = "refaras nur la artikolojn el la listo donita kiel argumento art-listo">
+
+      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="art-listo"/>
+     </ant>
+
+     <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="revo.dato" value="${v.dato}"/>
+        <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
+        <target name="revo-tar-gh"/>
+        <target name="revo-upload"/>
+     </ant>
+   </target>   
+
    <target name="srv-upload"
       description="alŝutas kaj malpakas la antaŭe faritajn tar-dosierojn ĉe reta-vortaro.de">
 
@@ -236,8 +254,13 @@
    <target name="srv-servo-art" depends="srv-agordo,srv-shlosu,srv-preparo,srv-refari-nur-artikolojn,srv-upload,srv-malshlosu"
       if="user-mail-file-exists"
       description="Interkuro (nur artikoloj, ne indeksoj) de la servo: preni kaj trakti poshton, refari artikolojn, sendi dosierojn kaj respondojn">
-
    </target> 
+
+   <target name="srv-servo-art-listo" depends="srv-agordo,srv-preparo,srv-art-listo,srv-upload"
+      if="art-listo"
+      description="Interkuro (nur artikoloj, ne indeksoj) de la servo: preni kaj trakti ŝanĝitajn artikolojn el Git, refari artikolojn, sendi dosierojn">
+   </target> 
+
 
    <target name="srv-resumo" depends="srv-preparo">
 

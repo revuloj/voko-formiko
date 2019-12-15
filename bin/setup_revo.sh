@@ -10,7 +10,7 @@ fi
 
 if [ ! -e /home/formiko/revo/cfg/agordo ]; then
     mkdir -p /home/formiko/revo/cfg
-    cp /etc/revo.cfg /home/formiko/revo/cfg/agordo
+    cp /etc/agordo /home/formiko/revo/cfg/agordo
 fi
 
 if [ ! -e /home/formiko/revo/dtd ]; then

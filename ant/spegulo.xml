@@ -16,11 +16,13 @@
    <property file="${etc}/spegulo-agordo-revo" prefix="revo."/>
    <property file="${etc}/spegulo-tempo-revo" prefix="revo."/>
 
-
 <!-- ################### alshuto al CVS-servilo ############################ -->
 
 <!--   
-   Tiuj aperu en la agordo-dosiero
+
+   https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets
+
+   Tiuj aperu en la agordo-dosiero(j)
    <property name="cvs.pado" location="/home/revo/cvsroot/revo"/>
    <property name="cvs.cachefile" location="/home/revo/mirrordat/cvs.cache"/>
    <property name="cvs.servilo.host" value="cyberwebserver-21.de"/>
@@ -272,6 +274,18 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
      <length property="revo-tar-file-size" file="${revo.tmpdir}/${revo.filename}"/> 
      <echoproperties prefix="revo-tar-file"/>
 
+   </target>
+
+   <target name="revo-tar-gh" depends="revo-preparo" 
+       description="pakas kreitajn Revo-dosieron en tar-dosieron (en Github)">
+
+     <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
+         protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
+
+        <tar destfile="${tmp}/${revo.filename}" compression="gzip">
+
+        <tarfileset dir="${revo.pado}" includes="art/*.html"/>
+     </tar>
    </target>
 
    <target name="revo-ftp" unless="${revo.usescp}">
