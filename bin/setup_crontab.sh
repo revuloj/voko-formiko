@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 cronfile=/voko-formiko.agordo-cron
 

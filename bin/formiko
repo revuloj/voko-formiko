@@ -58,6 +58,9 @@ med)
 red)
   cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/redaktilo.xml $target
   ;;
+revo)
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/spegulo.xml $target
+  ;;  
 *)
   echo "ERARO: Nekonata aŭ mankanta prefikso en celo '$1'!"
   echo "Konataj prefiksoj estas srv- inx- tez- art- med- red- ."

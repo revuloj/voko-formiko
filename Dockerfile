@@ -1,8 +1,9 @@
 FROM openjdk:jre-slim
 LABEL Author=<diestel@steloj.de>
 
+# libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl unzip cron ssh libjsch-java ant ant-optional libxalan2-java libsaxonhe-java \
+    curl unzip cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional libxalan2-java libsaxonhe-java \
 	&& rm -rf /var/lib/apt/lists/*
 #   openssh-server 	&& mkdir -p /var/run/sshd 
 
