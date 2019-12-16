@@ -4,7 +4,9 @@ LABEL Author=<diestel@steloj.de>
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl unzip cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional libxalan2-java libsaxonhe-java \
-	&& rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/* \
+  && ln -s /usr/share/java/commons-net.jar /usr/share/ant/lib/commons-net.jar \
+  && ln -s /usr/share/java/oro.jar /usr/share/ant/lib/oro.jar
 #   openssh-server 	&& mkdir -p /var/run/sshd 
 
 COPY bin/* /usr/local/bin/
