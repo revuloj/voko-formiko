@@ -1,10 +1,13 @@
 #!/bin/bash
 set -x
 
-# https://stackoverflow.com/questions/36054419/eot-in-conditional-section-of-bash-script
-
-# la servo-nomo por aliri Sesion tra "docker swarm ingress"
-FTP_SERVER=172.20.0.1
+# https://docs.docker.com/v17.09/engine/swarm/networking/
+# https://neuvector.com/network-security/docker-swarm-container-networking/
+# https://docs.docker.com/compose/compose-file/#networks
+#
+# la servo-nomo por aliri Sesion tra "docker swarm ingress" ... ne funkcias de interne ŝajne,
+# sed funkcias al gw_bridge:
+FTP_SERVER=sesio
 FTP_USER=sesio
 FTP_PASSWD=$(cat /run/secrets/voko-sesio.ftp_password)
 
