@@ -9,10 +9,20 @@ set -x
 # sed funkcias al gw_bridge:
 FTP_SERVER=sesio
 FTP_USER=sesio
-FTP_PASSWD=$(cat /run/secrets/voko-sesio.ftp_password)
+
+if [ -e /run/secrets/voko-sesio.ftp_password ]; then
+  FTP_PASSWD=$(cat /run/secrets/voko-sesio.ftp_password)
+else
+  #ls /secrets/*
+  FTP_PASSWD=$(cat /secrets/voko-sesio/ftp_password)
+fi  
 
 CGI_USER=araneo
-CGI_PASSWD=$(cat /run/secrets/voko-araneo.cgi_password)
+if [ -e /run/secrets/voko-araneo.cgi_password ]; then
+  CGI_PASSWD=$(cat /run/secrets/voko-araneo.cgi_password)
+else
+  CGI_PASSWD=$(cat /secrets/voko-araneo/cgi_password)
+fi  
 
 spegulo_agordo=/home/formiko/etc/spegulo-agordo-revo
 
