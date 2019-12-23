@@ -10,8 +10,11 @@ else
   export SECRETS=/run/secrets
 fi    
 
+mkdir -p /home/formiko/etc
+
 setup_revo.sh
 setup_upload.sh
+setup_redaktoservo.sh
 setup_crontab.sh
 
 exec "$@"

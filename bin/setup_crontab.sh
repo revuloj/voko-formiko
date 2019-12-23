@@ -1,14 +1,10 @@
 #!/bin/bash
 set -x
 
-ls -l /*formiko*
-cat /formiko-agordo-cron
+# debug
+ls -l /config/*
 
-if [ -e /voko-formiko.agordo-cron ]; then
-  cronfile=/voko-formiko.agordo-cron
-else
-  cronfile=/formiko-agordo-cron/voko-formiko.agordo-cron
-fi  
+cronfile=/config/voko-formiko.agordo-cron
 
 #chmod 0644 ${cronfile}
 crontab ${cronfile}

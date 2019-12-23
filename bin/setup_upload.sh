@@ -10,12 +10,16 @@ set -x
 FTP_SERVER=sesio
 FTP_USER=sesio
 
+# debug
 ls -l ${SECRETS}/*
 
 FTP_PASSWD=$(cat ${SECRETS}/voko-sesio.ftp_password)
 
 CGI_USER=araneo
 CGI_PASSWD=$(cat ${SECRETS}/voko-araneo.cgi_password)
+
+# debug
+ls -l /home/formiko/etc/*agordo*
 
 spegulo_agordo=/home/formiko/etc/spegulo-agordo-revo
 
