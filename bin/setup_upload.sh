@@ -10,19 +10,12 @@ set -x
 FTP_SERVER=sesio
 FTP_USER=sesio
 
-if [ -e /run/secrets/voko-sesio.ftp_password ]; then
-  FTP_PASSWD=$(cat /run/secrets/voko-sesio.ftp_password)
-else
-  #ls /secrets/*
-  FTP_PASSWD=$(cat /secrets/voko-sesio/ftp_password)
-fi  
+ls -l ${SECRETS}/*
+
+FTP_PASSWD=$(cat ${SECRETS}/voko-sesio.ftp_password)
 
 CGI_USER=araneo
-if [ -e /run/secrets/voko-araneo.cgi_password ]; then
-  CGI_PASSWD=$(cat /run/secrets/voko-araneo.cgi_password)
-else
-  CGI_PASSWD=$(cat /secrets/voko-araneo/cgi_password)
-fi  
+CGI_PASSWD=$(cat ${SECRETS}/voko-araneo.cgi_password)
 
 spegulo_agordo=/home/formiko/etc/spegulo-agordo-revo
 
@@ -46,4 +39,6 @@ resendo.user=${CGI_USER}
 resendo.password=${CGI_PASSWD}
 EOT
 
+else
+  echo "AVERTO: ${spegulo_agordo} mankas."
 fi

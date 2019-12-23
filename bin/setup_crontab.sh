@@ -1,7 +1,8 @@
 #!/bin/bash
 set -x
 
-ls /*formiko*
+ls -l /*formiko*
+cat /formiko-agordo-cron
 
 if [ -e /voko-formiko.agordo-cron ]; then
   cronfile=/voko-formiko.agordo-cron
