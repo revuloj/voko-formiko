@@ -92,6 +92,11 @@
 
 
   <target name="sql-zip" depends="sql-preparo" description="kondensigas la SQLite-datumbazon per ZIP">
+      <!-- forigu malnovajn --> 
+    <delete>
+      <fileset dir="${v.tgz}/" includes="revosql*.zip"/>
+    </delete>
+
      <zip destfile="${v.tgz}/revosql_${nun.dato}.zip" basedir="${v.sql}" includes="revo.db"/>
      <zip destfile="${v.tgz}/revosql-inx_${nun.dato}.zip" basedir="${v.sql}" includes="revo-inx.db"/>
   </target>
