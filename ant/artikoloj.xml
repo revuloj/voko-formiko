@@ -201,7 +201,7 @@ delete FROM art WHERE art_amrk = 'singult';
 
   <target name="art-tuto" depends="art-html"
        description="kopias shanghitajn artikolojn al la destin-dosierujo">
-    <copy todir="${v.bazo.art}">
+    <copy force="true" todir="${v.bazo.art}">
       <fileset dir="${v.tmp}/art" includes="*.html">
         <different targetdir="${v.bazo.art}" ignoreFileTimes="true"/>
       </fileset>
