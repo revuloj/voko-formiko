@@ -90,7 +90,7 @@ rezulto en:
     <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
        <target name="inx-agordo"/>
-       <target name="inx-cvs"/>
+       <target name="inx-git"/>
        <target name="inx-eraroj"/>
        <target name="inx-relax"/>
        <target name="inx-html"/>
@@ -118,7 +118,7 @@ rezulto en:
     <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
        <target name="inx-agordo"/>
-       <target name="inx-cvs"/>
+       <target name="inx-git"/>
        <target name="inx-eraroj"/>
        <target name="inx-relax"/>
        <target name="inx-tuto"/>
@@ -176,7 +176,7 @@ rezulto en:
     <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
        <target name="inx-agordo"/>
-       <target name="inx-cvs"/>
+       <target name="inx-git"/>
        <target name="inx-eraroj"/>
        <target name="inx-relax"/>
        <target name="inx-tuto"/>
