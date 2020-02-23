@@ -29,7 +29,7 @@
 <!--  <property name="v.tmp" location="${v.bazo}/.tmp"/> -->
 
     <property name="sqlite3" location="/usr/bin/sqlite3"/>   
-    <property name="insert-blobs" location="${v.voko.bin}/insert-art-blobs.pl"/>
+    <property name="insert-blobs" location="/usr/local/bin/insert-art-blobs.sh"/>
 
     <property name="saxon" location="${ENV.SAXONJAR}"/>
     <path id="saxon.classpath">
