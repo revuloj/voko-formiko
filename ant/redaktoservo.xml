@@ -174,7 +174,7 @@
       </ant>
    </target>
 
-   <target name="srv-sqlite-db-komplete" depends="srv-preparo"
+   <target name="srv-sqlite-db-tuto" depends="srv-preparo"
       description = "kreas sqlite-datumbazon kun la enhavo de la vortaro / indeksoj tra ĉiuj paŝoj de XML ĝis ZIP">
       <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
@@ -187,10 +187,6 @@
       <ant antfile="${v.voko.ant}/sqlite.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="sql-tuto"/>
-      </ant>
-      <ant antfile="${v.voko.ant}/sqlite.xml" inheritAll="false">
-        <property name="v.bazo" location="${v.bazo}"/>
-        <target name="sql-zip"/>
       </ant>
    </target>   
 
