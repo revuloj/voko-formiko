@@ -16,7 +16,7 @@ on:
   pull_request:
 
 env:
-  # TODO: Change variable to your image's name.
+  # image name.
   IMAGE_NAME: voko-formiko
   ORGANIZATION: revuloj
 

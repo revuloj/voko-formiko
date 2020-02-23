@@ -3,7 +3,7 @@ LABEL Author=<diestel@steloj.de>
 
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl unzip cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional libxalan2-java libsaxonhe-java \
+    curl unzip cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional libxalan2-java libsaxonhe-java sqlite3 \
 	&& rm -rf /var/lib/apt/lists/* \
   && ln -s /usr/share/java/commons-net.jar /usr/share/ant/lib/commons-net.jar \
   && ln -s /usr/share/java/oro.jar /usr/share/ant/lib/oro.jar
@@ -21,7 +21,7 @@ ENV SAXONJAR /usr/share/java/Saxon-HE.jar
 
 RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && unzip master.zip voko-grundo-master/xsl/* voko-grundo-master/dtd/* voko-grundo-master/cfg/* \
-     voko-grundo-master/owl/voko.rdf \
+     voko-grundo-master/sql/* voko-grundo-master/owl/voko.rdf \
   && ln -s voko-grundo-master voko && rm master.zip  \
   && chown formiko ${VOKO}/xsl/revo_tez.xsl ${VOKO}/xsl/revohtml2.xsl ${VOKO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp && mkdir -p log && chown -R formiko:users revo tmp log 
