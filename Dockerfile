@@ -16,6 +16,7 @@ WORKDIR /home/formiko
 ENV REVO /home/formiko/revo
 ENV VOKO /home/formiko/voko
 ENV SAXONJAR /usr/share/java/Saxon-HE.jar
+ENV ANT_OPTS=-Xmx1000m
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 

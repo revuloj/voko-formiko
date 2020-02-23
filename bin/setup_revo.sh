@@ -16,3 +16,8 @@ fi
 if [ ! -e /home/formiko/revo/dtd ]; then
     cp -r /home/formiko/voko/dtd /home/formiko/revo/dtd
 fi
+
+if [ ! -e /home/formiko/tgz ]; then
+    mkdir -p /home/formiko/tgz
+    chown formiko.users /home/formiko/tgz    
+fi
