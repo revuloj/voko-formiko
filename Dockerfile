@@ -3,7 +3,7 @@ LABEL Author=<diestel@steloj.de>
 
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl unzip cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional libxalan2-java libsaxonhe-java sqlite3 \
+    curl unzip cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional libxalan2-java libsaxonb-java libsaxonhe-java sqlite3 \
 	&& rm -rf /var/lib/apt/lists/* \
   && ln -s /usr/share/java/commons-net.jar /usr/share/ant/lib/commons-net.jar \
   && ln -s /usr/share/java/oro.jar /usr/share/ant/lib/oro.jar
@@ -15,7 +15,8 @@ RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
 ENV REVO /home/formiko/revo
 ENV VOKO /home/formiko/voko
-ENV SAXONJAR /usr/share/java/Saxon-HE.jar
+#ENV SAXONJAR /usr/share/java/Saxon-HE.jar
+ENV SAXONJAR /usr/share/java/saxonb.jar
 ENV ANT_OPTS=-Xmx1000m
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
