@@ -40,7 +40,6 @@ rezulto en:
   <property name="v.bazo.eta" location="${v.bazo}/eta"/>
 
   <property name="v.bazo.xml" location="${v.bazo}/xml"/>
-  <property name="v.bazo.art" location="${v.bazo}/art"/>
   <property name="v.bazo.bld" location="${v.bazo}/bld"/>
 
   <property name="v.voko.bin" location="${v.voko}/bin"/>

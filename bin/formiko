@@ -41,7 +41,7 @@ echo "celo: $target"
 
 case $prefix in
 srv)
-  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/redaktoservo.xml $target
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/redaktoservo-docker.xml $target
   ;;
 inx)
   cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/indeksoj.xml $target

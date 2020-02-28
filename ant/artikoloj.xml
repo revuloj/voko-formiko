@@ -16,8 +16,11 @@
   <property name="v.bazo.inx" location="${v.bazo}/inx"/>
   <property name="v.bazo.xml" location="${v.bazo}/xml"/>
   <property name="v.bazo.art" location="${v.bazo}/art"/>
+  <property name="v.bazo.hst" location="${v.bazo}/hst"/>
   <property name="v.voko.bin" location="${v.voko}/bin"/>
   <property name="v.voko.xsl" location="${v.voko}/xsl"/>
+  <property name="v.fonto" location="${user.home}/revo-fonto/revo"/>
+
   <!-- property name="tmp" location="/home/revo/tmp/inx_tmp"/ -->
   <property name="v.tmp" location="${v.bazo}/.tmp"/>
   <property name="v.outputformat" value="html"/>
@@ -38,6 +41,8 @@
     <pathelement path="${java.class.path}"/>
   </path>
 
+  <mapper id="hst-out" type="glob" from="*.xml" to="${v.tmp}/hst/*.html"/>
+
   <target name="art-preparo">
     <!-- Create the time stamp -->
     <tstamp/>
@@ -46,8 +51,10 @@
     </tstamp>
     <!-- Create the build directory structure used by compile -->
     <mkdir dir="${v.bazo.art}" />
+    <mkdir dir="${v.bazo.hst}" />
     <mkdir dir="${v.tmp}" />
     <mkdir dir="${v.tmp}/art" />
+    <mkdir dir="${v.tmp}/hst" />
 
     <!-- chu necesas refari la dosieron indekso.xml? -->
     <!-- uptodate property="indekso.aktuala">
@@ -83,10 +90,22 @@
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
 
+    <apply executable="${v.voko.bin}/gitlogart.sh" logError="true" 
+      dir="${v.fonto}" relative="true" verbose="true">
+      <srcfile/>
+      <!-- fileset dir="${v.fonto}" includes="*.xml"/ -->
+      <filelist dir="${v.fonto}" files="${dosiero}.xml"/>
+      <mapper refid="hst-out"/>
+      <redirector>
+        <outputmapper refid="hst-out"/>
+      </redirector>      
+    </apply>
+
+
     <copy file="${v.tmp}/art/${dosiero}.html" tofile="${v.bazo.art}/${dosiero}.html"/>
+    <copy file="${v.tmp}/hst/${dosiero}.html" tofile="${v.bazo.hst}/${dosiero}.html"/>
 
   </target>
-
 
 
   <target name="art-listo" depends="art-preparo" if="art-listo"
@@ -98,8 +117,19 @@
        <filelist dir="${v.bazo.xml}" files="${artikoloj}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>    
-  </target>
 
+    <apply executable="${v.voko.bin}/gitlogart.sh" dir="${v.fonto}"
+       relative="true" logError="true" verbose="true">
+      <srcfile/>
+      <!-- fileset dir="${v.fonto}" includes="*.xml"/ -->
+      <filelist dir="${v.fonto}" files="${artikoloj}"/>
+      <mapper refid="hst-out"/>
+      <redirector>
+        <outputmapper refid="hst-out"/>
+      </redirector>      
+    </apply>
+
+  </target>
 
   
   <target name="art-forigu-unu" depends="art-preparo" 
@@ -128,7 +158,9 @@
 
     <delete file="${v.tmp}/art/${dosiero}.xml"/>
     <delete file="${v.tmp}/art/${dosiero}.html"/>
+    <delete file="${v.tmp}/hst/${dosiero}.html"/>
     <delete file="${v.bazo.art}/${dosiero}.html"/>
+    <delete file="${v.bazo.hst}/${dosiero}.html"/>
 <!--
     <sql
 	driver="com.mysql.jdbc.Driver"
@@ -161,6 +193,7 @@ WHERE drv_art_id in (SELECT art_id FROM art WHERE art_amrk = 'singult');
 
 delete FROM art WHERE art_amrk = 'singult';
 -->
+    
   </target>
 
 
@@ -182,8 +215,8 @@ delete FROM art WHERE art_amrk = 'singult';
         <custom classname="de.steloj.respiro.DateMaxFilesSelector" classpath="${v.voko.ant}/respiro.jar">
           <param name="datetime" value="${v.antau_jaro}"/>
 	        <param name="pattern" value="yyyy-MM-dd HH:mm"/>
-          <param name="when" value="before"/>
-          <param name="maxFiles" value="50"/> <!-- aktualigu maksimume 50 malnovajn dosierojn -->
+           <param name="when" value="before"/>
+           <param name="maxFiles" value="50"/> <!-- aktualigu maksimume 50 malnovajn dosierojn -->
         </custom>
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
@@ -194,9 +227,32 @@ delete FROM art WHERE art_amrk = 'singult';
        <param name="xml-ref-pado" expression="${v.bazo.xml}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
-
+<!--
+    <apply executable="${v.voko.bin}/gitlogart.sh" dir="${v.fonto}"  verbose="true"
+      logError="true" relative="true">
+      <srcfile/>
+      <fileset dir="${v.fonto}" includes="*.xml"/>
+      <mapper refid="hst-out"/>
+      <redirector>
+        <outputmapper refid="hst-out"/>
+      </redirector>      
+    </apply>
+-->
   </target>
 
+
+  <target name="art-hist" depends="art-preparo" 
+       description="kreas shangh-historiojn de la xml-dosieroj">
+    <echo message="traktante la tutan historion de la arĥivo, tio daŭros plurajn ĝis multajn minutojn!"/>
+    <exec executable="${v.voko.bin}/gitlogxml.sh" dir="${v.fonto}"
+	logError="true" output="${v.tmp}/inx_shanghoj_cxiuj.xml"/> 
+    <xslt in="${v.tmp}/inx_shanghoj_cxiuj.xml" destdir="${v.tmp}/hst" out="${v.tmp}/hst/.tempo" 
+        style="${v.voko.xsl}/hst_html.xsl"
+        classpathref="saxon.classpath">
+	    <param name="agordo-pado" expression="${v.cfg}"/>
+	    <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+  </target>
 
 
   <target name="art-tuto" depends="art-html"
@@ -204,6 +260,12 @@ delete FROM art WHERE art_amrk = 'singult';
     <copy force="true" todir="${v.bazo.art}">
       <fileset dir="${v.tmp}/art" includes="*.html">
         <different targetdir="${v.bazo.art}" ignoreFileTimes="true"/>
+      </fileset>
+    </copy>
+
+    <copy force="true" todir="${v.bazo.hst}">
+      <fileset dir="${v.tmp}/hst" includes="*.html">
+        <different targetdir="${v.bazo.hst}" ignoreFileTimes="true"/>
       </fileset>
     </copy>
   </target>
@@ -230,6 +292,17 @@ delete FROM art WHERE art_amrk = 'singult';
         </custom>
       </fileset>
     </copy>
+
+    <!-- artikol-historioj: kopiu plurajn el la shanghitaj -->
+    <copy force="true" todir="${v.bazo.hst}">
+      <fileset dir="${v.tmp}/hst" includes="*.html">
+        <custom classname="de.steloj.respiro.DiffMaxFilesSelector" classpath="${v.voko.ant}/respiro.jar">
+          <param name="targetDir" value="${v.bazo.hst}"/>
+          <param name="ignoreFileTimes" value="true"/>
+          <param name="maxFiles" value="500"/> <!-- aktualigu maksimume 500 artikolojn -->
+        </custom>
+      </fileset>
+    </copy>    
 
   </target>
 
