@@ -16,7 +16,7 @@
    <property name="v.voko.bin" location="${v.voko}/bin"/>
    <property name="v.bazo" location="${user.dir}"/>
    <property name="poshtprotokolo" location="${v.log}/processmail.log"/>
-
+   <property name="ssh-key" location="/run/secrets/voko-formiko.ssh_key"/>
    <!-- speciala agordo por la redaktoservo -->
    <property file="${v.etc}/redaktoservo-agordo" prefix="srv."/>
 
@@ -24,7 +24,9 @@
    <property name="srv.seruro" location="${v.tmp}/redaktoservo-laboranta-do-shlosita"/>
    <property name="bash" location="/bin/bash"/>
    <property name="grep" location="/usr/bin/grep"/>
+   <property name="processmail" value="processmail.pl"/>
    <property name="resumo-filtro" value="1 message|messages|no mail|copy|tar-file-size|length|ftp|get|failed|total|dauxro"/>
+
 
    <target name="srv-agordo" description="eligas la agordeblajn variablojn por kontrolo">
       <echoproperties prefix="v."/>
@@ -32,8 +34,8 @@
    </target>
 
 
-   <target name="srv-shlosu" description="shlosas la servon dum ghi laboras por eviti konkurencajn procedojn">
-     <fail message="La redaktoservo estas shlosita. Atendu ghis ghi finighis. Esceptokaze vi povas forigi ${srv.seruro}.">
+   <target name="srv-shlosu" description="shlosas la servon dum ĝi laboras por eviti konkurencajn procedojn">
+     <fail message="La redaktoservo estas ŝlosita. Atendu ĝis ĝi finiĝis. Esceptokaze vi povas forigi ${srv.seruro}.">
        <condition>
            <available file="${srv.seruro}"/>
        </condition>
@@ -49,11 +51,11 @@
      <touch file="${srv.seruro}"/>
    </target>
 
-   <target name="srv-malshlosu" description="malshlosas la servon post la laboro kaj permesas rekomencadon">
+   <target name="srv-malshlosu" description="malŝlosas la servon post la laboro kaj permesas rekomencadon">
      <delete file="${srv.seruro}" verbose="true"/>
    </target>
 
-   <target name="srv-malshlosu-postnokte" description="malshlosas la servon post kiam ghi ne malshlosighis post noktomezo. Tio okazas neregule pro eraroj ekz. nefunkcianta retkonekto." depends="srv-preparo">
+   <target name="srv-malshlosu-postnokte" description="malŝlosas la servon post kiam ĝi ne malŝlosighis post noktomezo. Tio okazas neregule pro eraroj ekz. nefunkcianta retkonekto." depends="srv-preparo">
      <delete verbose="true">
 	<fileset file="${srv.seruro}">
 	    <date datetime="${v.dato}" pattern="yyyyMMdd" when="before"/>
@@ -75,28 +77,31 @@
 
    <target name="srv-preni-poshton" description="Prenas la retposhton de la redaktantoj ">
 
-     <!-- prenu liston de redaktantoj -->
+<!-- la sekvaj estas farataj intervale de tomocero, do ni forigos... 
+     redaktanto-listo eniru per docker-sekreto aŭ alivoje...
+-->
+
+     <!-- prenu liston de redaktantoj 
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">
        <property name="v.bazo" location="${v.bazo}"/>
        <target name="revo-redaktantoj"/>
-     </ant>
+     </ant -->
 
-     <!-- tushu poshtservilon -->
+     <!-- tushu poshtservilon 
      <exec dir="${v.bazo}" executable="${srv.ping}">
        <arg value="-qc5"/>
        <arg value="-i1"/>
        <arg value="${srv.poshtoservilo}"/>
-     </exec>
+     </exec -->
 
-     <!-- prenu retposhton kaj shovu al loka poshtfako -->
+     <!-- prenu retposhton kaj shovu al loka poshtfako 
      <exec dir="${v.bazo}" executable="${srv.fetchmail}"/>
      <exec dir="${v.bazo}" executable="${srv.sudo}">
        <arg value="${srv.sendmail}"/>
        <arg value="-q"/>
      </exec> 
-<!--     <exec dir="${v.bazo}" command="sudo /usr/sbin/sendmail -q"/> -->
 
-     <sleep seconds="3"/>
+     <sleep seconds="3"/ -->
 
      <available property="user-mail-file-exists" file="${srv.loka-poshto-dosiero}"/>
 
@@ -106,14 +111,26 @@
         if="user-mail-file-exists"
         description="Traktas retposhton de la redaktantoj post preno">
       
+      <!-- processmail estas en afido, do ni bezonas nun ssh por lanĉi 
       <exec dir="${v.bazo}" executable="${v.voko.bin}/processmail.pl"
-         output="${poshtprotokolo}" append="true"/>
+         output="${poshtprotokolo}" append="true"/ -->
 <!-- 
       <loadfile srcFile="${srv.poshtprotokolo}" property="poshtprotokolo"/>
       <echo>
          ${poshtprotokolo}
       </echo>
 -->
+    <!-- sshexec host="afido"
+         username="afido"
+         keyfile="${ssh-key}"
+         command="${processmail}" / -->
+
+    <exec executable="ssh">
+      <arg value="-i"/>
+      <arg file="${ssh-key}"/>
+      <arg value="afido@afido"/>
+      <arg value="${processmail}"/>
+    </exec>
    </target>
 
    <target name="srv-refari-vortaron" depends="srv-preparo,srv-trakti-poshton"
@@ -157,43 +174,79 @@
       </ant>
    </target>
 
+   <target name="srv-sqlite-db-tuto" depends="srv-preparo"
+      description = "kreas sqlite-datumbazon kun la enhavo de la vortaro / indeksoj tra ĉiuj paŝoj de XML ĝis ZIP">
+      <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="inx-eltiro"/>
+      </ant>
+      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="art-tuto"/>
+      </ant>
+      <ant antfile="${v.voko.ant}/sqlite.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="sql-tuto"/>
+      </ant>
+   </target>   
+
    <target name="srv-refari-nur-artikolojn" depends="srv-preparo,srv-trakti-poshton"
       if="user-mail-file-exists"
       description = "refaras nur la redaktitajn artikolojn, ne la indeksojn post poshtotrakto">
-
+<!-->
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="cvs.dato" value="${v.dato}"/>
         <property name="cvs.tempo" value="${v.tempo}"/>
         <target name="cvs-tar"/>
      </ant>
-
+-->
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="artikoloj"/>
      </ant>
 
+<!--
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="revo.dato" value="${v.dato}"/>
-        <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo de la arkivo, do devas koincidi en revo-tar kaj revo-upload -->
+        <property name="revo.tempo" value="${v.tempo}"/> - uzata en la dosiernomo de la arkivo, do devas koincidi en revo-tar kaj revo-upload 
         <target name="revo-resendu-malplenajn"/>
         <target name="revo-tar"/>
      </ant>
+     -->
    </target>
 
+   <target name="srv-art-listo" depends="srv-preparo"
+      if="art-listo"
+      description = "refaras nur la artikolojn el la listo donita kiel argumento art-listo">
+
+      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="art-listo"/>
+     </ant>
+
+     <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="revo.dato" value="${v.dato}"/>
+        <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
+        <target name="revo-tar-gh"/>
+        <target name="revo-upload"/>
+     </ant>
+   </target>   
+
    <target name="srv-upload"
-      description="alshutas kaj malpakas la antauefaritajn tar-dosierojn che reta-vortaro.de">
+      description="alŝutas kaj malpakas la antaŭe faritajn tar-dosierojn ĉe reta-vortaro.de">
 
      <!-- forsendi respondojn al redaktantoj, necesas poshtkontrolo antau forsendo pro legitimigo! -->
       <!-- <exec dir="${v.bazo}" executable="${srv.fetchmail}">
         <arg value="-c"/>
         <arg value="post.strato.de"/>
       </exec> -->
-      <exec dir="${v.bazo}" executable="${srv.sudo}">
+      <!-- exec dir="${v.bazo}" executable="${srv.sudo}">
         <arg value="${srv.sendmail}"/>
         <arg value="-q"/>
-      </exec>
+      </exec -->
 
       <!-- sendi shanghojn de arhhivo al servilo -->
       <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">
@@ -217,8 +270,13 @@
    <target name="srv-servo-art" depends="srv-agordo,srv-shlosu,srv-preparo,srv-refari-nur-artikolojn,srv-upload,srv-malshlosu"
       if="user-mail-file-exists"
       description="Interkuro (nur artikoloj, ne indeksoj) de la servo: preni kaj trakti poshton, refari artikolojn, sendi dosierojn kaj respondojn">
-
    </target> 
+
+   <target name="srv-servo-art-listo" depends="srv-agordo,srv-preparo,srv-art-listo,srv-upload"
+      if="art-listo"
+      description="Interkuro (nur artikoloj, ne indeksoj) de la servo: preni kaj trakti ŝanĝitajn artikolojn el Git, refari artikolojn, sendi dosierojn">
+   </target> 
+
 
    <target name="srv-resumo" depends="srv-preparo">
 
