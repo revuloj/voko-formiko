@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "Kreas la dosierstrukturon de VOKO el Voko-Iloj per la novaj strukturoj de voko-grundo kaj voko-formiko el Git."
-echo "Kelakj malmultaj skriptoj provizore ankoraŭ uziĝas el la malnova voko-svn (mirror.pl, processmail.pl)."
+echo "Kelkiaj malmultaj skriptoj provizore ankoraŭ uziĝas el la malnova voko-svn (mirror.pl, processmail.pl)."
+echo ""
 
 if [[ -z $VOKO || ! -d "$VOKO" ]]; then
     echo "Vi devas unue krei voko-dosierujon kaj difini variablon, ekzemple tiel:"
@@ -40,6 +41,7 @@ ln -s ${HOME}/voko-formiko/ant $VOKO/ant
 ln -s ${HOME}/voko-formiko/jav $VOKO/jav
 
 # kunmetu /bin/ el pluraj strukturoj: voko-grundo, voko-formiko, voko-svn
+mkdir $VOKO/bin/
 ln -s ${HOME}/voko-grundo/bin/alinomu.pl $VOKO/bin/
 ln -s ${HOME}/voko-grundo/bin/bedic_purigo.pl $VOKO/bin/
 ln -s ${HOME}/voko-grundo/bin/cfg2html.pl $VOKO/bin/
