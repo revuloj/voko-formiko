@@ -65,6 +65,7 @@ ln -s ${HOME}/voko-formiko/bin/gitlogart.sh $VOKO/bin/
 ln -s ${HOME}/voko-formiko/bin/jing2xml.sh $VOKO/bin/
 ln -s ${HOME}/voko-formiko/bin/jing2html.sh $VOKO/bin/
 
+# ankoraŭ la malnovaj...
 ln -s ${HOME}/voko-svn/bin/mirror.pl $VOKO/bin/
 ln -s ${HOME}/voko-svn/bin/redaktoservo.pl $VOKO/bin/
 ln -s ${HOME}/voko-svn/bin/processmail.pl $VOKO/bin/

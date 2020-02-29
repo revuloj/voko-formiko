@@ -1,15 +1,14 @@
-#!/usr/bin/perl -w
+#!/bin/bash
 
-my $jing_file = shift @ARGV ||
-  die "Necesas doni jing-eraro-dosieron sur komandlinio: $!\n";
+jing_file=$1 || ( echo "Necesas doni jing-eraro-dosieron sur komandlinio"; exit 1 )
 
-my $xml_dir = "./xml";
-my $ERROR_PREFIX = '^/([^:]+\.xml):([\d]+):([\d]+):';
+xml_dir="./xml"
+ERROR_PREFIX='^/([^:]+\.xml):([0-9]+):([0-9]+):'
 
 open IN, $jing_file ||
   die "Ne povis legi $jing_file: $!\n";
 
-print <<EOH;
+cat <<EOH
 <html>
   <head><title>Strukturaj neregulaĵoj trovitaj per RelaxNG (jing)</title></head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -35,35 +34,32 @@ print <<EOH;
    </p>
 EOH
 
-while (<IN>) {
-  if (m|$ERROR_PREFIX\s+(.*)|) {
-	my $file = $1;
-	my $line = $2;
-	my $col = $3;
-	my $error = $4;
-	output_error($file,$line,$col,$error);
-  } elsif (not eof(IN)) {
-	die "Okazis eraro, atendis dosiernomon, sed trovis: \"$_\"\n";
-  }	
-};
+while read -r line; do 
+  if [[ ${line} =~ ${ERROR_PREFIX}(.*) ]]; then
+	  file=${BASH_REMATCH[1]}
+	  line=${BASH_REMATCH[2]}
+	  col=${BASH_REMATCH[3]}
+	  error=${BASH_REMATCH[4]}
+    fn=$(basename -- "$file")
+    art=${fn%*.xml}
+    echo "<dt> <a target='precipa' href=\"../art/${art}.html\">${art}:${line}:${col}</a>:</dt>"
+    echo "<dd>${error}</dd>"
+  else
+	  echo "Okazis eraro, atendis dosiernomon, sed trovis: \"${line}\""
+    exit 1
+  fi
+done < ${jing_file}
 
-close IN;
 
-my $date = `date +"%Y-%m-%d %H:%M"`;
+date=`date +"%Y-%m-%d %H:%M"`
 
-print <<EOT;
+print <<EOT
   <p>
-    Generita je $date
+    Generita je ${date}
   </p>
   </body>
 </html>
 EOT
 
-sub output_error {
-  my ($file,$line,$col,$error) = @_;
-  $file = m|/([^/]+)\.xml|;
-  my $art = $1;
-  print "<dt> <a target='precipa' href=\"../art/$art.html\">$art:$line:$col</a>:</dt>\n";
-  print "<dd>$error</dd>\n";
-}
+
 

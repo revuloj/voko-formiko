@@ -29,7 +29,7 @@
   <property name="jing.errors.txt" location="${v.tmp}/relax_eraroj.txt"/>
   <property name="jing.errors.xml" location="${v.tmp}/relax_eraroj.xml"/>
   <property name="jing.errors.html" location="${v.tmp}/inx/relax_eraroj.html"/>
-  <property name="jing2xml" location="${v.voko.bin}/jing2xml.pl"/>
+  <property name="jing2xml" location="${v.voko.bin}/jing2xml.sh"/>
   <property name="gitlogxml2w" location="${v.voko.bin}/gitlogxml2w.sh"/>
   <property name="voko-relax" location="${v.voko}/dtd/vokoxml.rnc"/>
 
@@ -275,7 +275,7 @@
       <arg line="${artikoloj}"/>
     </java>
 
-    <exec executable="perl"
+    <exec executable="bash"
         output = "${jing.errors.xml}">
       <arg file="${jing2xml}"/>
       <arg file="${jing.errors.txt}"/>
