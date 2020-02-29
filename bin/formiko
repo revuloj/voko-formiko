@@ -64,7 +64,11 @@ revo)
 sql)
   cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/sqlite.xml $target
   ;;  
+vrt)
+  target=${target#*-}
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/vortaro.xml $target
+  ;;  
 *)
   echo "ERARO: Nekonata aŭ mankanta prefikso en celo '$1'!"
-  echo "Konataj prefiksoj estas srv- inx- tez- art- med- red- sql-."
+  echo "Konataj prefiksoj estas srv- inx- tez- art- med- red- sql- vrt-."
 esac
