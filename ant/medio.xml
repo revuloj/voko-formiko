@@ -87,11 +87,19 @@ rezulto en:
     <echoproperties prefix="v."/>
   </target>
 
-
+<!-- 
+  "bug" in saxonb from debian: 
+    - https://bugs.launchpad.net/ubuntu/+source/saxonb/+bug/412517 
+    - https://www.saxonica.com/html/documentation/using-xsl/xsltfromant.html
+    - https://www.saxonica.com/html/documentation/configuration/config-features.html
+-->
   <target name="med-kadro" depends="med-preparo" description="kreas index.hml kaj titolo.html el enhavo.xml">
     <xslt in="${v.voko.cfg}/enhavo.xml" out="${v.bazo}/index.html"
       style="${v.voko.xsl}/dok_enhavo.xsl" classpathref="saxon.classpath">
-      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+      <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                value="true"/>      
+      </factory>
     </xslt>
   </target>
 
