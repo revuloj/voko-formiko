@@ -25,7 +25,7 @@ ENV ANT_OPTS=-Xmx1000m
 
 RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && unzip master.zip voko-grundo-master/xsl/* voko-grundo-master/dtd/* voko-grundo-master/cfg/* \
-     voko-grundo-master/sql/* voko-grundo-master/owl/voko.rdf \
+     voko-grundo-master/dok/* voko-grundo-master/sql/* voko-grundo-master/owl/voko.rdf \
   && ln -s voko-grundo-master voko && rm master.zip \
   && chown formiko ${VOKO}/xsl/revo_tez.xsl ${VOKO}/xsl/revohtml2.xsl ${VOKO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp && mkdir -p log && chown -R formiko:users revo tmp log 
