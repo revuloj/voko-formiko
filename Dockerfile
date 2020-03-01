@@ -4,11 +4,12 @@ LABEL Author=<diestel@steloj.de>
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl unzip cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
-    libxalan2-java libsaxonb-java libsaxonhe-java sqlite3 bsdmainutils \
+    libxalan2-java libsaxonb-java trang sqlite3 bsdmainutils \
 	&& rm -rf /var/lib/apt/lists/* \
   && ln -s /usr/share/java/commons-net.jar /usr/share/ant/lib/commons-net.jar \
   && ln -s /usr/share/java/oro.jar /usr/share/ant/lib/oro.jar
 #   openssh-server 	&& mkdir -p /var/run/sshd 
+# libsaxonhe-java: havas problemon transformante multajn artikolojn: normalizationData.xml not found...
 
 COPY bin/* /usr/local/bin/
 
@@ -16,7 +17,7 @@ RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
 ENV REVO /home/formiko/revo
 ENV VOKO /home/formiko/voko
-# problemo kun normlaizeDAta.xml en Saxon-HE!
+# problemo kun normlaizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar
 ENV SAXONJAR /usr/share/java/saxonb.jar
 ENV ANT_OPTS=-Xmx1000m
