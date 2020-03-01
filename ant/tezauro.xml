@@ -74,8 +74,26 @@
      </xslt>
   </target>
 
+  <target name="tez-kontrolu-mrk" depends="tez-preparo,tez-retigo"
+     description="eltiras la markojn el la tezaŭro-dosiero kaj kontrolas unikecon">
+     <xslt in="${v.tmp}/tez_ret.xml" out="${v.tmp}/tez_mrk.xml"  style="${v.voko.xsl}/inx_markoj.xsl"/>
+<!--       classpathref="saxon.classpath">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      </xslt> -->
+      <exec executable="bash">
+        <arg value="-c"/>
+        <arg value="echo 'trovi duoblajn markojn en ${v.tmp}/tez_mrk.xml...'; sort ${v.tmp}/tez_mrk.xml | uniq -cd"/>
+      </exec>
 
-  <target name="tez-html" depends="tez-preparo,tez-retigo"
+      <exec executable="bash">
+        <arg value="-c"/>
+        <arg value="echo 'trovi malplenajn markojn en ${v.tmp}/tez_mrk.xml...'; grep '&quot;&quot;'  ${v.tmp}/tez_mrk.xml"/>
+      </exec>
+
+  </target>    
+
+
+  <target name="tez-html" depends="tez-preparo,tez-retigo,tez-kontrolu-mrk"
      description="kreas la HTML-dosierojn de la tezauro">
 
     <filter token="format" value="${v.outputformat}"/>

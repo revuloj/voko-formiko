@@ -103,6 +103,24 @@
 
   </target>
 
+  <target name="inx-kontrolu-mrk" depends="inx-preparo,inx-eltiro"
+     description="eltiras la markojn el la indeks-dosiero kaj kontrolas unikecon">
+     <xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/inx_mrk.xml"  style="${v.voko.xsl}/inx_markoj.xsl"/>
+<!--       classpathref="saxon.classpath">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      </xslt> -->
+      <exec executable="bash">
+        <arg value="-c"/>
+        <arg value="echo 'trovi duoblajn markojn en ${v.tmp}/inx_mrk.xml...'; sort ${v.tmp}/inx_mrk.xml | uniq -cd"/>
+      </exec>
+
+      <exec executable="bash">
+        <arg value="-c"/>
+        <arg value="echo 'trovi malplenajn markojn en ${v.tmp}/inx_mrk.xml...'; grep '&quot;&quot;'  ${v.tmp}/inx_mrk.xml"/>
+      </exec>
+
+  </target>  
+
   <target name="inx-kategorioj" depends="inx-preparo,inx-eltiro"
      description="eltiri la kapvortojn, tradukojn, fakindikojn ktp. el la indeks-dosiero">
      <xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/inx_kat.xml"  style="${v.voko.xsl}/inx_kategorioj.xsl"/>
