@@ -232,7 +232,7 @@ rezulto en:
 
   <target name="med-smb" depends="med-preparo"
        description="kopias simbolojn el voko">
-
+<!--
     <apply dir="${v.voko.smb}" executable="${mpost}" dest="${v.voko.smb}">
        <srcfile/>
        <fileset dir="${v.voko.smb}" includes="*.mp"
@@ -251,6 +251,7 @@ rezulto en:
        <fileset dir="${v.voko.smb}" includes="*.svg"/>
        <mapper type="glob" from="*.svg" to="*.png"/>
      </apply>
+-->
 
      <copy todir="${v.bazo.smb}">
       <fileset dir="${v.voko.smb}" casesensitive="yes">
@@ -297,6 +298,7 @@ rezulto en:
     </copy>
   </target>
 
+<!--
   <target name="med-eta" depends="med-preparo"
        description="kopias Revo-paĝojn por ekranetoj el voko">
     <copy todir="${v.bazo.eta}">
@@ -305,7 +307,7 @@ rezulto en:
       </fileset>
     </copy>
   </target>
-
+-->
 
   <target name="med-kls" depends="med-preparo"
         description="kreas liston de klasoj (vortlistoj) el rdf" >
@@ -318,7 +320,7 @@ rezulto en:
   </target>
 
 
-  <target name="med-medio" depends="med-preparo,med-kadro,med-bib,med-kls,med-dok,med-dtd,med-stl,med-smb,med-xsl,med-jsc,med-eta"
+  <target name="med-medio" depends="med-preparo,med-kadro,med-bib,med-kls,med-dok,med-dtd,med-stl,med-smb,med-xsl,med-jsc"
      description="(re)kreas la medion por la vortaro, dosierujoj cfg,dok,dtd,stl,smb,xsl kun enhavo"/>
 
 

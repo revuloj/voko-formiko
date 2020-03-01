@@ -1,3 +1,14 @@
+##### staĝo 1: Ni bezonas TeX kaj metapost por konverti simbolojn al png
+FROM silkeh/latex:small as metapost
+LABEL Author=<diestel@steloj.de>
+COPY mp2png.sh .
+RUN apk --update add curl unzip librsvg --no-cache && rm -f /var/cache/apk/* 
+RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
+  && unzip master.zip voko-grundo-master/smb/*.mp
+RUN cd voko-grundo-master && ../mp2png.sh # && cd ${HOME}
+
+
+##### staĝo 2: Ni bezonas Javon kaj Ant, Saxon ktp.
 FROM openjdk:jre-slim
 LABEL Author=<diestel@steloj.de>
 
@@ -17,6 +28,7 @@ RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
 ENV REVO /home/formiko/revo
 ENV VOKO /home/formiko/voko
+ENV GRUNDO /home/formiko/voko-grundo-master
 # problemo kun normlaizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar
 ENV SAXONJAR /usr/share/java/saxonb.jar
@@ -26,9 +38,10 @@ ENV ANT_OPTS=-Xmx1000m
 
 RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && unzip master.zip voko-grundo-master/xsl/* voko-grundo-master/dtd/* voko-grundo-master/cfg/* \
-     voko-grundo-master/dok/* voko-grundo-master/stl/* voko-grundo-master/sql/* voko-grundo-master/owl/voko.rdf \
-  && ln -s voko-grundo-master voko && rm master.zip \
-  && chown formiko ${VOKO}/xsl/revo_tez.xsl ${VOKO}/xsl/revohtml2.xsl ${VOKO}/xsl/revohtml.xsl \
+     voko-grundo-master/dok/* voko-grundo-master/jsc/* voko-grundo-master/stl/* \
+     voko-grundo-master/sql/* voko-grundo-master/owl/voko.rdf \
+  && ln -s ${GRUNDO} ${VOKO} && rm master.zip \
+  && chown formiko ${GRUNDO}/xsl/revo_tez.xsl ${GRUNDO}/xsl/revohtml2.xsl ${GRUNDO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp && mkdir -p log && chown -R formiko:users revo tmp log 
 
 #USER formiko:users
@@ -36,6 +49,7 @@ COPY ant ${VOKO}/ant
 # ni poste kopios tion al ${REVO}/cfg
 # ĉar ${REVO} estos injektita nur ĉe lanĉo de Formiko
 COPY cfg/* /etc/
+COPY --from=metapost --chown=root:root voko-grundo-master/smb/ /home/formiko/voko/smb/
 
 # FARENDA:
 # uzu ant-regulon por krei respiro.jar...?
