@@ -85,8 +85,11 @@
      <xslt in="${v.tmp}/tez_ret.xml" out="${v.tmp}/tez/.tempo"
        style="${v.voko.xsl}/tez_html_${v.outputformat}.xsl~"
        classpathref="saxon.classpath">
-       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-       <!-- param name="verbose" expression="'true'"/-->
+       <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                     value="true"/>      
+          <!-- param name="verbose" expression="'true'"/-->
+       </factory>
      </xslt>
   </target>
 
@@ -134,7 +137,10 @@
      <xslt in="${v.tmp}/tez_ret.xml" out="${v.tmp}/tez/.tempo2"
        style="${v.voko.xsl}/lst_html_${v.outputformat}.xsl~"
        classpathref="saxon.classpath">
-       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+       <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                     value="true"/>      
+       </factory>       
        <!-- param name="verbose" expression="'true'"/-->
      </xslt>
   </target>

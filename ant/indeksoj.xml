@@ -133,10 +133,13 @@
        filtering="true"/>
 
      <xslt in="${v.tmp}/inx_ord.xml" out="${v.tmp}/inx/.tempo"
-       style="${v.voko.xsl}/inx_html_${v.outputformat}.xsl~"
-       classpathref="saxon.classpath">
-	 <param name="agordo-pado" expression="${v.cfg}"/>
-	 <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        style="${v.voko.xsl}/inx_html_${v.outputformat}.xsl~"
+        classpathref="saxon.classpath">
+        <param name="agordo-pado" expression="${v.cfg}"/>
+        <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                     value="true"/>      
+        </factory>
      </xslt>
   </target>
 
@@ -161,9 +164,12 @@
 
     <!-- kreu paĝon de ŝanĝitaj kaj de novaj artikoloj (ambaŭ per sama xslt) -->
      <xslt in="${v.tmp}/inx_shanghoj.xml" out="${v.tmp}/inx/shanghoj.html"
-       style="${v.voko.xsl}/inx_shanghoj.xsl" classpathref="saxon.classpath">
-         <param name="agordo-pado" expression="${v.cfg}"/>
-         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+           style="${v.voko.xsl}/inx_shanghoj.xsl" classpathref="saxon.classpath">
+        <param name="agordo-pado" expression="${v.cfg}"/>
+        <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                     value="true"/>      
+        </facory>
      </xslt>
 
      <tstamp>
