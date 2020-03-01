@@ -169,7 +169,7 @@
         <factory name="net.sf.saxon.TransformerFactoryImpl">
           <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
                      value="true"/>      
-        </facory>
+        </factory>
      </xslt>
 
      <tstamp>
