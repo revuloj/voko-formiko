@@ -18,7 +18,7 @@ env:
   # image name.
   IMAGE_NAME: voko-formiko
   IMAGE_ENTRY: formiko
-  IMAGE_TEST: med-medio
+#  IMAGE_TEST: med-medio
   ORGANIZATION: revuloj
 
 jobs:
@@ -42,7 +42,10 @@ jobs:
       - name: testoj
         run: |
            docker build . --file Dockerfile --tag $IMAGE_NAME
-           docker run $IMAGE_NAME $IMAGE_ENTRY $IMAGE_TEST
+           docker run $IMAGE_NAME $IMAGE_ENTRY med-medio
+           docker run $IMAGE_NAME $IMAGE_ENTRY inx-?
+           docker run $IMAGE_NAME $IMAGE_ENTRY tez-?
+           docker run $IMAGE_NAME $IMAGE_ENTRY vrt-?
 
   # Push image to GitHub Package Registry.
   # See also https://docs.docker.com/docker-hub/builds/
