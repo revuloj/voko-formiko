@@ -211,7 +211,7 @@
   </target>
 
 
-  <target name="inx-git"
+  <target name="inx-git" depends="inx-preparo"
      description="kreas raporton pri la lastaj ŝanĝoj el Git">
 
      <exec executable="${gitlogxml2w}" dir="${v.fonto}"
