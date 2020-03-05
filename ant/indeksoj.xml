@@ -223,7 +223,10 @@
      <xslt in="${v.tmp}/inx_shanghoj.xml" out="${v.tmp}/inx/shanghoj.html"
        style="${v.voko.xsl}/inx_shanghoj.xsl" classpathref="saxon.classpath">
          <param name="agordo-pado" expression="${v.cfg}"/>
-         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+         <factory name="net.sf.saxon.TransformerFactoryImpl">
+                   <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                     value="true"/>      
+         </factory>
      </xslt>
 
      <tstamp>
