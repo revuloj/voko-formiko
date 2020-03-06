@@ -39,7 +39,7 @@ ENV ANT_OPTS=-Xmx1000m
 RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && unzip master.zip voko-grundo-master/xsl/* voko-grundo-master/dtd/* voko-grundo-master/cfg/* \
      voko-grundo-master/dok/* voko-grundo-master/jsc/* voko-grundo-master/stl/* \
-     voko-grundo-master/bin/* voko-grundo-master/sql/* voko-grundo-master/owl/voko.rdf \
+     voko-grundo-master/bin/* voko-grundo-master/sql/* voko-grundo-master/owl/voko.rdf  \
   && ln -s ${GRUNDO} ${VOKO} && rm master.zip \
   && chmod go+w ${GRUNDO}/xsl \
   && chown formiko ${GRUNDO}/xsl/revo_tez.xsl ${GRUNDO}/xsl/revohtml2.xsl ${GRUNDO}/xsl/revohtml.xsl \

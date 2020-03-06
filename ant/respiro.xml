@@ -14,12 +14,19 @@
   <property name="v.voko.jav" location="${v.voko}/jav"/>
   <property name="v.voko.klasoj" location="${v.voko.jav}/de/steloj/respiro"/>
 
+  <property name="saxon" location="${ENV.SAXONJAR}"/> 
+
+  <path id="saxon.classpath">
+     <pathelement location="${saxon}"/>
+     <pathelement path="${java.class.path}"/>
+  </path>
+
   <target name="rsp-agordo" description="eligas la agordeblajn variablojn por kontrolo">
     <echoproperties prefix="v."/> 
   </target>
 
   <target name="rsp-klasoj" description="kompilas la Javo-klasojn" depends="rsp-agordo">
-    <javac srcdir="${v.voko.jav}" destdir="${v.voko.jav}"/> 
+    <javac srcdir="${v.voko.jav}" destdir="${v.voko.jav}" classpathref="saxon.classpath"/> 
   </target>
 
   <target name="rsp-jar" description="kunigas la Javo-klasojn an Jar-arhhivo"

@@ -224,7 +224,7 @@
        style="${v.voko.xsl}/inx_shanghoj.xsl" classpathref="saxon.classpath">
          <param name="agordo-pado" expression="${v.cfg}"/>
          <factory name="net.sf.saxon.TransformerFactoryImpl">
-                   <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+            <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
                      value="true"/>      
          </factory>
      </xslt>
@@ -253,15 +253,16 @@
   <target name="inx-eraroj" depends="inx-preparo" unless="eraroj.aktuala"
      description="kreas raporton pri diversaj eraroj en la artikoloj">
 
-     <java classname="de.steloj.respiro.DirectoryTransformer"
+     <java classname="de.steloj.respiro.DirectoryTransformerSaxon"
        logError="true">
          <!-- arg value="-v"/ -->
+         <!-- arg value="-Dhttp://saxon.sf.net/feature/allow-external-functions=true"/ -->
          <arg path="${v.bazo.xml}"/>
          <arg file="${v.voko.xsl}/inx_eraroj.xsl"/>
          <arg file="${v.tmp}/eraroj.xml"/>
          <classpath>
            <pathelement location="${saxon}"/>
-	   <pathelement location="${v.voko.ant}/respiro.jar"/>
+	         <pathelement location="${v.voko.ant}/respiro.jar"/>
            <pathelement path="${java.class.path}"/>
        </classpath>
     </java>
@@ -271,7 +272,10 @@
        style="${v.voko.xsl}/inx_eraroj_html.xsl"
        classpathref="saxon.classpath">
          <param name="agordo-pado" expression="${v.cfg}"/>
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <factory name="net.sf.saxon.TransformerFactoryImpl">
+            <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                     value="true"/>      
+        </factory>
      </xslt>
   </target>
     
