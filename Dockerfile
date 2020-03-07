@@ -22,17 +22,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #   openssh-server 	&& mkdir -p /var/run/sshd 
 # libsaxonhe-java: havas problemon transformante multajn artikolojn: normalizationData.xml not found...
 
+COPY ant ${VOKO}/ant
 COPY bin/* /usr/local/bin/
 
 RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
-ENV REVO /home/formiko/revo
-ENV VOKO /home/formiko/voko
-ENV GRUNDO /home/formiko/voko-grundo-master
+ENV REVO=/home/formiko/revo \
+    VOKO=/home/formiko/voko \
+    GRUNDO=/home/formiko/voko-grundo-master \
+    SAXONJAR=/usr/share/java/saxonb.jar \
+    ANT_OPTS=-Xmx1000m
 # problemo kun normlaizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar
-ENV SAXONJAR /usr/share/java/saxonb.jar
-ENV ANT_OPTS=-Xmx1000m
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 
@@ -47,10 +48,11 @@ RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && ln -s /usr/local/bin/jing2xml.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogxml.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogxml2w.sh ${VOKO}/bin/ \
-  && ln -s /usr/local/bin/insert-art-blobs.sh ${VOKO}/bin/
+  && ln -s /usr/local/bin/insert-art-blobs.sh ${VOKO}/bin/ \
+  && ant -f $VOKO/ant/respiro.xml
 
 #USER formiko:users
-COPY ant ${VOKO}/ant
+
 # ni poste kopios tion al ${REVO}/cfg
 # ĉar ${REVO} estos injektita nur ĉe lanĉo de Formiko
 COPY cfg/* /etc/
