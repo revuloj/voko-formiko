@@ -3,29 +3,28 @@
 
 echo "### Prepari Revon..."
 
-if [ ! -e /home/formiko/revo/index.html ]; then
+basedir=/home/formiko
+
+if [ ! -e $basedir/revo/index.html ]; then
     echo "AVERTO: La medio en revo/ estas ankoraŭ ne kreita."
     echo "  Aŭ provizu aktualan vortaron kun ĉiuj dosieroj en revo/"
     echo "  Aŭ kreu novan vortaran kadron per komando 'formiko med-medio'"
     echo "  Ekz.: 'docker exec ${formiko_id} formiko med-medio'."
 fi
 
-if [ ! -e /home/formiko/revo/cfg/agordo ]; then
-    mkdir -p /home/formiko/revo/cfg
-    cp /etc/agordo /home/formiko/revo/cfg/agordo
+if [ ! -e $basedir/revo/cfg/agordo ]; then
+    mkdir -p $basedir/revo/cfg
+    cp /etc/agordo $basedir/revo/cfg/agordo
 fi
 
-if [ ! -e /home/formiko/revo/dtd ]; then
-    cp -r /home/formiko/voko/dtd /home/formiko/revo/dtd
+if [ ! -e $basedir/revo/dtd ]; then
+    cp -r $basedir/voko/dtd $basedir/revo/dtd
 fi
 
-if [ ! -e /home/formiko/tgz ]; then
-    mkdir -p /home/formiko/tgz
-    chown formiko.users /home/formiko/tgz    
+if [ ! -e $basedir/tgz ]; then
+    mkdir -p $basedir/tgz
+    chown formiko.users $basedir/tgz    
 fi
-
-chown formiko:formiko /home/formiko/revo/cfg
-chown -R formiko:formiko /home/formiko/revo/dtd
 
 if [[ ! $(ls -A /home/formiko/revo-fonto) ]]; then
     # vi povas antaŭdifini ekz.:
@@ -33,6 +32,13 @@ if [[ ! $(ls -A /home/formiko/revo-fonto) ]]; then
     # por preni la fontojn el Git-arĥivo
     if [[ ! -z "$GIT_REPO_REVO" ]]; then
         #?? git clone --progress $GIT_REPO_REVO revo-fonto
+        cd $basedir
         git clone $GIT_REPO_REVO revo-fonto
+        mkdir -p $basedir/revo/xml
+        cp $basedir/revo-fonto/revo/*.xml $basedir/revo/xml/
     fi
 fi
+
+chown formiko:formiko $basedir/revo/cfg
+chown -R formiko:formiko $basedir/revo/dtd
+chown -R formiko:formiko $basedir/revo/xml
