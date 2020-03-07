@@ -206,10 +206,12 @@ rezulto en:
     <xslt in="${v.voko.cfg}/literoj.xml" out="${v.bazo.dtd}/vokosgn.dtd"
           style="${v.voko.xsl}/dtd_vokosgn.xsl"/>
 
+<!-- ni ne nepre bezonas tion:
     <exec executable="trang" logError="true">
       <arg file="${v.voko.dtd}/vokoxml.rnc"/>
       <arg file="${v.voko.dtd}/vokoxml.rng"/>
     </exec>
+-->
 
     <copy todir="${v.bazo.dtd}">
       <fileset dir="${v.voko.dtd}" casesensitive="yes">
