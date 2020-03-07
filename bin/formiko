@@ -23,6 +23,8 @@ EOF
   exit
 fi
 
+export CLASSPATH=$SAXONJAR:$JINGJAR
+
 last=${@: -1}
 prefix=${last%%-*}
 suffix=${last#*-}

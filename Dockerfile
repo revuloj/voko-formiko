@@ -15,15 +15,12 @@ LABEL Author=<diestel@steloj.de>
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl unzip git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
-    libxalan2-java libsaxonb-java trang sqlite3 bsdmainutils \
+    libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
 	&& rm -rf /var/lib/apt/lists/* \
   && ln -s /usr/share/java/commons-net.jar /usr/share/ant/lib/commons-net.jar \
   && ln -s /usr/share/java/oro.jar /usr/share/ant/lib/oro.jar
 #   openssh-server 	&& mkdir -p /var/run/sshd 
 # libsaxonhe-java: havas problemon transformante multajn artikolojn: normalizationData.xml not found...
-
-COPY ant ${VOKO}/ant
-COPY bin/* /usr/local/bin/
 
 RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
@@ -31,9 +28,12 @@ ENV REVO=/home/formiko/revo \
     VOKO=/home/formiko/voko \
     GRUNDO=/home/formiko/voko-grundo-master \
     SAXONJAR=/usr/share/java/saxonb.jar \
+    JINGJAR=/usr/share/java/jing.jar \
     ANT_OPTS=-Xmx1000m
 # problemo kun normlaizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar
+
+COPY bin/* /usr/local/bin/
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 
@@ -48,8 +48,10 @@ RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && ln -s /usr/local/bin/jing2xml.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogxml.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogxml2w.sh ${VOKO}/bin/ \
-  && ln -s /usr/local/bin/insert-art-blobs.sh ${VOKO}/bin/ \
-  && ant -f $VOKO/ant/respiro.xml
+  && ln -s /usr/local/bin/insert-art-blobs.sh ${VOKO}/bin/ 
+
+COPY ant ${VOKO}/ant
+COPY jav ${VOKO}/jav
 
 #USER formiko:users
 
@@ -67,7 +69,7 @@ COPY --from=metapost --chown=root:root voko-grundo-master/smb/ /home/formiko/vok
 # eblecoj: kiel nuntempe per ftp, alternative per rsync, cvs, git (aŭ eĉ komuna dosierujo?)
 
 ## https://stackoverflow.com/questions/37458287/how-to-run-a-cron-job-inside-a-docker-container
-RUN touch /var/log/cron.log
+RUN ant -f $VOKO/ant/respiro.xml && touch /var/log/cron.log
 
 HEALTHCHECK --interval=5m --timeout=3s CMD health_check_cron.sh 
 

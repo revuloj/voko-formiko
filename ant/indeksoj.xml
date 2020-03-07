@@ -299,8 +299,7 @@
 
 
     <java classpath="${jing.jar}" classname="${jing.class}"
-        fork="true"
-	output="${jing.errors.txt}">
+        fork="true"	output="${jing.errors.txt}">
       <arg value="-c"/>
       <arg file="${voko-relax}"/>
       <arg line="${artikoloj}"/>
