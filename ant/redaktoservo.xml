@@ -231,6 +231,11 @@
 <!--        <target name="pakajhoj"/ -->
 <!--        <target name="tezauro"/> -->
      </ant>      
+     <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="pak-agordo"/>
+        <target name="pak-html"/>
+     </ant>         
    </target> 
 
    <target name="srv-resumo" depends="srv-preparo">

@@ -1,5 +1,7 @@
 #!/bin/bash
-set -x
+# set -x
+
+echo "### Prepari alŝuton (ftp ktp.)..."
 
 # https://docs.docker.com/v17.09/engine/swarm/networking/
 # https://neuvector.com/network-security/docker-swarm-container-networking/

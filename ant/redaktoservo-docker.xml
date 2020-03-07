@@ -282,7 +282,12 @@
         <target name="tuto"/>
 <!--        <target name="pakajhoj"/ -->
 <!--        <target name="tezauro"/> -->
-     </ant>      
+     </ant>  
+     <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="pak-agordo"/>
+        <target name="pak-html"/>
+     </ant>         
    </target>    
 
    <target name="srv-servo-art-listo" depends="srv-agordo,srv-preparo,srv-art-listo,srv-upload"

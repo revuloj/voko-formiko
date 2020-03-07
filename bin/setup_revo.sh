@@ -1,5 +1,7 @@
 #!/bin/bash
-set -x
+# set -x
+
+echo "### Prepari Revon..."
 
 if [ ! -e /home/formiko/revo/index.html ]; then
     echo "AVERTO: La medio en revo/ estas ankoraŭ ne kreita."
@@ -24,3 +26,13 @@ fi
 
 chown formiko:formiko /home/formiko/revo/cfg
 chown -R formiko:formiko /home/formiko/revo/dtd
+
+if [[ ! $(ls -A /home/formiko/revo-fonto) ]]; then
+    # vi povas antaŭdifini ekz.:
+    # GIT_REPO_REVO=https://github.com/revuloj/revo-fonto-testo.git
+    # por preni la fontojn el Git-arĥivo
+    if [[ ! -z "$GIT_REPO_REVO" ]]; then
+        #?? git clone --progress $GIT_REPO_REVO revo-fonto
+        git clone $GIT_REPO_REVO revo-fonto
+    fi
+fi

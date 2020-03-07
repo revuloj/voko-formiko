@@ -1,5 +1,7 @@
 #!/bin/bash
-set -x
+# set -x
+
+echo "### Prepari tempotaskojn (cron)..."
 
 # debug
 ls -l /config/*
