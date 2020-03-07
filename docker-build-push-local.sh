@@ -1,5 +1,7 @@
 #!/bin/bash
 
-docker build -t voko-formiko .
-docker tag voko-formiko registry.local:5000/voko-formiko
-docker push registry.local:5000/voko-formiko
+img=voko-formiko
+
+docker build -t $img .
+docker tag $img registry.local:5000/$img
+docker push registry.local:5000/$img
