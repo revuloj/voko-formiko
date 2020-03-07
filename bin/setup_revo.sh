@@ -21,3 +21,6 @@ if [ ! -e /home/formiko/tgz ]; then
     mkdir -p /home/formiko/tgz
     chown formiko.users /home/formiko/tgz    
 fi
+
+chown formiko:formiko /home/formiko/revo/cfg
+chown -R formiko:formiko /home/formiko/revo/dtd

@@ -260,17 +260,30 @@
       </ant>
    </target>
 
-
    <target name="srv-servo" depends="srv-agordo,srv-malshlosu-postnokte,srv-shlosu,srv-preparo,srv-refari-vortaron,srv-upload,srv-malshlosu"
       if="user-mail-file-exists"
       description="Kuro de la tuta servo: preni kaj trakti poshton, refari vortaron, sendi dosierojn kaj respondojn">
-
    </target> 
 
    <target name="srv-servo-art" depends="srv-agordo,srv-shlosu,srv-preparo,srv-refari-nur-artikolojn,srv-upload,srv-malshlosu"
       if="user-mail-file-exists"
       description="Interkuro (nur artikoloj, ne indeksoj) de la servo: preni kaj trakti poshton, refari artikolojn, sendi dosierojn kaj respondojn">
    </target> 
+
+   <target name="srv-servo-github" depends="srv-agordo,srv-preparo"
+      description="Kuro de la tuta servo ene de Github-ago: fari kompletan vortaron, ... (pli venos poste...)">
+
+     <ant antfile="${v.voko.ant}/medio.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="med-medio"/>
+     </ant>      
+     <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="tuto"/>
+<!--        <target name="pakajhoj"/ -->
+<!--        <target name="tezauro"/> -->
+     </ant>      
+   </target>    
 
    <target name="srv-servo-art-listo" depends="srv-agordo,srv-preparo,srv-art-listo,srv-upload"
       if="art-listo"
