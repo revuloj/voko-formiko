@@ -18,6 +18,8 @@ then
   de celoj, ekz.:
 
     formiko art-helpo
+
+  Vi povas aldoni argumentojn antaŭ la celo per -Darg=valoro
   
 EOF
   exit
