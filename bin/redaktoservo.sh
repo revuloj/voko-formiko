@@ -24,7 +24,11 @@ while getopts "rap" OPT; do
   esac
 done
 
-log="${HOME}/revolog/redsrv-${datetime}.log"
+if [[ -d ${HOME}/revolog ]]; then
+  log="${HOME}/revolog/redsrv-${datetime}.log"
+else  
+  log="${HOME}/log/redsrv-${datetime}.log"
+fi  
 command="ant -file ${VOKO}/ant/redaktoservo.xml ${target} 2>&1 | tee ${log}"
 echo -e "${command}\nTIME:" $(date)"\n"
 exec ${command}
