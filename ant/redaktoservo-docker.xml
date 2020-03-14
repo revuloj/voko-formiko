@@ -277,6 +277,7 @@
      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="sha" value="${sha}"/>
+        <target name="art-agordo"/>
         <target name="art-git-co"/>
      </ant>   
 
