@@ -37,6 +37,7 @@
 
    <property name="voko.bin" location="${voko}/bin"/>
    <property name="mirror" location="${voko.bin}/mirror.pl"/>
+   <property name="tar" location="/bin/tar"/>
    <!-- property name="tmp" location="${v.tmp}"/ -->
    <!--property name="log" location="${v.log}"/-->
 <!--
@@ -276,16 +277,32 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
 
    </target>
 
+
    <target name="revo-tar-gh" depends="revo-preparo" 
        description="pakas kreitajn Revo-dosieron en tar-dosieron (en Github)">
 
      <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
          protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
 
-        <tar destfile="${revo.tmpdir}/${revo.filename}" compression="gzip">
+      <exec executable="${tar}" output="${revo.logdir}/${revo.tarlog}">
+        <arg value="--newer"/>
+        <arg value="-czvf"/>
+        <arg value="${revo.tmpdir}/${revo.filename}"/>
+        <arg value="./"/>
+      </exec>
 
+      <!-- tar destfile="${revo.tmpdir}/${revo.filename}" compression="gzip">
+      <tarfileset dir="${revo.pado}" includes="art/*.html"/>
+      </tar>
+      -->
+   </target>
+
+   <target name="revo-tar-art" depends="revo-preparo" 
+       description="pakas kreitajn Revo-artikolojn en tar-dosieron">
+
+      <tar destfile="${revo.tmpdir}/${revo.filename}" compression="gzip">
         <tarfileset dir="${revo.pado}" includes="art/*.html"/>
-     </tar>
+      </tar>
    </target>
 
    <target name="revo-ftp" unless="${revo.usescp}">
