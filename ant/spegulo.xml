@@ -297,6 +297,9 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
         <arg value="${revo.tmpdir}/${revo.filename}"/>
         <arg value="./"/>
       </exec>
+
+      <copy file="${revo.tmpdir}/${revo.filename}" tofile="${v.tgz}/${revo.filename}"/>
+
    </target>
    
 
