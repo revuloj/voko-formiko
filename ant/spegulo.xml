@@ -9,6 +9,7 @@
    <property name="voko" value="${ENV.VOKO}"/>
 
    <property file="${user.dir}/cfg/agordo" prefix="v."/>
+   <property name="v.tgz" location="${v.bazo}/../tgz"/>
    <property name="etc" value="${v.etc}"/>
 
    <property file="${etc}/spegulo-agordo-cvs" prefix="cvs."/>
