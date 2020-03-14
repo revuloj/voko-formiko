@@ -277,25 +277,27 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
 
    </target>
 
+   <target name="revo-reftempo" depends="revo-preparo"
+     description="kreas dosieron por marki la nunan tempon kiel referenco por post rekreo paki la poste ŝanĝitajn dosierojn">
+       <touch file="${v.tgz}/.reftempo"/>
+   </target>           
 
-   <target name="revo-tar-gh" depends="revo-preparo" 
-       description="pakas kreitajn Revo-dosieron en tar-dosieron (en Github)">
+
+   <target name="revo-tar-ref" depends="revo-preparo" 
+       description="pakas Revo-dosierojn ŝanĝitajn post referenctempo en tar-dosieron">
 
      <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
          protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
 
       <exec executable="${tar}" output="${revo.logdir}/${revo.tarlog}">
         <arg value="--newer"/>
+        <arg file="${v.tgz}/.reftempo"/>
         <arg value="-czvf"/>
         <arg value="${revo.tmpdir}/${revo.filename}"/>
         <arg value="./"/>
       </exec>
-
-      <!-- tar destfile="${revo.tmpdir}/${revo.filename}" compression="gzip">
-      <tarfileset dir="${revo.pado}" includes="art/*.html"/>
-      </tar>
-      -->
    </target>
+   
 
    <target name="revo-tar-art" depends="revo-preparo" 
        description="pakas kreitajn Revo-artikolojn en tar-dosieron">
