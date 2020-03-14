@@ -39,6 +39,7 @@
    <property name="voko.bin" location="${voko}/bin"/>
    <property name="mirror" location="${voko.bin}/mirror.pl"/>
    <property name="tar" location="/bin/tar"/>
+   <property name="rsync" location="/usr/bin/rsync"/>
    <!-- property name="tmp" location="${v.tmp}"/ -->
    <!--property name="log" location="${v.log}"/-->
 <!--
@@ -278,19 +279,28 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
 
    </target>
 
-   <target name="revo-reftempo" depends="revo-preparo"
-     description="kreas dosieron por marki la nunan tempon kiel referenco por post rekreo paki la poste ŝanĝitajn dosierojn">
+   <target name="revo-referenco" depends="revo-preparo"
+     description="kreas kopion de revo kiel referenco kaj kreas dosieron por marki la nunan tempon">
        <touch file="${v.tgz}/.reftempo"/>
-   </target>           
+       <sync todir="${revo.pado}.ref">
+          <fileset dir="${revo.pado}"/>
+       </sync>
+   </target>
 
-
-   <target name="revo-tar-ref" depends="revo-preparo" 
+   <target name="revo-diferenco" depends="revo-preparo" 
        description="pakas Revo-dosierojn ŝanĝitajn post referenctempo en tar-dosieron">
+
+      <exec executable="${rsync}">
+        <arg value="--checksum">
+        <arg value="-r">
+        <arg location="${revo.pado}">
+        <arg location="${revo.pado}.ref">
+      </exec>
 
      <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
          protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
 
-      <exec executable="${tar}" dir="${user.dir}"
+      <exec executable="${tar}" dir="${revo.pado}.ref"
         output="${revo.logdir}/${revo.tarlog}">
         <arg value="--newer"/>
         <arg file="${v.tgz}/.reftempo"/>
