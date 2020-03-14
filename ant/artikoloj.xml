@@ -315,6 +315,15 @@ delete FROM art WHERE art_amrk = 'singult';
       <arg value="checkout"/>
       <arg value="${sha}"/>
     </exec>
+
+    <copy force="true" todir="${v.bazo.xml}">
+      <fileset dir="${v.fonto}" includes="*.xml"/>
+    </copy>
+
+    <copy force="true" todir="${v.bazo}/bld">
+      <fileset dir="${v.fonto}../bld/" includes="*"/>
+    </copy>
+
   </target>
 
 </project>
