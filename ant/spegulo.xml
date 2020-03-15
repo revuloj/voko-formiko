@@ -291,10 +291,10 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
        description="pakas Revo-dosierojn ŝanĝitajn post referenctempo en tar-dosieron">
 
       <exec executable="${rsync}">
-        <arg value="--checksum">
-        <arg value="-r">
-        <arg location="${revo.pado}">
-        <arg location="${revo.pado}.ref">
+        <arg value="--checksum"/>
+        <arg value="-r"/>
+        <arg location="${revo.pado}"/>
+        <arg location="${revo.pado}.ref"/>
       </exec>
 
      <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
