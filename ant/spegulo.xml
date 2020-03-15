@@ -293,8 +293,8 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
       <exec executable="${rsync}">
         <arg value="--checksum"/>
         <arg value="-r"/>
-        <arg value="${revo.pado}"/>
-        <arg value="${revo.pado}.ref"/>
+        <arg value="${revo.pado}/"/>
+        <arg value="${revo.pado}.ref/"/>
       </exec>
 
      <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
