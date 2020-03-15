@@ -281,18 +281,26 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
 
    <target name="revo-referenco" depends="revo-preparo"
      description="kreas kopion de revo kiel referenco kaj kreas dosieron por marki la nunan tempon">
-       <touch file="${v.tgz}/.reftempo"/>
        <sync todir="${revo.pado}.ref">
           <fileset dir="${revo.pado}"/>
        </sync>
+       <sleep seconds="5"/>
+       <touch file="${v.tgz}/.reftempo"/>
    </target>
 
    <target name="revo-diferenco" depends="revo-preparo" 
        description="pakas Revo-dosierojn ŝanĝitajn post referenctempo en tar-dosieron">
 
-      <exec executable="${rsync}">
+      <!-- debug 
+      <exec executable="diff" output="${revo.logdir}/${revo.tarlog}.diff">
+        <arg value="-ur"/>
+        <arg value="${revo.pado}/"/>
+        <arg value="${revo.pado}.ref/"/>
+      </exec -->
+
+      <exec executable="${rsync}" output="${revo.logdir}/${revo.tarlog}.rsync">
         <arg value="--checksum"/>
-        <arg value="-r"/>
+        <arg value="-rv"/>
         <arg value="${revo.pado}/"/>
         <arg value="${revo.pado}.ref/"/>
       </exec>
