@@ -43,4 +43,5 @@ fi
 
 chown formiko:formiko $basedir/revo/cfg
 chown -R formiko:formiko $basedir/revo/dtd
+chown -R formiko:formiko $basedir/revo/bld
 chown -R formiko:formiko $basedir/revo/xml
