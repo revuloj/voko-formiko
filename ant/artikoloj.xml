@@ -315,13 +315,13 @@ delete FROM art WHERE art_amrk = 'singult';
       <arg value="${sha}"/>
     </exec>
 
-    <copy force="true" todir="${v.bazo.xml}">
-      <fileset dir="${v.fonto}" includes="*.xml"/>
-    </copy>
+    <sync todir="${v.bazo.xml}">
+      <fileset dir="${v.fonto}"/>
+    </sync>
 
-    <copy force="true" todir="${v.bazo}/bld">
-      <fileset dir="${v.fonto}/../bld/" includes="*"/>
-    </copy>
+    <sync todir="${v.bazo}/bld">
+      <fileset dir="${v.fonto}/../bld/"/>
+    </sync>
 
   </target>
 
