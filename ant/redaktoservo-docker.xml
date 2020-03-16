@@ -303,6 +303,11 @@
       description="Kuro de la tuta servo ene de Github-ago: kreu la vortaron en du diversaj eldonoj (sha1,sha2) kaj paki+alŝuti nur la ŝanĝojn"
       if="sha1">
 
+      <condition property="shaEqual">
+        <equals arg1="${sha1}" arg2="${sha2}"/>
+      </condition>
+      <fail if="shaEqual" message="La eldonoj samas, ni ne bezonas krei diferencon: ${sha1} = ${sha2}"/>      
+
      <antcall target="srv-servo-github" inheritAll="false">   
         <param name="v.bazo" location="${v.bazo}"/>
         <param name="sha" value="${sha1}"/>
