@@ -300,7 +300,13 @@
 
 
    <target name="srv-servo-diferenco-github" depends="srv-agordo,srv-preparo"
-      description="Kuro de la tuta servo ene de Github-ago: refari kompletan vortaron kaj paki+alŝuti nur la ŝanĝojn">
+      description="Kuro de la tuta servo ene de Github-ago: kreu la vortaron en du diversaj eldonoj (sha1,sha2) kaj paki+alŝuti nur la ŝanĝojn"
+      if="sha1">
+
+     <antcall target="srv-servo-github" inheritAll="false">   
+        <param name="v.bazo" location="${v.bazo}"/>
+        <param name="sha" value="${sha1}"/>
+     </antcall>
 
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
@@ -310,7 +316,7 @@
      <!-- se argumento 'sha' estas donita (per -Dsha=99c8a2b749), metu la fontojn al tiu pozicio -->
      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
-        <property name="sha" value="${sha}"/>
+        <property name="sha" value="${sha2}"/>
         <target name="art-git-co"/>
      </ant>   
 
