@@ -17,6 +17,9 @@ ls -l ${SECRETS}/*
 
 if [[ -z "$FTP_SERVER" ]]; then
   FTP_SERVER=$(cat ${SECRETS}/voko-sesio.ftp_server)
+  FTP_DIR=./alveno
+else
+  FTP_DIR=.  
 fi
 
 if [[ -z "$FTP_USER" ]]; then
@@ -50,6 +53,7 @@ if [ ! -e ${spegulo_agordo} ]; then
   cp /etc/spegulo-agordo-revo ${spegulo_agordo}
 
   cat >> ${spegulo_agordo} <<EOT
+servilo.dir=${FTP_DIR}
 servilo.host=${FTP_SERVER}
 servilo.user=${FTP_USER}
 servilo.password=${FTP_PASSWD}

@@ -13,7 +13,7 @@ logdir=/home/formiko/log
 tmpdir=/home/formiko/tmp
 
 ## agordo por konekti kun ftp-servilo (Sesio)
-servilo.dir=./alveno
+#servilo.dir=./alveno
 #servilo.host=sesio
 #servilo.user=
 #servilo.password=
