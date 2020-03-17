@@ -19,7 +19,7 @@ servilo.dir=./alveno
 #servilo.password=
 
 ## agordo por anonci kaj malpaki alŝuton en publika Revo-servilo (Araneo)
-upload.url=http://araneo/cgi-bin/admin/uprevo.pl?fname=
+#upload.url=http://araneo/cgi-bin/admin/uprevo.pl?fname=
 #upload.user=
 #upload.password=
 
@@ -39,16 +39,16 @@ redaktantoj.listo=/home/revo/etc/redaktantoj
 ## Foje pro eraroj dum transsendo de dosieroj, la versioj deviiĝas
 # tiu skripto/retpaĝo helpas kompari ilin...
 #versioj.url=http://localhost/cgi-bin/admin/checkversioj.pl?arts=*
-versioj.url=http://araneo/tmp/checkversioj.html
+#versioj.url=http://araneo/tmp/checkversioj.html
 #versioj.user=
 #versioj.password=
 
 ## per resendo ni povas eltrovi, kiujn deviiĝintajn dosierojn necesas refreŝigi
-resendo.url=http://araneo/cgi-bin/admin/resendu.pl
+#resendo.url=http://araneo/cgi-bin/admin/resendu.pl
 #resendo.user=
 #resendo.password=
 
 ## Vikipediaj ligoj en la artikoloj estas kreataj per aparta Perl-skripto
-vikio.url=http://araneo/cgi-bin/admin/upviki.pl?download=0
+#vikio.url=http://araneo/cgi-bin/admin/upviki.pl?download=0
 #vikio.user=
 #vikio.password=

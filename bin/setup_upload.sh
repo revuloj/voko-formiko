@@ -9,16 +9,37 @@ echo "### Prepari alŝuton (ftp ktp.)..."
 #
 # la servo-nomo por aliri Sesion tra "docker swarm ingress" ... ne funkcias de interne ŝajne,
 # sed funkcias al gw_bridge:
-FTP_SERVER=sesio
-FTP_USER=sesio
+#FTP_SERVER=sesio
+#FTP_USER=sesio
 
 # debug
 ls -l ${SECRETS}/*
 
-FTP_PASSWD=$(cat ${SECRETS}/voko-sesio.ftp_password)
+if [[ -z "$FTP_SERVER" ]]; then
+  FTP_SERVER=$(cat ${SECRETS}/voko-sesio.ftp_server)
+fi
 
-CGI_USER=araneo
-CGI_PASSWD=$(cat ${SECRETS}/voko-araneo.cgi_password)
+if [[ -z "$FTP_USER" ]]; then
+  FTP_USER=$(cat ${SECRETS}/voko-sesio.ftp_user)
+fi
+
+if [[ -z "$FTP_PASSWD" ]]; then
+  FTP_PASSWD=$(cat ${SECRETS}/voko-sesio.ftp_password)
+fi
+
+#CGI_USER=araneo
+
+if [[ -z "$CGI_SERVER" ]]; then
+  CGI_SERVER=$(cat ${SECRETS}/voko-sesio.cgi_server)
+fi
+
+if [[ -z "$CGI_USER" ]]; then
+  CGI_USER=$(cat ${SECRETS}/voko-sesio.cgi_user)
+fi
+
+if [[ -z "$CGI_PASSWD" ]]; then
+  CGI_PASSWD=$(cat ${SECRETS}/voko-sesio.cgi_password)
+fi
 
 # debug
 ls -l /home/formiko/etc/*agordo*
@@ -33,16 +54,13 @@ servilo.host=${FTP_SERVER}
 servilo.user=${FTP_USER}
 servilo.password=${FTP_PASSWD}
 
+upload.url=http://${CGI_SERVER}/cgi-bin/admin/uprevo.pl?fname=
 upload.user=${CGI_USER}
 upload.password=${CGI_PASSWD}
-redaktantoj.user=${CGI_USER}
-redaktantoj.password=${CGI_PASSWD}
-versioj.user=${CGI_USER}
-versioj.password=${CGI_PASSWD}
+
+vikio.url=http://${CGI_SERVER}/cgi-bin/admin/upviki.pl?download=0
 vikio.user=${CGI_USER}
 vikio.password=${CGI_PASSWD}
-resendo.user=${CGI_USER}
-resendo.password=${CGI_PASSWD}
 EOT
 
 else
