@@ -26,7 +26,7 @@ servilo.dir=./alveno
 ## agordo por preni la tempon de la publika Revo-servilo (Araneo)
 # ni bezonis ĝin por agordita tempo, ni kontrolu ĉu en Kuberneto
 # tio plu estos bezonata...
-tempo.url=http://araneo/cgi-bin/admin/time.pl
+#tempo.url=http://araneo/cgi-bin/admin/time.pl
 
 ## agordo por preni la liston de redaktantoj el Abelo
 # se ni decidos administr tion kiel Kuberneto-sekreto

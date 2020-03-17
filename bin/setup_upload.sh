@@ -54,6 +54,7 @@ servilo.host=${FTP_SERVER}
 servilo.user=${FTP_USER}
 servilo.password=${FTP_PASSWD}
 
+tempo.url=http://${CGI_SERVER}/cgi-bin/admin/time.pl
 upload.url=http://${CGI_SERVER}/cgi-bin/admin/uprevo.pl?fname=
 upload.user=${CGI_USER}
 upload.password=${CGI_PASSWD}
