@@ -9,6 +9,7 @@ mkdir bld
 mkdir revo
 
 echo "<xml>" > bld/test.svg
+echo "<xml>" > bld/test1.svg
 
 cat << EOF1 > revo/artefakt.xml
 <?xml version="1.0"?>
@@ -89,3 +90,8 @@ EOF2
 git add revo
 git commit -m"v2"
 git tag "v2"
+
+rm bld/test.svg
+git add bld
+git commit -m"v3"
+git tag "v3"

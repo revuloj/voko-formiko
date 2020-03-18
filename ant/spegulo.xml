@@ -280,7 +280,7 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
 
    <target name="revo-referenco" depends="revo-preparo"
      description="kreas kopion de revo kiel referenco kaj kreas dosieron por marki la nunan tempon">
-       <sync todir="${revo.pado}.ref">
+       <sync todir="${revo.tmpdir}/revo">
           <fileset dir="${revo.pado}"/>
        </sync>
        <sleep seconds="5"/>
@@ -296,20 +296,20 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
       <arg value="--ignore-existing"/>
       <arg value="--delete"/>
       <arg value="${revo.pado}/"/>
-      <arg value="${revo.pado}.ref/"/>
+      <arg value="${revo.tmpdir}/revo/"/>
      </exec>
 
      <loadfile srcFile="${revo.logdir}/rsync-delete.log" property="files-tobe-del">
        <filterchain>
          <tokenfilter>
-           <linetokenizer delims=" " delimsaretokens="false"/>
+           <linetokenizer/>
 	         <containsstring contains="deleting"/>
-           <replaceregex pattern="deleting\s" replace=""/>
+           <replaceregex pattern="deleting\s" replace="revo/"/>
          </tokenfilter>
        </filterchain>
      </loadfile>
 
-     <echo file="${revo.pado}.ref/bv_forigu_tiujn.lst">${files-tobe-del}</echo>
+     <echo file="${revo.tmpdir}/bv_forigu_tiujn.lst">${files-tobe-del}</echo>
 
    </target>
 
@@ -321,28 +321,30 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
       <exec executable="diff" output="${revo.logdir}/${revo.tarlog}.diff">
         <arg value="-ur"/>
         <arg value="${revo.pado}/"/>
-        <arg value="${revo.pado}.ref/"/>
+        <arg value="${revo.tmpdir}/revo/"/>
       </exec -->      
 
       <exec executable="${rsync}" output="${revo.logdir}/${revo.tarlog}.rsync">
         <arg value="--checksum"/>
         <arg value="-rv"/>
         <arg value="${revo.pado}/"/>
-        <arg value="${revo.pado}.ref/"/>
+        <arg value="${revo.tmpdir}/revo/"/>
       </exec>
 
      <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
          protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
 
-      <exec executable="${tar}" dir="${revo.pado}.ref"
+      <exec executable="${tar}" dir="${revo.tmpdir}"
         output="${revo.logdir}/${revo.tarlog}">
         <arg value="--newer"/>
         <arg file="${v.tgz}/.reftempo"/>
-        <arg value="-czvf"/>
+        <arg value="--ignore-failed-read"/>
+        <arg value="-cvzf"/>
         <arg value="${revo.tmpdir}/${revo.filename}"/>
-        <arg value="./"/>
+        <arg value="./revo"/>
+        <arg value="./bv_forigu_tiujn.lst"/>
       </exec>
-
+    
       <copy file="${revo.tmpdir}/${revo.filename}" tofile="${v.tgz}/${revo.filename}"/>
 
    </target>
