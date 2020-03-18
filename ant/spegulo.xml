@@ -231,7 +231,6 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
      <echoproperties prefix="revo."/>
    </target>
 
-
    <target name="revo-tar" unless="revo-tar-file-exists" depends="revo-preparo" 
        description="pakas shanghitajn Revo-dosieron en tar-dosieron">
 
@@ -288,7 +287,34 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
        <touch file="${v.tgz}/.reftempo"/>
    </target>
 
-   <target name="revo-diferenco" depends="revo-preparo" 
+   <target name="revo-forigendaj" depends="revo-preparo"
+     description="eltrovas dosierojn, kiuj estas en la referenco, sed ne en aktuala versio kaj listigas en bv_forigu_tiujn.lst">
+
+     <exec executable="${rsync}" output="${revo.logdir}/rsync-delete.log">
+      <arg value="-nrv"/>
+      <arg value="--existing"/>
+      <arg value="--ignore-existing"/>
+      <arg value="--delete"/>
+      <arg value="${revo.pado}/"/>
+      <arg value="${revo.pado}.ref/"/>
+     </exec>
+
+     <loadfile srcFile="${revo.logdir}/rsync-delete.log" property="files-tobe-del">
+       <filterchain>
+         <tokenfilter>
+           <linetokenizer delims=" " delimsaretokens="false"/>
+	         <containsstring contains="deleting"/>
+           <replaceregex pattern="deleting\s" replace=""/>
+         </tokenfilter>
+       </filterchain>
+     </loadfile>
+
+     <echo file="${revo.pado}.ref/bv_forigu_tiujn.lst">${files-tobe-del}</echo>
+
+   </target>
+
+
+   <target name="revo-diferenco" depends="revo-preparo, revo-forigendaj" 
        description="pakas Revo-dosierojn ŝanĝitajn post referenctempo en tar-dosieron">
 
       <!-- debug 
@@ -296,7 +322,7 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
         <arg value="-ur"/>
         <arg value="${revo.pado}/"/>
         <arg value="${revo.pado}.ref/"/>
-      </exec -->
+      </exec -->      
 
       <exec executable="${rsync}" output="${revo.logdir}/${revo.tarlog}.rsync">
         <arg value="--checksum"/>
