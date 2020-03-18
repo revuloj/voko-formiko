@@ -1,6 +1,5 @@
+name: procesumo voko-formiko
 # https://github.com/actions/starter-workflows/blob/master/ci/docker-push.yml
-
-name: Docker
 
 on:
   push:
@@ -18,6 +17,8 @@ on:
 env:
   # image name.
   IMAGE_NAME: voko-formiko
+  IMAGE_ENTRY: formiko
+#  IMAGE_TEST: med-medio
   ORGANIZATION: revuloj
 
 jobs:
@@ -27,7 +28,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - name: checkout
+        uses: actions/checkout@v1
 
 #      - name: Run tests
 #        run: |
@@ -37,6 +39,12 @@ jobs:
 #          else
 #            docker build . --file Dockerfile
 #          fi
+      - name: testoj
+        run: |
+           docker build . --file Dockerfile --tag $IMAGE_NAME
+           docker run $IMAGE_NAME $IMAGE_ENTRY med-medio
+           docker run $IMAGE_NAME $IMAGE_ENTRY inx-?
+           docker run $IMAGE_NAME $IMAGE_ENTRY tez-?
 
   # Push image to GitHub Package Registry.
   # See also https://docs.docker.com/docker-hub/builds/

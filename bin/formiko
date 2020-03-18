@@ -18,10 +18,14 @@ then
   de celoj, ekz.:
 
     formiko art-helpo
+
+  Vi povas aldoni argumentojn antaŭ la celo per -Darg=valoro
   
 EOF
   exit
 fi
+
+export CLASSPATH=$SAXONJAR:$JINGJAR
 
 last=${@: -1}
 prefix=${last%%-*}
@@ -64,7 +68,11 @@ revo)
 sql)
   cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/sqlite.xml $target
   ;;  
+vrt)
+  target=${target#*-}
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/vortaro.xml $target
+  ;;  
 *)
   echo "ERARO: Nekonata aŭ mankanta prefikso en celo '$1'!"
-  echo "Konataj prefiksoj estas srv- inx- tez- art- med- red- sql-."
+  echo "Konataj prefiksoj estas srv- inx- tez- art- med- red- sql- vrt-."
 esac

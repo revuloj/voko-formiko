@@ -9,6 +9,7 @@
    <property name="voko" value="${ENV.VOKO}"/>
 
    <property file="${user.dir}/cfg/agordo" prefix="v."/>
+   <property name="v.tgz" location="${v.bazo}/../tgz"/>
    <property name="etc" value="${v.etc}"/>
 
    <property file="${etc}/spegulo-agordo-cvs" prefix="cvs."/>
@@ -37,6 +38,8 @@
 
    <property name="voko.bin" location="${voko}/bin"/>
    <property name="mirror" location="${voko.bin}/mirror.pl"/>
+   <property name="tar" location="/bin/tar"/>
+   <property name="rsync" location="/usr/bin/rsync"/>
    <!-- property name="tmp" location="${v.tmp}"/ -->
    <!--property name="log" location="${v.log}"/-->
 <!--
@@ -228,7 +231,6 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
      <echoproperties prefix="revo."/>
    </target>
 
-
    <target name="revo-tar" unless="revo-tar-file-exists" depends="revo-preparo" 
        description="pakas shanghitajn Revo-dosieron en tar-dosieron">
 
@@ -276,16 +278,84 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
 
    </target>
 
-   <target name="revo-tar-gh" depends="revo-preparo" 
-       description="pakas kreitajn Revo-dosieron en tar-dosieron (en Github)">
+   <target name="revo-referenco" depends="revo-preparo"
+     description="kreas kopion de revo kiel referenco kaj kreas dosieron por marki la nunan tempon">
+       <sync todir="${revo.tmpdir}/revo">
+          <fileset dir="${revo.pado}"/>
+       </sync>
+       <sleep seconds="5"/>
+       <touch file="${v.tgz}/.reftempo"/>
+   </target>
+
+   <target name="revo-forigendaj" depends="revo-preparo"
+     description="eltrovas dosierojn, kiuj estas en la referenco, sed ne en aktuala versio kaj listigas en bv_forigu_tiujn.lst">
+
+     <exec executable="${rsync}" output="${revo.logdir}/rsync-delete.log">
+      <arg value="-nrv"/>
+      <arg value="--existing"/>
+      <arg value="--ignore-existing"/>
+      <arg value="--delete"/>
+      <arg value="${revo.pado}/"/>
+      <arg value="${revo.tmpdir}/revo/"/>
+     </exec>
+
+     <loadfile srcFile="${revo.logdir}/rsync-delete.log" property="files-tobe-del">
+       <filterchain>
+         <tokenfilter>
+           <linetokenizer/>
+	         <containsstring contains="deleting"/>
+           <replaceregex pattern="deleting\s" replace="revo/"/>
+         </tokenfilter>
+       </filterchain>
+     </loadfile>
+
+     <echo file="${revo.tmpdir}/bv_forigu_tiujn.lst">${files-tobe-del}</echo>
+
+   </target>
+
+
+   <target name="revo-diferenco" depends="revo-preparo, revo-forigendaj" 
+       description="pakas Revo-dosierojn ŝanĝitajn post referenctempo en tar-dosieron">
+
+      <!-- debug 
+      <exec executable="diff" output="${revo.logdir}/${revo.tarlog}.diff">
+        <arg value="-ur"/>
+        <arg value="${revo.pado}/"/>
+        <arg value="${revo.tmpdir}/revo/"/>
+      </exec -->      
+
+      <exec executable="${rsync}" output="${revo.logdir}/${revo.tarlog}.rsync">
+        <arg value="--checksum"/>
+        <arg value="-rv"/>
+        <arg value="${revo.pado}/"/>
+        <arg value="${revo.tmpdir}/revo/"/>
+      </exec>
 
      <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
          protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
 
-        <tar destfile="${revo.tmpdir}/${revo.filename}" compression="gzip">
+      <exec executable="${tar}" dir="${revo.tmpdir}"
+        output="${revo.logdir}/${revo.tarlog}">
+        <arg value="--newer"/>
+        <arg file="${v.tgz}/.reftempo"/>
+        <arg value="--ignore-failed-read"/>
+        <arg value="-cvzf"/>
+        <arg value="${revo.tmpdir}/${revo.filename}"/>
+        <arg value="./revo"/>
+        <arg value="./bv_forigu_tiujn.lst"/>
+      </exec>
+    
+      <copy file="${revo.tmpdir}/${revo.filename}" tofile="${v.tgz}/${revo.filename}"/>
 
+   </target>
+   
+
+   <target name="revo-tar-art" depends="revo-preparo" 
+       description="pakas kreitajn Revo-artikolojn en tar-dosieron">
+
+      <tar destfile="${revo.tmpdir}/${revo.filename}" compression="gzip">
         <tarfileset dir="${revo.pado}" includes="art/*.html"/>
-     </tar>
+      </tar>
    </target>
 
    <target name="revo-ftp" unless="${revo.usescp}">

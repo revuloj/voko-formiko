@@ -306,6 +306,23 @@ delete FROM art WHERE art_amrk = 'singult';
 
   </target>
 
+  <target name="art-git-co" depends="art-preparo" 
+       description="metas la fontojn al pozicio de certa 'sha'"
+       if="sha">
 
+    <exec executable="${git}" dir="${v.fonto}">
+      <arg value="checkout"/>
+      <arg value="${sha}"/>
+    </exec>
+
+    <sync todir="${v.bazo.xml}">
+      <fileset dir="${v.fonto}"/>
+    </sync>
+
+    <sync todir="${v.bazo}/bld">
+      <fileset dir="${v.fonto}/../bld/"/>
+    </sync>
+
+  </target>
 
 </project>

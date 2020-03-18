@@ -1,5 +1,7 @@
 *~
 \#*
+*.class
+respiro.jar
 revo/
 
 

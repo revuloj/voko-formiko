@@ -4,3 +4,7 @@ commandTests:
   command: "su"
   args: ["-c","ant -f ${VOKO}/ant/redaktoservo.xml srv-agordo","formiko"]
   expectedOutput: ["v.voko.ant=/home/formiko/voko/ant"]
+- name: "redaktoservo agordo"
+  command: "su"
+  args: ["-c","formiko inx-relax","formiko"]
+  expectedOutput: ["BUILD SUCCESS"]

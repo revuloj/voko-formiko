@@ -37,7 +37,7 @@ secrets:
     file: ${HOME}/etc/redaktantoj
     
 configs:
-  # alternatice uzu file: ...
+  # alternative uzu file: ...
   # por rekte lasi la agordon sur la docker-gastiganto
   voko-formiko.agordo-cron:
     external: true

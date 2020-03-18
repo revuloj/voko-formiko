@@ -1,5 +1,9 @@
 #!/bin/bash
-set -x
+#set -x
+
+echo "### Prepari redaktoservon..."
+
+export CLASSPATH=$SAXONJAR:$JINGJAR
 
 # debug
 ls -l /config/*

@@ -190,6 +190,41 @@ rezulto en:
 
   </target>
 
+  <target name="tuto-paralele" depends="preparo" 
+       description="shovas (re)kreitajn indeksojn, tezauron kaj artikolojn el provizora dosierujo al la vortaro">
+
+    <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
+       <property name="v.bazo" location="${v.bazo}"/>
+       <target name="inx-agordo"/>
+       <target name="inx-eltiro"/>
+    </ant>
+
+    <parallel>
+
+      <ant antfile="${v.voko.ant}/tezauro.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="tez-agordo"/>
+        <target name="tez-tuto"/>
+      </ant>
+
+      <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="inx-git"/>
+        <target name="inx-eraroj"/>
+        <target name="inx-relax"/>
+        <target name="inx-tuto"/>
+      </ant>
+
+      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="art-agordo"/>
+        <target name="art-tuto"/>
+      </ant>
+
+    </parallel>
+
+  </target>
+
 
   <target name="pakajhoj" depends="preparo"
      description="faras pakajhojn de la vortaro post regulaj intervaloj">

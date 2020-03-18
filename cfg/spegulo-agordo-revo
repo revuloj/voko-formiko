@@ -13,20 +13,20 @@ logdir=/home/formiko/log
 tmpdir=/home/formiko/tmp
 
 ## agordo por konekti kun ftp-servilo (Sesio)
-servilo.dir=./alveno
+#servilo.dir=./alveno
 #servilo.host=sesio
 #servilo.user=
 #servilo.password=
 
 ## agordo por anonci kaj malpaki alŝuton en publika Revo-servilo (Araneo)
-upload.url=http://araneo/cgi-bin/admin/uprevo.pl?fname=
+#upload.url=http://araneo/cgi-bin/admin/uprevo.pl?fname=
 #upload.user=
 #upload.password=
 
 ## agordo por preni la tempon de la publika Revo-servilo (Araneo)
 # ni bezonis ĝin por agordita tempo, ni kontrolu ĉu en Kuberneto
 # tio plu estos bezonata...
-tempo.url=http://araneo/cgi-bin/admin/time.pl
+#tempo.url=http://araneo/cgi-bin/admin/time.pl
 
 ## agordo por preni la liston de redaktantoj el Abelo
 # se ni decidos administr tion kiel Kuberneto-sekreto
@@ -39,16 +39,16 @@ redaktantoj.listo=/home/revo/etc/redaktantoj
 ## Foje pro eraroj dum transsendo de dosieroj, la versioj deviiĝas
 # tiu skripto/retpaĝo helpas kompari ilin...
 #versioj.url=http://localhost/cgi-bin/admin/checkversioj.pl?arts=*
-versioj.url=http://araneo/tmp/checkversioj.html
+#versioj.url=http://araneo/tmp/checkversioj.html
 #versioj.user=
 #versioj.password=
 
 ## per resendo ni povas eltrovi, kiujn deviiĝintajn dosierojn necesas refreŝigi
-resendo.url=http://araneo/cgi-bin/admin/resendu.pl
+#resendo.url=http://araneo/cgi-bin/admin/resendu.pl
 #resendo.user=
 #resendo.password=
 
 ## Vikipediaj ligoj en la artikoloj estas kreataj per aparta Perl-skripto
-vikio.url=http://araneo/cgi-bin/admin/upviki.pl?download=0
+#vikio.url=http://araneo/cgi-bin/admin/upviki.pl?download=0
 #vikio.user=
 #vikio.password=

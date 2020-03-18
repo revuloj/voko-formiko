@@ -132,16 +132,16 @@
 
   <target name="pak-html" depends="pak-preparo" description="Revo-HTML-pakajho">
      <zip destfile="${v.tgz}/revohtml_${nun.dato}.zip" encoding="UTF-8">
-       <zipfileset dir="${v.bazo}/art" excludes="CVS/*" prefix="revo/art"/>
-       <zipfileset dir="${v.bazo}/inx" excludes="CVS/*" prefix="revo/inx"/>
-       <zipfileset dir="${v.bazo}/dok" excludes="CVS/*" prefix="revo/dok"/>
-       <zipfileset dir="${v.bazo}/stl" excludes="CVS/*" prefix="revo/stl"/>
-       <zipfileset dir="${v.bazo}/tez" excludes="CVS/*" prefix="revo/tez"/>
-       <zipfileset dir="${v.bazo}/smb" excludes="CVS/*" prefix="revo/smb"/>
+       <zipfileset dir="${v.bazo}/art" prefix="revo/art"/>
+       <zipfileset dir="${v.bazo}/inx" prefix="revo/inx"/>
+       <zipfileset dir="${v.bazo}/dok" prefix="revo/dok"/>
+       <zipfileset dir="${v.bazo}/stl" prefix="revo/stl"/>
+       <zipfileset dir="${v.bazo}/tez" prefix="revo/tez"/>
+       <zipfileset dir="${v.bazo}/smb" prefix="revo/smb"/>
        <zipfileset dir="${v.bazo}" includes="index.html sercxo.html titolo.html revo.ico " 
        prefix="revo"/>
      </zip>  
-   </target>
+  </target>
 
 
    <target name="pak-shanghoj">
