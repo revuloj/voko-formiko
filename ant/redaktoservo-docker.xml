@@ -1,4 +1,4 @@
-<project name="Revo-redaktoservo" default="" basedir=".">
+<project name="voko-redaktoservo-docker" default="" basedir=".">
     <description>
        Reta Vortaro, reguloj por redaktoservo, kiu kunigas chion de retposhttrakto tra refaro de la vortaro 
        ghis shovo de la rezultoj al la servilo.
@@ -26,12 +26,10 @@
    <property name="processmail" value="processmail.pl"/>
    <property name="resumo-filtro" value="1 message|messages|no mail|copy|tar-file-size|length|ftp|get|failed|total|dauxro"/>
 
-
    <target name="srv-agordo" description="eligas la agordeblajn variablojn por kontrolo">
       <echoproperties prefix="v."/>
       <echoproperties prefix="srv."/>
    </target>
-
 
    <target name="srv-shlosu" description="shlosas la servon dum ĝi laboras por eviti konkurencajn procedojn">
      <fail message="La redaktoservo estas ŝlosita. Atendu ĝis ĝi finiĝis. Esceptokaze vi povas forigi ${srv.seruro}.">
@@ -288,14 +286,7 @@
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="tuto-paralele"/>
-<!--        <target name="pakajhoj"/ -->
-<!--        <target name="tezauro"/> -->
      </ant>  
-     <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
-        <property name="v.bazo" location="${v.bazo}"/>
-        <target name="pak-agordo"/>
-        <target name="pak-html"/>
-     </ant>         
    </target>    
 
 
@@ -303,10 +294,13 @@
       description="Kuro de la tuta servo ene de Github-ago: kreu la vortaron en du diversaj eldonoj (sha1,sha2) kaj paki+alŝuti nur la ŝanĝojn"
       if="sha1">
 
+      <!-- se ambaŭ tempo-punktoj identas, ni rezignas pri la procedo per "fail" -->
       <condition property="shaEqual">
         <equals arg1="${sha1}" arg2="${sha2}"/>
       </condition>
       <fail if="shaEqual" message="La eldonoj samas, ni ne bezonas krei diferencon: ${sha1} = ${sha2}"/>      
+
+      <!-- ### 1a kompleta kuro ### -->
 
      <antcall target="srv-servo-github" inheritAll="false">   
         <param name="v.bazo" location="${v.bazo}"/>
@@ -318,7 +312,8 @@
         <target name="revo-referenco"/>
      </ant>
 
-     <!-- se argumento 'sha' estas donita (per -Dsha=99c8a2b749), metu la fontojn al tiu pozicio -->
+     <!-- ### 2a diferenca kuro ### -->
+
      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="sha" value="${sha2}"/>
@@ -331,9 +326,7 @@
      </ant>      
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
-        <target name="tuto"/>
-<!--        <target name="pakajhoj"/ -->
-<!--        <target name="tezauro"/> -->
+        <target name="tuto-diference"/>
      </ant>  
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
@@ -342,7 +335,14 @@
           de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-diferenco"/>
         <!-- target name="revo-upload"/ -->
+     </ant>        
+
+     <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="pak-agordo"/>
+        <target name="pak-html"/>
      </ant>         
+
    </target>      
 
 

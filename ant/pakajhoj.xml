@@ -1,4 +1,4 @@
-<project name="Revo-pakajhoj" default="pak-regule" basedir=".">
+<project name="voko-pakajhoj" default="pak-regule" basedir=".">
     <description>
        Reta Vortaro, reguloj por fari pakajhojn. Normale refarighas
        nova kompleto post 28 tagoj nova parto (t.e. shanghitaj dosieroj)

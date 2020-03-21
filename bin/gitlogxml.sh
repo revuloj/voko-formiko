@@ -1,7 +1,17 @@
 #!/bin/bash
 
+from=$1
+
+if [[ ! -z "$from" ]]; then
+  # ĉiuj post $from
+  commits="$from..HEAD"
+else
+  # ĉiuj
+  commits="HEAD"
+fi  
+
 # https://gist.github.com/rhochreiter/4666858 
-revlist=$(git rev-list HEAD)
+revlist=$(git rev-list $commits)
 (
   echo '<?xml version="1.0" encoding="UTF-8"?>'
   echo '<changelog>'

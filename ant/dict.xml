@@ -1,4 +1,4 @@
-<project name="Revo-Dict" default="test" basedir=".">
+<project name="voko-dict" default="test" basedir=".">
     <description>
        Reta Vortaro, reguloj por krei dict-version. 
     </description>

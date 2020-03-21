@@ -1,4 +1,4 @@
-<project name="Revo-tezauro" default="tuto" basedir=".">
+<project name="voko-tezauro" default="tuto" basedir=".">
     <description>
        Reta Vortaro, reguloj por (re)krei tezauron. 
     </description>

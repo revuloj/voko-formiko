@@ -1,4 +1,4 @@
-<project name="Respiro-jar" default="rsp-jar" basedir=".">
+<project name="voko-respiro" default="rsp-jar" basedir=".">
     <description>
        Reta Vortaro, reguloj por (re)krei Java-klasojn en respiro.jar. 
     </description>

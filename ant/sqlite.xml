@@ -1,4 +1,4 @@
-<project name="Revo-sql" default="" basedir=".">
+<project name="voko-sqlite" default="" basedir=".">
     <description>
       Ekstraktu strukturajn (indeks-)informojn el Revo kaj preparu por
       SQLite datumbazo.

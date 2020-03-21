@@ -1,4 +1,4 @@
-<project name="Revo-redaktoservo" default="" basedir=".">
+<project name="voko-redaktoservo" default="" basedir=".">
     <description>
        Reta Vortaro, reguloj por redaktoservo, kiu kunigas chion de retposhttrakto tra refaro de la vortaro 
        ghis shovo de la rezultoj al la servilo.

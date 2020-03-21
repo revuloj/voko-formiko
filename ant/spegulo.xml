@@ -1,4 +1,4 @@
-<project name="Revo-spegulo" default="" basedir=".">
+<project name="voko-spegulo" default="" basedir=".">
     <description>
        Reta Vortaro, reguloj por speguli shanghitajn dosierojn al publikaj serviloj.
     </description>

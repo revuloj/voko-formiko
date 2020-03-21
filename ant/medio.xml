@@ -1,4 +1,4 @@
-<project name="Revo" default="test" basedir=".">
+<project name="voko-medio" default="test" basedir=".">
     <description>
        Reta Vortaro, reguloj por (re)krei gxin. 
     </description>

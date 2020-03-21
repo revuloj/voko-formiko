@@ -1,4 +1,4 @@
-<project name="Revo" default="test" basedir=".">
+<project name="voko-artikoloj" default="test" basedir=".">
     <description>
        Reta Vortaro, reguloj por artikoloj.
     </description>
@@ -245,14 +245,50 @@ delete FROM art WHERE art_amrk = 'singult';
        description="kreas ŝanĝ-historiojn de la xml-dosieroj">
     <echo message="traktante la tutan historion de la arĥivo, tio daŭros plurajn ĝis multajn minutojn!"/>
     <exec executable="${v.voko.bin}/gitlogxml.sh" dir="${v.fonto}"
-	logError="true" output="${v.tmp}/inx_shanghoj_cxiuj.xml"/> 
+	        logError="true" output="${v.tmp}/inx_shanghoj_cxiuj.xml"/> 
     <xslt in="${v.tmp}/inx_shanghoj_cxiuj.xml" destdir="${v.tmp}/hst" out="${v.tmp}/hst/.tempo" 
         style="${v.voko.xsl}/hst_html.xsl"
         classpathref="saxon.classpath">
 	    <param name="agordo-pado" expression="${v.cfg}"/>
-	    <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                    value="true"/>      
+      </factory>
     </xslt>
   </target>
+
+  <target name="art-hist-diferenco" depends="art-preparo" 
+       description="kreas ŝanĝ-historiojn de la xml-dosieroj"
+       if="${sha1}">
+    <echo message="traktante la historion de la arĥivo post ${sha1}"/>
+    <!-- eltiru ĉiujn ŝangojn post sha1 -->
+    <exec executable="${v.voko.bin}/gitlogxml.sh" dir="${v.fonto}"
+	        logError="true" output="${v.tmp}/inx_shanghoj_sha1.xml"/> 
+    <!-- kunigu ambau XML-dosierojn en unu supozante, ke la unuaj du linioj estas
+        <?xml... kaj la radika elemento -->
+    <exec executable="head" logError="true"
+      output="${v.tmp}/inx_shanghoj_kunigitaj">
+      <arg value="-n"/>
+      <arg value="-1"/>
+      <arg file="${v.tmp}/inx_shanghoj_sha1.xml"/>
+    </exec>
+    <exec executable="tail" logError="true"
+      append="true" output="${v.tmp}/inx_shanghoj_kunigitaj">
+      <arg value="-n"/>
+      <arg value="+3"/>
+      <arg file="${v.tmp}/inx_shanghoj_cxiuj.xml"/>
+    </exec>
+    <!-- rekreu ĉiujn historiajn HTML-dosierojn -->
+    <xslt in="${v.tmp}/inx_shanghoj_kunigitaj.xml" destdir="${v.tmp}/hst" out="${v.tmp}/hst/.tempo" 
+        style="${v.voko.xsl}/hst_html.xsl"
+        classpathref="saxon.classpath">
+      <param name="agordo-pado" expression="${v.cfg}"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                    value="true"/>      
+      </factory>
+    </xslt>
+  </target>  
 
 
   <target name="art-tuto" depends="art-html"

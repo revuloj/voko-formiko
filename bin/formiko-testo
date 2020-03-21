@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# malsukcesu, se iu komando malsukcesas
+set -e
+
+# kontrolas la sintakson vokante ĉiujn dosierojn en ant kun la celo -p (listo de difinitaj celoj)
+
+for file in ${VOKO}/ant/*.xml
+do
+    ant -f ${file} -p
+done
+
+# kontrolas ĉu la skripto formiko estas en ordo farante pli malpli la samon per ĝi
+
+formiko art-helpo
+formiko inx-helpo
+formiko tez-helpo
+formiko med-helpo
+formiko srv-helpo
+formiko vrt-helpo
+formiko sql-helpo
+
+

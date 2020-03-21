@@ -1,4 +1,4 @@
-<project name="Revo" default="test" basedir=".">
+<project name="voko-vortaro" default="test" basedir=".">
     <description>
        Reta Vortaro, reguloj por (re)krei gxin. 
     </description>
@@ -209,6 +209,49 @@ rezulto en:
 
       <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
+        <!-- sufiĉas tiujn kalkuli tiujn tri la duan fojon (tuto-diference)
+        <target name="inx-git"/>
+        <target name="inx-eraroj"/>
+        <target name="inx-relax"/> -->
+        <target name="inx-tuto"/>
+      </ant>
+
+      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="art-agordo"/>
+        <target name="art-tuto"/>
+      </ant>
+
+      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="art-agordo"/>
+        <target name="art-hist"/>
+      </ant>
+
+    </parallel>
+
+  </target>
+
+
+  <target name="tuto-diference" depends="preparo" 
+       description="shovas (re)kreitajn indeksojn, tezauron kaj artikolojn el provizora dosierujo al la vortaro">
+
+    <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
+       <property name="v.bazo" location="${v.bazo}"/>
+       <target name="inx-agordo"/>
+       <target name="inx-eltiro"/>
+    </ant>
+
+    <parallel>
+
+      <ant antfile="${v.voko.ant}/tezauro.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="tez-agordo"/>
+        <target name="tez-tuto"/>
+      </ant>
+
+      <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
         <target name="inx-git"/>
         <target name="inx-eraroj"/>
         <target name="inx-relax"/>
@@ -221,15 +264,15 @@ rezulto en:
         <target name="art-tuto"/>
       </ant>
 
-      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">   
+      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="art-agordo"/>
-        <target name="art-hist"/>
+        <target name="art-hist-diferenco"/>
       </ant>
 
     </parallel>
 
-  </target>
+  </target>  
 
 
   <target name="pakajhoj" depends="preparo"

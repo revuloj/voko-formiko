@@ -1,4 +1,4 @@
-<project name="Revo-indeksoj" default="tuto" basedir=".">
+<project name="voko-indeksoj" default="tuto" basedir=".">
     <description>
        Reta Vortaro, reguloj por (re)krei indeksojn. 
     </description>

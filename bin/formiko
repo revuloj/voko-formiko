@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# malsukcesu, se iu komando malsukcesas
+set -e
+
 if [ $1 == '--help' ] || [ $1 == '-h' ] || [ $1 == '' ]
 then
   cat << EOF
@@ -69,7 +72,9 @@ sql)
   cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/sqlite.xml $target
   ;;  
 vrt)
-  target=${target#*-}
+  if [[ "$target" != "-projecthelp" ]]; then
+    target=${target#*-}
+  fi
   cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/vortaro.xml $target
   ;;  
 *)
