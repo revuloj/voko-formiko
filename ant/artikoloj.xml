@@ -259,7 +259,7 @@ delete FROM art WHERE art_amrk = 'singult';
 
   <target name="art-hist-diferenco" depends="art-preparo" 
        description="kreas ŝanĝ-historiojn de la xml-dosieroj"
-       if="${sha}">
+       if="sha">
     <echo message="traktante la historion de la arĥivo post ${sha}"/>
     <!-- eltiru ĉiujn ŝangojn post sha -->
     <exec executable="${v.voko.bin}/gitlogxml.sh" dir="${v.fonto}"
