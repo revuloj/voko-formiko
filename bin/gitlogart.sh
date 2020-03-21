@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# por krei la historion de artikolo, vi troviĝu ene de la Git-arĥivo, ekz. $HOME/revo-fono/revo
+
 # kiel plirapidigi...?
 # https://stackoverflow.com/questions/35186829/how-to-improve-git-log-performance
 
+# La arĥivo-URL uzata malsupre por referenci al unopaj eldonoj per "hash"
 repo='https://github.com/revuloj/revo-fonto/commit/'
 
 if [[ "$1" == *".xml" ]]; then
@@ -19,6 +22,7 @@ if [[ ! -f "$art" ]]; then
   exit 1
 fi 
 
+# referenco al la artikolo en la servilo reta-vortaro.de
 href="http://reta-vortaro.de/revo/art/$nom.html"
 
 cat <<EOH

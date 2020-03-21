@@ -221,6 +221,12 @@ rezulto en:
         <target name="art-tuto"/>
       </ant>
 
+      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="art-agordo"/>
+        <target name="art-hist"/>
+      </ant>
+
     </parallel>
 
   </target>

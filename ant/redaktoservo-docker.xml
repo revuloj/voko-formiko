@@ -287,7 +287,7 @@
      </ant>      
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
-        <target name="tuto"/>
+        <target name="tuto-paralele"/>
 <!--        <target name="pakajhoj"/ -->
 <!--        <target name="tezauro"/> -->
      </ant>  
@@ -341,7 +341,7 @@
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo 
           de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-diferenco"/>
-        <!--target name="revo-upload"/ -->
+        <!-- target name="revo-upload"/ -->
      </ant>         
    </target>      
 

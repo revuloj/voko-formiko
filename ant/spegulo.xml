@@ -345,6 +345,9 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
         <arg value="bv_forigu_tiujn.lst"/>
       </exec>
     
+      <!-- la arĥivo alŝutiĝas al la publika servilo de tmpdir, sed
+           por faciligi la konservadon de rezultoj en Github-ago, ni kopias ĝin ankaŭ
+           al tgz -->
       <copy file="${revo.tmpdir}/${revo.filename}" tofile="${v.tgz}/${revo.filename}"/>
 
    </target>
@@ -397,31 +400,6 @@ ant -f ~/voko/ant/spegulo.xml -Drevo-tar-file-exists=true -Drevo.filename=revo-J
    <target name="revo-upload" depends="revo-preparo, revo-tempo, revo-ftp, revo-scp" 
      if="revo-tar-file-exists"
      description="transportas la tar-dosieron al la Revo-servilo">
-
-<!--
-     <echo>sendas ${revo.tmpdir}/${revo.filename} 
-           al ${revo.servilo.host}/${revo.servilo.dir}</echo>
--->
-<!-- scp/sftp bezonas ant-jsch (jsch.jar) 
-
-     <scp todir="${revo.servilo.user}:${revo.servilo.password}@${revo.servilo.host}:${revo.servilo.dir}">
-        <!- - keyfile="${user.home}/.ssh/id_revo" - ->
-       <fileset file="${revo.tmpdir}/${revo.filename}"/>
-     </scp>
--->
-
-<!--
-     <ftp server="${revo.servilo.host}"
-         remotedir="${revo.servilo.dir}"
-         userid="${revo.servilo.user}"
-         password="${revo.servilo.password}"
-         retriesAllowed="3"
-         passive="yes"
-         verbose="yes">
-
-       <fileset file="${revo.tmpdir}/${revo.filename}"/>
-     </ftp>
--->
 
      <echo>malpakas la arhhivon, protokolo en ${revo.logdir}/${revo.uploadlog}</echo>
 

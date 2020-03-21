@@ -242,7 +242,7 @@ delete FROM art WHERE art_amrk = 'singult';
 
 
   <target name="art-hist" depends="art-preparo" 
-       description="kreas shangh-historiojn de la xml-dosieroj">
+       description="kreas ŝanĝ-historiojn de la xml-dosieroj">
     <echo message="traktante la tutan historion de la arĥivo, tio daŭros plurajn ĝis multajn minutojn!"/>
     <exec executable="${v.voko.bin}/gitlogxml.sh" dir="${v.fonto}"
 	logError="true" output="${v.tmp}/inx_shanghoj_cxiuj.xml"/> 
