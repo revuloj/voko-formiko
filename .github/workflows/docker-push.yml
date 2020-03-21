@@ -17,14 +17,14 @@ on:
 env:
   # image name.
   IMAGE_NAME: voko-formiko
-  IMAGE_ENTRY: formiko
+#  IMAGE_ENTRY: formiko
 #  IMAGE_TEST: med-medio
   ORGANIZATION: revuloj
 
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
+  testo:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,33 +39,55 @@ jobs:
 #          else
 #            docker build . --file Dockerfile
 #          fi
-      - name: testoj
+      - name: kreo de $IMAGE_NAME
         run: |
            docker build . --file Dockerfile --tag $IMAGE_NAME
-           docker run $IMAGE_NAME $IMAGE_ENTRY med-medio
-           docker run $IMAGE_NAME $IMAGE_ENTRY inx-?
-           docker run $IMAGE_NAME $IMAGE_ENTRY tez-?
+
+      - name: testoj de $IMAGE_NAME
+        run: |
+           docker run $IMAGE_NAME formiko med-medio
+           docker run $IMAGE_NAME formiko-testo
+           docker run -u1001 $IMAGE_NAME  bin/xsl-testo
+
+      - name: Arĥivo de $IMAGE_NAME
+        run: |
+           docker image save -o $IMAGE_NAME.tar $IMAGE_NAME
+
+      - name: Konservo de $IMAGE_NAME por la sekvonta tasko)
+        uses: actions/upload-artifact@v1
+        with:
+          name: $IMAGE_NAME
+          path: $IMAGE_NAME.tar
 
   # Push image to GitHub Package Registry.
   # See also https://docs.docker.com/docker-hub/builds/
-  push:
+  sendo:
     # Ensure test job passes before pushing image.
-    needs: test
+    needs: testo
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
     steps:
-      - uses: actions/checkout@v1
 
-      - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+      - name: Reakiro de $IMAGE_NAME
+        uses: actions/download-artifact@v1
+        with:
+          name: $IMAGE_NAME
+          path: $IMAGE_NAME.tar
 
-      - name: Log into registry
+#      - uses: actions/checkout@v1
+#
+#      - name: Build image
+#        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
+      - name: Saluto al docker.pkg.github.com
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-      - name: Push image
+      - name: Puŝo de $IMAGE_NAME
         run: |
+          docker image load -i $IMAGE_NAME.tar $IMAGE_NAME
+
           #IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
           # ĉu eblas ankau nur /revuloj/ ($ORGANIZATION) ?
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
