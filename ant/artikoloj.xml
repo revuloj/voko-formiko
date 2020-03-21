@@ -259,18 +259,20 @@ delete FROM art WHERE art_amrk = 'singult';
 
   <target name="art-hist-diferenco" depends="art-preparo" 
        description="kreas ŝanĝ-historiojn de la xml-dosieroj"
-       if="${sha1}">
-    <echo message="traktante la historion de la arĥivo post ${sha1}"/>
-    <!-- eltiru ĉiujn ŝangojn post sha1 -->
+       if="${sha}">
+    <echo message="traktante la historion de la arĥivo post ${sha}"/>
+    <!-- eltiru ĉiujn ŝangojn post sha -->
     <exec executable="${v.voko.bin}/gitlogxml.sh" dir="${v.fonto}"
-	        logError="true" output="${v.tmp}/inx_shanghoj_sha1.xml"/> 
+	        logError="true" output="${v.tmp}/inx_shanghoj_sha.xml"> 
+        <arg value="${sha}"/>
+    </exec>
     <!-- kunigu ambau XML-dosierojn en unu supozante, ke la unuaj du linioj estas
         <?xml... kaj la radika elemento -->
     <exec executable="head" logError="true"
       output="${v.tmp}/inx_shanghoj_kunigitaj">
       <arg value="-n"/>
       <arg value="-1"/>
-      <arg file="${v.tmp}/inx_shanghoj_sha1.xml"/>
+      <arg file="${v.tmp}/inx_shanghoj_sha.xml"/>
     </exec>
     <exec executable="tail" logError="true"
       append="true" output="${v.tmp}/inx_shanghoj_kunigitaj">

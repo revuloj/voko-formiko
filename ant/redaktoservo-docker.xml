@@ -326,6 +326,7 @@
      </ant>      
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha1}"/>
         <target name="tuto-diference"/>
      </ant>  
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">   
