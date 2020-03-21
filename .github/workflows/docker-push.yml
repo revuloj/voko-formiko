@@ -51,13 +51,13 @@ jobs:
 
       - name: Arĥivo de ${{ env.IMAGE_NAME }}
         run: |
-           docker image save -o $IMAGE_NAME.tar $IMAGE_NAME
+           docker image save -o ${IMAGE_NAME}.tar ${IMAGE_NAME}
 
-      - name: Konservo de $IMAGE_NAME por la sekvonta tasko)
+      - name: Konservo de ${{ env.IMAGE_NAME }} por la sekvonta tasko
         uses: actions/upload-artifact@v1
         with:
-          name: $IMAGE_NAME
-          path: $IMAGE_NAME.tar
+          name: ${{ env.IMAGE_NAME }}
+          path: ${{ env.IMAGE_NAME }}.tar
 
   # Push image to GitHub Package Registry.
   # See also https://docs.docker.com/docker-hub/builds/
@@ -73,8 +73,8 @@ jobs:
       - name: Reakiro de ${{ env.IMAGE_NAME }}
         uses: actions/download-artifact@v1
         with:
-          name: $IMAGE_NAME
-          path: $IMAGE_NAME.tar
+          name: ${{ env.IMAGE_NAME }}
+          path: ${{ env.IMAGE_NAME }}.tar
 
 #      - uses: actions/checkout@v1
 #
@@ -86,7 +86,7 @@ jobs:
 
       - name: Puŝo de ${{ env.IMAGE_NAME }}
         run: |
-          docker image load -i $IMAGE_NAME.tar $IMAGE_NAME
+          docker image load -i ${IMAGE_NAME}.tar ${IMAGE_NAME}
 
           #IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
           # ĉu eblas ankau nur /revuloj/ ($ORGANIZATION) ?
