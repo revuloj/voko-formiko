@@ -269,13 +269,13 @@ delete FROM art WHERE art_amrk = 'singult';
     <!-- kunigu ambau XML-dosierojn en unu supozante, ke la unuaj du linioj estas
         <?xml... kaj la radika elemento -->
     <exec executable="head" logError="true"
-      output="${v.tmp}/inx_shanghoj_kunigitaj">
+      output="${v.tmp}/inx_shanghoj_kunigitaj.xml">
       <arg value="-n"/>
       <arg value="-1"/>
       <arg file="${v.tmp}/inx_shanghoj_sha.xml"/>
     </exec>
     <exec executable="tail" logError="true"
-      append="true" output="${v.tmp}/inx_shanghoj_kunigitaj">
+      append="true" output="${v.tmp}/inx_shanghoj_kunigitaj.xml">
       <arg value="-n"/>
       <arg value="+3"/>
       <arg file="${v.tmp}/inx_shanghoj_cxiuj.xml"/>
