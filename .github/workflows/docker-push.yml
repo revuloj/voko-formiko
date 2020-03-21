@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
+      - name: Ricevi la aktualan kodon
         uses: actions/checkout@v1
 
 #      - name: Run tests
@@ -39,17 +39,17 @@ jobs:
 #          else
 #            docker build . --file Dockerfile
 #          fi
-      - name: kreo de $IMAGE_NAME
+      - name: Kreo de ${{ env.IMAGE_NAME }}
         run: |
            docker build . --file Dockerfile --tag $IMAGE_NAME
 
-      - name: testoj de $IMAGE_NAME
+      - name: Testoj de ${{ env.IMAGE_NAME }}
         run: |
            docker run $IMAGE_NAME formiko med-medio
            docker run $IMAGE_NAME formiko-testo
-           docker run -u1001 $IMAGE_NAME  bin/xsl-testo
+           docker run -u1001 $IMAGE_NAME voko/bin/xsl-testo
 
-      - name: Arĥivo de $IMAGE_NAME
+      - name: Arĥivo de ${{ env.IMAGE_NAME }}
         run: |
            docker image save -o $IMAGE_NAME.tar $IMAGE_NAME
 
@@ -70,7 +70,7 @@ jobs:
 
     steps:
 
-      - name: Reakiro de $IMAGE_NAME
+      - name: Reakiro de ${{ env.IMAGE_NAME }}
         uses: actions/download-artifact@v1
         with:
           name: $IMAGE_NAME
@@ -84,7 +84,7 @@ jobs:
       - name: Saluto al docker.pkg.github.com
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-      - name: Puŝo de $IMAGE_NAME
+      - name: Puŝo de ${{ env.IMAGE_NAME }}
         run: |
           docker image load -i $IMAGE_NAME.tar $IMAGE_NAME
 
