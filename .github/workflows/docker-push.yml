@@ -86,7 +86,7 @@ jobs:
 
       - name: Puŝo de ${{ env.IMAGE_NAME }}
         run: |
-          docker image load -i ${IMAGE_NAME}.tar ${IMAGE_NAME}
+          docker image load -i ${IMAGE_NAME}.tar
 
           #IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
           # ĉu eblas ankau nur /revuloj/ ($ORGANIZATION) ?
