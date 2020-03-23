@@ -271,26 +271,15 @@
    <target name="srv-servo-github" depends="srv-agordo,srv-preparo"
       description="Kuro de la tuta servo ene de Github-ago: fari kompletan vortaron kaj krei arĥivon">
 
-     <!-- se argumento 'sha' estas donita (per -Dsha=99c8a2b749), metu la fontojn al tiu pozicio -->
-     <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
-        <property name="v.bazo" location="${v.bazo}"/>
-        <property name="sha" value="${sha}"/>
-        <target name="art-agordo"/>
-        <target name="art-git-co"/>
-     </ant>   
-
-     <ant antfile="${v.voko.ant}/medio.xml" inheritAll="false">
-        <property name="v.bazo" location="${v.bazo}"/>
-        <target name="med-medio"/>
-     </ant>      
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
-        <target name="tuto-paralele"/>
+        <property name="sha" value="${sha}"/>
+        <target name="inxtez-bazo"/>
      </ant>  
    </target>    
 
 
-   <target name="srv-servo-diferenco-github" depends="srv-agordo,srv-preparo"
+   <target name="srv-servo-github-diurne" depends="srv-agordo,srv-preparo"
       description="Kuro de la tuta servo ene de Github-ago: kreu la vortaron en du diversaj eldonoj (sha1,sha2) kaj paki+alŝuti nur la ŝanĝojn"
       if="sha1">
 
@@ -300,35 +289,25 @@
       </condition>
       <fail if="shaEqual" message="La eldonoj samas, ni ne bezonas krei diferencon: ${sha1} = ${sha2}"/>      
 
-      <!-- ### 1a kompleta kuro ### -->
+      <!-- ### 1a kalkulu la bazon ### -->
 
-     <antcall target="srv-servo-github" inheritAll="false">   
-        <param name="v.bazo" location="${v.bazo}"/>
-        <param name="sha" value="${sha1}"/>
-     </antcall>
+     <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha1}"/>
+        <target name="inxtez-bazo"/>
+     </ant>  
 
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="revo-referenco"/>
      </ant>
 
-     <!-- ### 2a diferenca kuro ### -->
+     <!-- ### 2a kalkulu la diferencon ### -->
 
-     <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
-        <property name="v.bazo" location="${v.bazo}"/>
-        <property name="sha" value="${sha2}"/>
-        <target name="art-git-co"/>
-     </ant>   
-
-     <ant antfile="${v.voko.ant}/medio.xml" inheritAll="false">
-        <property name="v.bazo" location="${v.bazo}"/>
-        <target name="med-medio"/>
-     </ant>      
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
-        <!-- kun aldono de lastatempa historio ekde sha1 -->
-        <property name="sha" value="${sha1}"/>
-        <target name="tuto-diference"/>
+        <property name="sha" value="${sha2}"/>
+        <target name="inxtez-pluso"/>
      </ant>  
 
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">   
@@ -340,11 +319,13 @@
         <!-- target name="revo-upload"/ -->
      </ant>        
 
+<!-- provizore ni rezignas pri la pakaĵo, ĉar ni ekskludis la artikolojn kaj historion 
      <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="pak-agordo"/>
         <target name="pak-html"/>
      </ant>         
+     -->
 
    </target>      
 

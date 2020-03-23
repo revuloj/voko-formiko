@@ -190,8 +190,21 @@ rezulto en:
 
   </target>
 
-  <target name="tuto-paralele" depends="preparo" 
+  <target name="inxtez-bazo" depends="preparo" 
        description="shovas (re)kreitajn indeksojn, tezauron kaj artikolojn el provizora dosierujo al la vortaro">
+
+    <!-- se argumento 'sha' estas donita (per -Dsha=99c8a2b749), metu la fontojn al tiu pozicio -->
+    <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha}"/>
+        <target name="art-agordo"/>
+        <target name="art-git-co"/>
+    </ant>   
+
+    <ant antfile="${v.voko.ant}/medio.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="med-medio"/>
+    </ant>      
 
     <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
@@ -216,6 +229,8 @@ rezulto en:
         <target name="inx-tuto"/>
       </ant>
 
+<!-- ni ne bezonas aktualigi artikolojn kaj historiojn diurne, ni jam faras
+  hore kaj ni devos ŝpari tempon, ĉar en Github la identigilo validas nur 60min
       <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="art-agordo"/>
@@ -227,14 +242,26 @@ rezulto en:
         <target name="art-agordo"/>
         <target name="art-hist"/>
       </ant>
+-->
 
     </parallel>
 
   </target>
 
 
-  <target name="tuto-diference" depends="preparo" 
-       description="shovas (re)kreitajn indeksojn, tezauron kaj artikolojn el provizora dosierujo al la vortaro">
+  <target name="inxtez-pluso" depends="preparo" 
+       description="(re)kreas indeksojn, tezauron por kompari kun la bazo, inkl. ŝanĝ- kaj erarolistoj">
+
+    <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha}"/>
+        <target name="art-git-co"/>
+    </ant>   
+
+    <ant antfile="${v.voko.ant}/medio.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="med-medio"/>
+    </ant>  
 
     <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
@@ -258,6 +285,9 @@ rezulto en:
         <target name="inx-tuto"/>
       </ant>
 
+<!-- ni ne bezonas aktualigi artikolojn kaj historiojn diurne, ni jam faras
+  hore kaj ni devos ŝpari tempon, ĉar en Github la identigilo validas nur 60min
+
       <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="art-agordo"/>
@@ -270,6 +300,7 @@ rezulto en:
         <target name="art-agordo"/>
         <target name="art-hist-diferenco"/>
       </ant>
+-->
 
     </parallel>
 
