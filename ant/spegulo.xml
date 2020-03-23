@@ -324,6 +324,9 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
         <arg value="${revo.tmpdir}/revo/"/>
       </exec -->      
 
+      <!-- aktualigu dosierojn el revo al tmp/revo nur, se ili enhavas ŝanĝiĝis
+         ne surbaze de la tempo-stampo, tiel ni povos paki malsupre (-newer) 
+         nur la vere diferencajn dosierojn -->
       <exec executable="${rsync}" output="${revo.logdir}/${revo.tarlog}.rsync">
         <arg value="--checksum"/>
         <arg value="-rv"/>
