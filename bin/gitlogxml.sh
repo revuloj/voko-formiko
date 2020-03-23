@@ -18,7 +18,7 @@ revlist=$(git rev-list $commits)
   for rev in $revlist
   do
 	# malnova git 1.8 ne subtenas: --date=format:'%Y-%m-%d %H:%M' 
-    echo "$(git log -1 --date=short --pretty=format:"<entry revision=\"%H\">%n<date>%ad</date>%n<msg><![CDATA[%s]]></msg>%n" $rev)"
+    echo "$(git log -1 --date=short --pretty=format:"<entry revision=\"%h\">%n<date>%ad</date>%n<msg><![CDATA[%s]]></msg>%n" $rev)"
     files=$(git log -1 --pretty="format:" --name-only $rev)
     #echo '<paths>'
     for file in $files

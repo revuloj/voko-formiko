@@ -44,7 +44,7 @@ revlist=$(git rev-list HEAD -- $art)
       | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g')   
     # malnova git 1.8 ne subtenas --date=format:'%Y-%m-%d %H:%M' 
     echo "$(git log -1 --date=short \
-      --pretty=format:"<tr><td>%ad</td><td><a target=\"_new\" href=\"$repo%H\">%h</a></td>" $rev)"
+      --pretty=format:"<tr><td>%ad</td><td><a target=\"_new\" href=\"$repo%h\">%h</a></td>" $rev)"
     echo "<td>$changed</td></tr>"
   done
 )
