@@ -112,7 +112,7 @@
   </target>
 
 
-  <target name="tez-mil" depends="tez-preparo,tez-html,lst-html"
+  <target name="tez-mil" depends="tez-preparo,tez-html,tez-lst-html"
      description="kopias fine maksimume mil shanghitajn dosierojn al la
      tezaurodosierujo kaj tie forigas forfalintajn">
 
@@ -145,7 +145,7 @@
 
 
 
-  <target name="lst-html" depends="tez-preparo,tez-retigo"
+  <target name="tez-lst-html" depends="tez-preparo,tez-retigo"
      description="kreas la HTML-dosierojn de la vortlistoj (klasoj)">
 
     <filter token="format" value="${v.outputformat}"/>
@@ -164,7 +164,7 @@
   </target>
 
 
-  <target name="tez-tuto" depends="tez-preparo,tez-html,lst-html"
+  <target name="tez-tuto" depends="tez-preparo,tez-html,tez-lst-html"
      description="kopias fine chiujn enhave shanghitajn dosierojn al la
      tezaurodosierujo kaj tie forigas forfalintajn">
 
