@@ -276,10 +276,10 @@
         <property name="sha" value="${sha}"/>
         <target name="inxtez-bazo"/>
      </ant>  
-   </target>    
+   </target>   
 
-
-   <target name="srv-servo-github-diurne" depends="srv-agordo,srv-preparo"
+   
+   <target name="srv-servo-github-diurne" depends="srv-agordo,srv-preparo" 
       description="Kuro de la tuta servo ene de Github-ago: kreu la vortaron en du diversaj eldonoj (sha1,sha2) kaj paki+alŝuti nur la ŝanĝojn"
       if="sha1">
 
@@ -327,7 +327,60 @@
      </ant>         
      -->
 
-   </target>      
+   </target>     
+
+
+   <target name="srv-servo-github-medinxtez" depends="srv-agordo,srv-preparo"
+      description="Kuro de la tuta servo ene de Github-ago: fari ĉiujn artikolojn kaj krei arĥivon">
+
+     <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha1}"/>
+        <target name="inxtez-bazo"/>
+     </ant>  
+
+     <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="pak-agordo"/>
+        <target name="pak-html"/>
+     </ant>         
+
+   </target>    
+ 
+
+   <target name="srv-servo-github-art" depends="srv-agordo,srv-preparo"
+      description="Kuro de la tuta servo ene de Github-ago: fari ĉiujn artikolojn kaj krei arĥivon">
+
+     <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha}"/>
+        <target name="art-bazo"/>
+     </ant>  
+
+     <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="pak-agordo"/>
+        <target name="pak-art"/>
+     </ant>         
+
+   </target>    
+
+   <target name="srv-servo-github-hst" depends="srv-agordo,srv-preparo"
+      description="Kuro de la tuta servo ene de Github-ago: fari ĉiujn artikolhistoriojn kaj krei arĥivon">
+
+     <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha}"/>
+        <target name="hst-bazo"/>
+     </ant>  
+
+     <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="pak-agordo"/>
+        <target name="pak-hst"/>
+     </ant>         
+
+   </target>    
 
 
    <target name="srv-servo-art-listo" depends="srv-agordo,srv-preparo,srv-art-listo,srv-upload"

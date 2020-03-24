@@ -139,12 +139,23 @@
        <zipfileset dir="${v.bazo}/tez" prefix="revo/tez"/>
        <zipfileset dir="${v.bazo}/smb" prefix="revo/smb"/>
        <zipfileset dir="${v.bazo}" includes="index.html sercxo.html titolo.html revo.ico " 
-       prefix="revo"/>
+                   prefix="revo"/>
      </zip>  
   </target>
 
+  <target name="pak-art" depends="pak-preparo" description="Revo-HTML-pakajho, nur artikoloj">
+     <zip destfile="${v.tgz}/revoart_${nun.dato}.zip" encoding="UTF-8">
+       <zipfileset dir="${v.bazo}/art" prefix="revo/art"/>
+     </zip>  
+  </target>
 
-   <target name="pak-shanghoj">
+  <target name="pak-hst" depends="pak-preparo" description="Revo-HTML-pakajho, nur historioj">
+     <zip destfile="${v.tgz}/revohst_${nun.dato}.zip" encoding="UTF-8">
+       <zipfileset dir="${v.bazo}/hst" prefix="revo/hst"/>
+     </zip>  
+  </target>
+
+  <target name="pak-shanghoj">
     <zip destfile="${v.tgz}/revonov_${lasta_parta.dato}_${nun.dato}.zip">
        <zipfileset dir="${v.bazo}" includes="**/*" prefix="revo">
          <date datetime="${lasta_parta.dato} ${lasta_parta.tempo}" 

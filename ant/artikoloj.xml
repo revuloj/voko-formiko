@@ -290,6 +290,13 @@ delete FROM art WHERE art_amrk = 'singult';
                     value="true"/>      
       </factory>
     </xslt>
+
+    <copy force="true" todir="${v.bazo.hst}">
+      <fileset dir="${v.tmp}/hst" includes="*.html">
+        <different targetdir="${v.bazo.hst}" ignoreFileTimes="true"/>
+      </fileset>
+    </copy>
+
   </target>  
 
 
@@ -300,6 +307,10 @@ delete FROM art WHERE art_amrk = 'singult';
         <different targetdir="${v.bazo.art}" ignoreFileTimes="true"/>
       </fileset>
     </copy>
+  </target>
+
+  <target name="art-hist-tuto" depends="art-hist"
+       description="kopias shanghitajn historiojn al la destin-dosierujo">
 
     <copy force="true" todir="${v.bazo.hst}">
       <fileset dir="${v.tmp}/hst" includes="*.html">

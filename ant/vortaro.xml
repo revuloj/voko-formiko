@@ -248,6 +248,56 @@ rezulto en:
 
   </target>
 
+  <target name="art-bazo" depends="preparo" 
+       description="Kreas artikolojn por versio donita per ${sha}">  
+
+    <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha}"/>
+        <target name="art-agordo"/>
+        <target name="art-git-co"/>
+    </ant>   
+
+<!-- ĉu ni beonas tion...?
+    <ant antfile="${v.voko.ant}/medio.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="med-dok"/>
+        <target name="med-dtd"/>
+    </ant>      
+-->
+
+    <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">   
+      <property name="v.bazo" location="${v.bazo}"/>
+      <!-- target name="art-agordo"/ -->
+      <target name="art-tuto"/>
+    </ant>
+  </target>
+
+
+  <target name="hst-bazo" depends="preparo" 
+       description="Kreas artikolhistoriojn por versio donita per ${sha}">  
+
+    <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha}"/>
+        <target name="art-agordo"/>
+        <target name="art-git-co"/>
+    </ant>   
+
+<!-- ni ne bezonas medion tie ĉi, eble nur parton
+    <ant antfile="${v.voko.ant}/medio.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <target name="med-medio"/>
+    </ant>      
+-->
+
+    <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+      <property name="v.bazo" location="${v.bazo}"/>
+      <!-- target name="art-agordo"/ -->
+      <target name="art-hist-tuto"/>
+    </ant>
+  </target>
+
 
   <target name="inxtez-pluso" depends="preparo" 
        description="(re)kreas indeksojn, tezauron por kompari kun la bazo, inkl. ŝanĝ- kaj erarolistoj">
