@@ -117,16 +117,27 @@
     <!--loadfile property="artikoloj" srcFile="${art-listo}"/ -->
 
     <exec executable="${git_shanghitaj}" logError="true" dir="${v.fonto}"
-      outputpropert="artikoloj">
+      outputproperty="artikoloj">
       <arg value="${sha}"/>
       <arg value="."/>
     </exec>
+
+    <copy todir="${v.bazo.xml}">
+      <filelist dir="${v.fonto}" files="${artikoloj}"/>
+    </copy>
 
     <xslt destdir="${v.tmp}/art" extension=".xml" useImplicitFileset="false"
        force="true" style="${v.voko.xsl}/revo_tez.xsl" classpathref="saxon.classpath">
        <filelist dir="${v.bazo.xml}" files="${artikoloj}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>    
+
+    <xslt destdir="${v.tmp}/art" extension=".html" useImplicitFileset="false" 
+       force="true" style="${v.voko.xsl}/revohtml2.xsl" classpathref="saxon.classpath">
+       <filelist dir="${v.tmp}/art" files="${artikoloj}"/>
+       <param name="xml-ref-pado" expression="${v.bazo.xml}"/>
+       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
 
     <apply executable="${v.voko.bin}/gitlogart.sh" dir="${v.fonto}"
        relative="true" logError="true" verbose="true">
@@ -138,6 +149,13 @@
         <outputmapper refid="hst-out"/>
       </redirector>      
     </apply>
+
+    <copy todir="${v.bazo.art}">
+       <fileset dir="${v.tmp}/art" includes="*.html"/>
+    </copy>
+    <copy todir="${v.bazo.hst}">
+       <fileset dir="${v.tmp}/hst"/>
+    </copy>
 
   </target>
 

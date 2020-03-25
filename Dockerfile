@@ -46,10 +46,12 @@ RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && chown formiko ${GRUNDO}/cfg/klasoj.xml ${GRUNDO}/xsl/revo_tez.xsl ${GRUNDO}/xsl/revohtml2.xsl ${GRUNDO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp && mkdir -p log && chown -R formiko:users revo tmp log \
   && ln -s /usr/local/bin/jing2xml.sh ${VOKO}/bin/ \
+  && ln -s /usr/local/bin/gitlogart.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogxml.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogxml2w.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/git_shanghitaj.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/git_forigitaj.sh ${VOKO}/bin/ \
+  && ln -s /usr/local/bin/git_bv_forigu_lst.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/insert-art-blobs.sh ${VOKO}/bin/ 
 
 COPY ant ${VOKO}/ant

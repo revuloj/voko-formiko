@@ -193,7 +193,7 @@ rezulto en:
 
   <target name="art-hst-aktualigo" depends="preparo" 
       description="aktualigu ŝanĝitajn artikolojn kaj historiojn ekde ${sha} kaj forigu malaperintajn artikolojn"
-      if="sha1">
+      if="sha">
 
       <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>

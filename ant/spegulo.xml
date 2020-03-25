@@ -371,7 +371,7 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
      <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
          protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
 
-      <exec executable="${tar}" dir="${revo.tmpdir}"
+      <exec executable="${tar}" dir="${revo.pado}/.."
         output="${revo.logdir}/${revo.tarlog}">
         <arg value="--ignore-failed-read"/>
         <arg value="-cvzf"/>
