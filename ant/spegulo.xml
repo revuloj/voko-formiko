@@ -364,6 +364,32 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
       </tar>
    </target>
 
+
+   <target name="revo-tar-art-hst" depends="revo-preparo" 
+       description="pakas Revo-artikolojn kaj historiojn kaj forigojn en tar-dosieron">
+
+     <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
+         protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
+
+      <exec executable="${tar}" dir="${revo.tmpdir}"
+        output="${revo.logdir}/${revo.tarlog}">
+        <arg value="--ignore-failed-read"/>
+        <arg value="-cvzf"/>
+        <arg value="${revo.tmpdir}/${revo.filename}"/>
+        <arg value="revo/art"/>
+        <arg value="revo/hst"/>
+        <arg value="bv_forigu_tiujn.lst"/>
+      </exec>
+    
+      <!-- la arĥivo alŝutiĝas al la publika servilo de tmpdir, sed
+           por faciligi la konservadon de rezultoj en Github-ago, ni kopias ĝin ankaŭ
+           al tgz -->
+      <copy file="${revo.tmpdir}/${revo.filename}" tofile="${v.tgz}/${revo.filename}"/>
+
+   </target>   
+
+
+
    <target name="revo-ftp" unless="${revo.usescp}">
     <echo>sendas ${revo.tmpdir}/${revo.filename}
            al ${revo.servilo.host}/${revo.servilo.dir}</echo>

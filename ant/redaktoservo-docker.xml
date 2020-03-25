@@ -383,10 +383,25 @@
    </target>    
 
 
-   <target name="srv-servo-art-listo" depends="srv-agordo,srv-preparo,srv-art-listo,srv-upload"
-      if="art-listo"
-      description="Interkuro (nur artikoloj, ne indeksoj) de la servo: preni kaj trakti ŝanĝitajn artikolojn el Git, refari artikolojn, sendi dosierojn">
-   </target> 
+   <target name="srv-servo-github-hore" depends="srv-agordo,srv-preparo" 
+      description="Kuro de la servo ene de Github-ago: aktualigu ŝanĝitajn artikolojn kaj historiojn ekde ${sha} kaj forigu malaperintajn artikolojn"
+      if="sha">
+
+     <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha}"/>
+        <target name="art-hst-aktualigo"/>
+     </ant>  
+
+     <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">   
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="revo.dato" value="${v.dato}"/>
+        <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo 
+          de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
+        <target name="revo-tar-art-hst"/>
+        <!-- target name="revo-upload"/ -->
+     </ant>   
+   </target>     
 
 
    <target name="srv-resumo" depends="srv-preparo">

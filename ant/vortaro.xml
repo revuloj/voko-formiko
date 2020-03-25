@@ -190,6 +190,22 @@ rezulto en:
 
   </target>
 
+
+  <target name="art-hst-aktualigo" depends="preparo" 
+      description="aktualigu ŝanĝitajn artikolojn kaj historiojn ekde ${sha} kaj forigu malaperintajn artikolojn"
+      if="sha1">
+
+      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha}"/>
+        <target name="art-agordo"/>
+        <!-- target name="art-git-co"/ -->
+        <target name="art-git-shanghoj"/>
+        <target name="art-git-forigoj"/>
+      </ant>
+  </target>
+
+
   <target name="inxtez-bazo" depends="preparo" 
        description="shovas (re)kreitajn indeksojn, tezauron kaj artikolojn el provizora dosierujo al la vortaro">
 

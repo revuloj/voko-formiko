@@ -28,6 +28,9 @@
   <property name="saxon" location="${ENV.SAXONJAR}"/>
   <property name="git" location="/usr/bin/git"/>
 
+  <property name="git_bv_forigu_lst" location="${v.voko.bin}/git_bv_forigu_lst.sh"/>
+  <property name="git_shanghitaj" location="${v.voko.bin}/git_shanghitaj.sh"/>
+
   <!-- ial Formiko foje ne trovas Saxon per klaspado donita en la tasko mem,
       tial difinu mediovariablon CLASSPATH aldonante la Saxon-arkivon antau voki Formikon -->
   <path id="saxon.classpath">
@@ -108,9 +111,15 @@
   </target>
 
 
-  <target name="art-listo" depends="art-preparo" if="art-listo"
-    description="rekreas plurajn artikolojn laŭ listo legita el dosiero">
-    <loadfile property="artikoloj" srcFile="${art-listo}"/>
+  <target name="art-git-shanghoj" depends="art-preparo" if="art-listo"
+    description="rekreas plurajn artikolojn laŭ listo de Git-ŝanĝoj"
+    if="sha">
+    <!--loadfile property="artikoloj" srcFile="${art-listo}"/ -->
+
+    <exec executable="${git_shanghitaj}" logError="true" dir="${v.fonto}"
+      outputpropert="artikoloj">
+      <arg value="${sha}"/>
+    </exec>
 
     <xslt destdir="${v.tmp}/art" extension=".xml" useImplicitFileset="false"
        force="true" style="${v.voko.xsl}/revo_tez.xsl" classpathref="saxon.classpath">
@@ -131,7 +140,19 @@
 
   </target>
 
+
+  <target name="art-git-forigoj" depends="art-preparo" 
+       description="forigas artikolojn, kiuj forighis en git"
+       if="sha">
+
+    <exec executable="${git_bv_forigu_lst}" logError="true" dir="${v.fonto}"
+      output="${v.tmp}/bv_forigu_tiujn.lst">
+      <arg value="${sha}"/>
+    </exec>
+
+  </target>
   
+
   <target name="art-forigu-unu" depends="art-preparo" 
        description="forigas artikolon surdiske kaj el-db-e, donu $dosiero (sen '.xml') sur komandlinio"
        if="dosiero">
