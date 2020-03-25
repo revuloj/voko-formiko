@@ -95,3 +95,9 @@ rm bld/test.svg
 git add bld
 git commit -m"v3"
 git tag "v3"
+
+
+rm revo/artefakt.xml
+git add revo
+git commit -m"v4"
+git tag "v4"

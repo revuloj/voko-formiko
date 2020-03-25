@@ -111,7 +111,7 @@
   </target>
 
 
-  <target name="art-git-shanghoj" depends="art-preparo" if="art-listo"
+  <target name="art-git-shanghoj" depends="art-preparo" 
     description="rekreas plurajn artikolojn laŭ listo de Git-ŝanĝoj"
     if="sha">
     <!--loadfile property="artikoloj" srcFile="${art-listo}"/ -->
@@ -119,6 +119,7 @@
     <exec executable="${git_shanghitaj}" logError="true" dir="${v.fonto}"
       outputpropert="artikoloj">
       <arg value="${sha}"/>
+      <arg value="."/>
     </exec>
 
     <xslt destdir="${v.tmp}/art" extension=".xml" useImplicitFileset="false"
@@ -148,6 +149,7 @@
     <exec executable="${git_bv_forigu_lst}" logError="true" dir="${v.fonto}"
       output="${v.tmp}/bv_forigu_tiujn.lst">
       <arg value="${sha}"/>
+      <arg value="."/>
     </exec>
 
   </target>
