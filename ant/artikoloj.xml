@@ -149,14 +149,14 @@
         <outputmapper refid="hst-out"/>
       </redirector>      
     </apply>
-
+<!--
     <copy todir="${v.bazo.art}">
        <fileset dir="${v.tmp}/art" includes="*.html"/>
     </copy>
     <copy todir="${v.bazo.hst}">
        <fileset dir="${v.tmp}/hst"/>
     </copy>
-
+-->
   </target>
 
 
