@@ -1,4 +1,4 @@
-<project name="voko-spegulo" default="" basedir=".">
+<project name="voko-spegulo" default="" basedir="." xmlns:if="ant:if">
     <description>
        Reta Vortaro, reguloj por speguli shanghitajn dosierojn al publikaj serviloj.
     </description>
@@ -309,7 +309,7 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
        </filterchain>
      </loadfile>
 
-     <echo file="${revo.tmpdir}/bv_forigu_tiujn.lst">${files-tobe-del}</echo>
+     <echo if:set="files-tobe-del" file="${revo.tmpdir}/bv_forigu_tiujn.lst">${files-tobe-del}</echo>
 
    </target>
 

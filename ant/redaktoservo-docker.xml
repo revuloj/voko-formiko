@@ -284,10 +284,11 @@
       if="sha1">
 
       <!-- se ambaŭ tempo-punktoj identas, ni rezignas pri la procedo per "fail" -->
-      <condition property="shaEqual">
-        <equals arg1="${sha1}" arg2="${sha2}"/>
-      </condition>
-      <fail if="shaEqual" message="La eldonoj samas, ni ne bezonas krei diferencon: ${sha1} = ${sha2}"/>      
+      <fail message="La eldonoj samas, ni ne bezonas krei diferencon: ${sha1} = ${sha2}">
+        <condition> 
+          <equals arg1="${sha1}" arg2="${sha2}"/>
+        </condition>
+      </fail>      
 
       <!-- ### 1a kalkulu la bazon ### -->
 
