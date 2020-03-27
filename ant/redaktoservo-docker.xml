@@ -386,11 +386,19 @@
 
    <target name="srv-servo-github-hore" depends="srv-agordo,srv-preparo" 
       description="Kuro de la servo ene de Github-ago: aktualigu ŝanĝitajn artikolojn kaj historiojn ekde ${sha} kaj forigu malaperintajn artikolojn"
-      if="sha">
+      if="sha1">
+
+      <!-- se ambaŭ tempo-punktoj identas, ni rezignas pri la procedo per "fail" -->
+      <fail message="La eldonoj samas, ni ne bezonas aktualigon: ${sha1} = ${sha2}">
+        <condition> 
+          <equals arg1="${sha1}" arg2="${sha2}"/>
+        </condition>
+      </fail>      
 
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
-        <property name="sha" value="${sha}"/>
+        <property name="sha1" value="${sha1}"/>
+        <property name="sha2" value="${sha2}"/>
         <target name="art-hst-aktualigo"/>
      </ant>  
 
