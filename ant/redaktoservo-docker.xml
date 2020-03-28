@@ -317,10 +317,10 @@
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo 
           de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-diferenco"/>
-        <!-- target name="revo-upload"/ -->
+        <target name="revo-upload"/>
      </ant>        
 
-<!-- provizore ni rezignas pri la pakaĵo, ĉar ni ekskludis la artikolojn kaj historion 
+<!--  ni rezignas tie ĉi pri la pakaĵo, ni nun alpendigas plurajn ZIP-dosierojn al ĉiutatagaj eldonoj anst.
      <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="pak-agordo"/>
@@ -408,7 +408,7 @@
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo 
           de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-tar-art-hst"/>
-        <!-- target name="revo-upload"/ -->
+        <target name="revo-upload"/>
      </ant>   
    </target>     
 
