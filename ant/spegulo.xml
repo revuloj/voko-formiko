@@ -348,6 +348,9 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
         <arg value="bv_forigu_tiujn.lst"/>
       </exec>
     
+      <!-- revo-upload ruliĝas nur, se la dosiero ekzistas -->
+      <available property="revo-tar-file-exists" file="${revo.tmpdir}/${revo.filename}"/>
+
       <!-- la arĥivo alŝutiĝas al la publika servilo de tmpdir, sed
            por faciligi la konservadon de rezultoj en Github-ago, ni kopias ĝin ankaŭ
            al tgz -->
