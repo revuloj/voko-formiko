@@ -384,6 +384,7 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
         <arg value="-cvzf"/>
         <arg value="${revo.tmpdir}/${revo.filename}"/>
         <arg value="./art"/>
+        <arg value="./xml"/>
         <arg value="./hst"/>
         <arg value="bv_forigu_tiujn.lst"/>
       </exec>

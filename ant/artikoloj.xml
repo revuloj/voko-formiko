@@ -58,6 +58,7 @@
     <mkdir dir="${v.tmp}" />
     <mkdir dir="${v.tmp}/art" />
     <mkdir dir="${v.tmp}/hst" />
+    <mkdir dir="${v.tmp}/xml" />
 
     <!-- chu necesas refari la dosieron indekso.xml? -->
     <!-- uptodate property="indekso.aktuala">
@@ -149,6 +150,11 @@
         <outputmapper refid="hst-out"/>
       </redirector>      
     </apply>
+
+    <copy todir="${v.tmp}/xml">
+      <filelist dir="${v.bazo.xml}" files="${artikoloj}"/>
+    </copy>
+
 <!--
     <copy todir="${v.bazo.art}">
        <fileset dir="${v.tmp}/art" includes="*.html"/>
