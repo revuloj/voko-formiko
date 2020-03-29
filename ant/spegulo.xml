@@ -378,7 +378,7 @@ ant -f voko/ant/spegulo.xml -Dcvs-tar-file-exists=true -Dcvs.filename=revocvs-JJ
         output="${revo.logdir}/${revo.tarlog}">
         <arg value="--ignore-failed-read"/>
         <arg value="--exclude"/>
-        <arg value="*.xml"/>
+        <arg value="/art/*.xml"/>
         <arg value="--transform"/>
         <arg value="s,^\.,revo,"/>
         <arg value="-cvzf"/>
