@@ -128,20 +128,20 @@
     </copy>
 
     <xslt destdir="${v.tmp}/art" extension=".xml" useImplicitFileset="false"
-       force="true" style="${v.voko.xsl}/revo_tez.xsl" classpathref="saxon.classpath">
+        failOnNoResources="false" force="true" style="${v.voko.xsl}/revo_tez.xsl" classpathref="saxon.classpath">
        <filelist dir="${v.bazo.xml}" files="${artikoloj}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>    
 
     <xslt destdir="${v.tmp}/art" extension=".html" useImplicitFileset="false" 
-       force="true" style="${v.voko.xsl}/revohtml2.xsl" classpathref="saxon.classpath">
+       failOnNoResources="false" force="true" style="${v.voko.xsl}/revohtml2.xsl" classpathref="saxon.classpath">
        <filelist dir="${v.tmp}/art" files="${artikoloj}"/>
        <param name="xml-ref-pado" expression="${v.bazo.xml}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
 
     <apply executable="${v.voko.bin}/gitlogart.sh" dir="${v.fonto}"
-       relative="true" logError="true" verbose="true">
+       skipemptyfilesets="true" relative="true" logError="true" verbose="true">
       <srcfile/>
       <!-- fileset dir="${v.fonto}" includes="*.xml"/ -->
       <filelist dir="${v.fonto}" files="${artikoloj}"/>
