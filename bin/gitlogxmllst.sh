@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# ni supozas, ke ni estas revo-fonto/revo, t.e. en la
+# dosierujo kie enestas la XML-dosieroj, do ili donitaj
+# kiel argumentoj ($@) ne havas padon kiel prefikso!
+
+# ĉiuj eroj de la historio
+commits="HEAD"
+
+# https://gist.github.com/rhochreiter/4666858 
+revlist=$(git rev-list $commits -- $@)
+(
+  echo '<?xml version="1.0" encoding="UTF-8"?>'
+  echo '<changelog>'
+  for rev in $revlist
+  do
+	# malnova git 1.8 ne subtenas: --date=format:'%Y-%m-%d %H:%M' 
+    echo "$(git log -1 --date=short --pretty=format:"<entry revision=\"%h\">%n<date>%ad</date>%n<msg><![CDATA[%s]]></msg>%n" $rev)"
+    files=$(git log -1 --pretty="format:" --name-only $rev)
+    #echo '<paths>'
+    for file in $files
+    do
+      filename=${file#"revo/"}
+      # konsideru nur dosierojn donitajn kiel argumento kaj 
+      # ignoru aliajn samtempe ŝanĝitajn
+      if [[ " $@ " =~ " ${filename} " ]]; then
+        echo "<file><name>$filename</name></file>"
+      fi
+    done
+    #echo '</paths>'
+    echo '</entry>'
+  done
+  echo '</changelog>'
+)
+

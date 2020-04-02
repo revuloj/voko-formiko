@@ -48,6 +48,7 @@ RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
   && ln -s /usr/local/bin/jing2xml.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogart.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogxml.sh ${VOKO}/bin/ \
+  && ln -s /usr/local/bin/gitlogxmllst.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogxml2w.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/git_shanghitaj.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/git_forigitaj.sh ${VOKO}/bin/ \

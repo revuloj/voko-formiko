@@ -140,6 +140,7 @@
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
 
+<!--
     <apply executable="${v.voko.bin}/gitlogart.sh" dir="${v.fonto}"
        skipemptyfilesets="true" relative="true" logError="true" verbose="true">
       <srcfile/>
@@ -149,6 +150,21 @@
         <outputmapper refid="hst-out"/>
       </redirector>      
     </apply>
+-->
+
+    <exec executable="${v.voko.bin}/gitlogxmllst.sh" dir="${v.fonto}"
+	        logError="true" output="${v.tmp}/inx_shanghoj_certaj.xml"> 
+        <arg line="${artikoloj}"/>
+    </exec>
+    <xslt in="${v.tmp}/inx_shanghoj_certaj.xml" destdir="${v.tmp}/hst" out="${v.tmp}/hst/.tempo" 
+        style="${v.voko.xsl}/hst_html.xsl"
+        classpathref="saxon.classpath">
+	    <param name="agordo-pado" expression="${v.cfg}"/>
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
+                    value="true"/>      
+      </factory>
+    </xslt>
 
     <copy todir="${v.tmp}/xml">
       <filelist dir="${v.bazo.xml}" files="${artikoloj}"/>
