@@ -156,6 +156,8 @@
 	        logError="true" output="${v.tmp}/inx_shanghoj_certaj.xml"> 
         <arg line="${artikoloj}"/>
     </exec>
+    <!-- provizore por kontrolo kopiu ankaŭ al log/ -->
+    <copy file="${v.tmp}/inx_shanghoj_certaj.xml" tofile="${v.log}/inx_shanghoj_certaj.xml"/>
     <xslt in="${v.tmp}/inx_shanghoj_certaj.xml" destdir="${v.tmp}/hst" out="${v.tmp}/hst/.tempo" 
         style="${v.voko.xsl}/hst_html.xsl"
         classpathref="saxon.classpath">
