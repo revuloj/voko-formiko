@@ -6,6 +6,7 @@
 
 # ĉiuj eroj de la historio
 commits="HEAD"
+filelist=$(echo $@ | tr '\n' ' ')
 
 # https://gist.github.com/rhochreiter/4666858 
 revlist=$(git rev-list $commits -- $@)
@@ -15,7 +16,7 @@ revlist=$(git rev-list $commits -- $@)
 
   # debugging
   echo "<!-- "
-  echo "$@"
+  echo "$filelist"
   echo "-->"
 
   for rev in $revlist
@@ -29,7 +30,7 @@ revlist=$(git rev-list $commits -- $@)
       filename=${file#"revo/"}
       # konsideru nur dosierojn donitajn kiel argumento kaj 
       # ignoru aliajn samtempe ŝanĝitajn
-      if [[ " $@ " =~ " ${filename} " ]]; then
+      if [[ " $filelist " =~ " ${filename} " ]]; then
         echo "<file><name>$filename</name></file>"
       else
         echo "<!-- ign: ${filename} -->"
