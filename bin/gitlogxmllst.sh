@@ -12,6 +12,12 @@ revlist=$(git rev-list $commits -- $@)
 (
   echo '<?xml version="1.0" encoding="UTF-8"?>'
   echo '<changelog>'
+
+  # debugging
+  echo "<!-- "
+  echo "$@"
+  echo "-->"
+
   for rev in $revlist
   do
 	# malnova git 1.8 ne subtenas: --date=format:'%Y-%m-%d %H:%M' 
@@ -25,6 +31,8 @@ revlist=$(git rev-list $commits -- $@)
       # ignoru aliajn samtempe ŝanĝitajn
       if [[ " $@ " =~ " ${filename} " ]]; then
         echo "<file><name>$filename</name></file>"
+      else
+        echo "<!-- ign: ${filename} -->"
       fi
     done
     #echo '</paths>'
