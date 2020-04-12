@@ -5,7 +5,9 @@
 # kiel argumentoj ($@) ne havas padon kiel prefikso!
 
 if [ $# -eq 0 ]; then
-  echo "Vi devas doni la liston de dosiero, por kiu ni eltrovu la historion."
+  echo '<?xml version="1.0" encoding="UTF-8"?>'
+  echo '<changelog></changelog>'
+  >&2 echo "Vi devas doni la liston de dosiero, por kiu ni eltrovu la historion."
   return 1
 fi
 
