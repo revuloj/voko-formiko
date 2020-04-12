@@ -4,6 +4,11 @@
 # dosierujo kie enestas la XML-dosieroj, do ili donitaj
 # kiel argumentoj ($@) ne havas padon kiel prefikso!
 
+if [ $# -eq 0 ]; then
+  echo "Vi devas doni la liston de dosiero, por kiu ni eltrovu la historion."
+  return 1
+fi
+
 # ĉiuj eroj de la historio
 commits="HEAD"
 filelist=$(echo $@ | tr '\n' ' ')
