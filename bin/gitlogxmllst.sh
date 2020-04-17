@@ -8,7 +8,7 @@ if [ $# -eq 0 ]; then
   echo '<?xml version="1.0" encoding="UTF-8"?>'
   echo '<changelog></changelog>'
   >&2 echo "Vi devas doni la liston de dosiero, por kiu ni eltrovu la historion."
-  return 1
+  exit 1
 fi
 
 # ĉiuj eroj de la historio
