@@ -37,7 +37,7 @@ COPY bin/* /usr/local/bin/
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 
-RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
+RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip  \
   && unzip master.zip voko-grundo-master/xsl/* voko-grundo-master/dtd/* voko-grundo-master/cfg/* \
      voko-grundo-master/dok/* voko-grundo-master/jsc/* voko-grundo-master/stl/* \
      voko-grundo-master/bin/* voko-grundo-master/sql/* voko-grundo-master/owl/voko.rdf \
