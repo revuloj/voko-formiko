@@ -38,6 +38,7 @@ if [[ ! $(ls -A /home/formiko/revo-fonto) ]]; then
         mkdir -p $basedir/revo/bld
         cp $basedir/revo-fonto/revo/*.xml $basedir/revo/xml/
         cp $basedir/revo-fonto/bld/* $basedir/revo/bld/
+        cp $basedir/revo-fonto/cfg/*.xml $basedir/revo/cfg/
     fi
 fi
 
