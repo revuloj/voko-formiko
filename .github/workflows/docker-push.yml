@@ -46,7 +46,7 @@ jobs:
 
       - name: Testoj de ${{ env.IMAGE_NAME }}
         run: |
-           docker run $IMAGE_NAME formiko med-medio
+           docker run $IMAGE_NAME formiko med-kls
            docker run $IMAGE_NAME formiko-testo
            docker run -u1001 $IMAGE_NAME voko/bin/xsl-testo
 
