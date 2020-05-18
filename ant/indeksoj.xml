@@ -305,6 +305,11 @@
       <arg line="${artikoloj}"/>
     </java>
 
+   <!-- debug -->
+    <exec executable="cat"
+      <arg file="${jing.errors.txt}"/>
+    </exec>
+
     <exec executable="bash"
         output = "${jing.errors.xml}">
       <arg file="${jing2xml}"/>
