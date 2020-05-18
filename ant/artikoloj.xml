@@ -91,6 +91,7 @@
     <xslt in="${v.tmp}/art/${dosiero}.xml" out="${v.tmp}/art/${dosiero}.html" 
        style="${v.voko.xsl}/revohtml2.xsl" classpathref="saxon.classpath">
          <param name="xml-ref-pado" expression="${v.bazo.xml}"/>
+       <param name="agordo-pado" expression="${v.cfg}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
 
@@ -136,6 +137,7 @@
     <xslt destdir="${v.tmp}/art" extension=".html" useImplicitFileset="false" 
        failOnNoResources="false" force="true" style="${v.voko.xsl}/revohtml2.xsl" classpathref="saxon.classpath">
        <filelist dir="${v.tmp}/art" files="${artikoloj}"/>
+       <param name="agordo-pado" expression="${v.cfg}"/>
        <param name="xml-ref-pado" expression="${v.bazo.xml}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
@@ -288,6 +290,7 @@ delete FROM art WHERE art_amrk = 'singult';
     <echo message="### kreu la HTML-dosierojn por la artikoloj"/>
     <xslt basedir="${v.tmp}/art" includes="*.xml" destdir="${v.tmp}/art/" extension=".html"
        style="${v.voko.xsl}/revohtml2.xsl" classpathref="saxon.classpath">
+       <param name="agordo-pado" expression="${v.cfg}"/>
        <param name="xml-ref-pado" expression="${v.bazo.xml}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
