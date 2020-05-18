@@ -354,7 +354,7 @@ rezulto en:
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="inx-git"/>
         <target name="inx-eraroj"/>
-        <target name="inx-relax"/>
+       <!-- provizore: <target name="inx-relax"/> -->
         <target name="inx-tuto"/>
       </ant>
 
