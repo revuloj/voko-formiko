@@ -306,7 +306,7 @@
     </java>
 
    <!-- debug -->
-    <exec executable="cat"
+    <exec executable="cat">
       <arg file="${jing.errors.txt}"/>
     </exec>
 
