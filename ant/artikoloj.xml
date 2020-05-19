@@ -439,6 +439,10 @@ delete FROM art WHERE art_amrk = 'singult';
       <fileset dir="${v.fonto}/../bld/"/>
     </sync>
 
+    <sync todir="${v.bazo}/cfg">
+      <fileset dir="${v.fonto}/../cfg/"/>
+    </sync>
+
   </target>
 
 </project>
