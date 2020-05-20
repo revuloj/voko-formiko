@@ -1,4 +1,4 @@
-name: procesumo voko-formiko
+name: procezujo voko-formiko
 # https://github.com/actions/starter-workflows/blob/master/ci/docker-push.yml
 
 on:
