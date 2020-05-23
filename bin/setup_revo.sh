@@ -34,6 +34,7 @@ if [[ ! $(ls -A /home/formiko/revo-fonto) ]]; then
         #?? git clone --progress $GIT_REPO_REVO revo-fonto
         cd $basedir
         git clone $GIT_REPO_REVO revo-fonto
+        chown -R formiko:formiko revo-fonto
         mkdir -p $basedir/revo/xml
         mkdir -p $basedir/revo/bld
         cp $basedir/revo-fonto/revo/*.xml $basedir/revo/xml/
