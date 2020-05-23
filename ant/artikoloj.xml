@@ -439,9 +439,9 @@ delete FROM art WHERE art_amrk = 'singult';
       <fileset dir="${v.fonto}/../bld/"/>
     </sync>
 
-    <!-- copy, ĉar ankaŭ ĉeestas bazaj agordo-dosieroj, kiuj venas el voko-formiko anst. revo-fonto 
+    <!-- copy, ĉar ankaŭ ĉeestas bazaj agordo-dosieroj, kiuj venas el voko-formiko anst. revo-fonto; 
         sync forigus ilin -->
-    <copy todir="${v.bazo}/cfg">
+    <copy todir="${v.bazo}/cfg" overwrite="true">
       <fileset dir="${v.fonto}/../cfg/"/>
     </copy>
 
