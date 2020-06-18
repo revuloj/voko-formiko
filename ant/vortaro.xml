@@ -206,7 +206,7 @@ rezulto en:
     <ant antfile="${v.voko.ant}/tezauro.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
        <target name="tez-agordo"/>
-       <target name="tez-html"/>
+       <target name="tez-tuto"/>
     </ant>
 
     <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
