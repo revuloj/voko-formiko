@@ -195,6 +195,13 @@ rezulto en:
       description="aktualigu ŝanĝitajn artikolojn kaj historiojn ekde ${sha} kaj forigu malaperintajn artikolojn"
       if="sha1">
 
+    <!-- ni fakte bezonas la tezaŭron por aldoni la ligilojn en la artikoloj -->
+    <ant antfile="${v.voko.ant}/tezauro.xml" inheritAll="false">   
+       <property name="v.bazo" location="${v.bazo}"/>
+       <target name="tez-agordo"/>
+       <target name="tez-html"/>
+    </ant>
+
     <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="sha" value="${sha2}"/>
