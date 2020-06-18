@@ -20,6 +20,7 @@
   <property name="v.voko.bin" location="${v.voko}/bin"/>
   <property name="v.voko.xsl" location="${v.voko}/xsl"/>
   <property name="v.fonto" location="${user.home}/revo-fonto/revo"/>
+  <property name="v.cfg" value="${user.dir}/cfg"/>
 
   <!-- property name="tmp" location="/home/revo/tmp/inx_tmp"/ -->
   <property name="v.tmp" location="${v.bazo}/.tmp"/>
