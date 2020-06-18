@@ -195,6 +195,13 @@ rezulto en:
       description="aktualigu ŝanĝitajn artikolojn kaj historiojn ekde ${sha} kaj forigu malaperintajn artikolojn"
       if="sha1">
 
+    <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
+        <property name="v.bazo" location="${v.bazo}"/>
+        <property name="sha" value="${sha2}"/>
+        <target name="art-agordo"/>
+        <target name="art-git-co"/>
+    </ant>   
+
     <!-- ni fakte bezonas la tezaŭron por aldoni la ligilojn en la artikoloj -->
     <ant antfile="${v.voko.ant}/tezauro.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
@@ -203,20 +210,13 @@ rezulto en:
     </ant>
 
     <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
-        <property name="v.bazo" location="${v.bazo}"/>
-        <property name="sha" value="${sha2}"/>
-        <target name="art-agordo"/>
-        <target name="art-git-co"/>
-    </ant>   
-
-      <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
-        <property name="v.bazo" location="${v.bazo}"/>
-        <property name="sha" value="${sha1}"/>
-        <!--target name="art-agordo"/-->
-        <!-- target name="art-git-co"/ -->
-        <target name="art-git-shanghoj"/>
-        <target name="art-git-forigoj"/>
-      </ant>
+      <property name="v.bazo" location="${v.bazo}"/>
+      <property name="sha" value="${sha1}"/>
+      <!--target name="art-agordo"/-->
+      <!-- target name="art-git-co"/ -->
+      <target name="art-git-shanghoj"/>
+      <target name="art-git-forigoj"/>
+    </ant>
   </target>
 
 
