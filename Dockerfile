@@ -1,16 +1,21 @@
 ##### staĝo 1: Ni bezonas TeX kaj metapost por konverti simbolojn al png
 FROM silkeh/latex:small as metapost
 LABEL Author=<diestel@steloj.de>
+
+ARG VG_BRANCH=html5
+
 COPY mp2png.sh .
 RUN apk --update add curl unzip librsvg --no-cache && rm -f /var/cache/apk/* 
-RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
-  && unzip master.zip voko-grundo-master/smb/*.mp
-RUN cd voko-grundo-master && ../mp2png.sh # && cd ${HOME}
+RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_BRANCH}.zip \
+  && unzip ${VG_BRANCH}.zip voko-grundo-${VG_BRANCH}/smb/*.mp
+RUN cd voko-grundo-${VG_BRANCH} && ../mp2png.sh # && cd ${HOME}
 
 
 ##### staĝo 2: Ni bezonas Javon kaj Ant, Saxon ktp.
 FROM openjdk:jre-slim
 LABEL Author=<diestel@steloj.de>
+
+ARG VG_BRANCH=html5
 
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -26,7 +31,7 @@ RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
 ENV REVO=/home/formiko/revo \
     VOKO=/home/formiko/voko \
-    GRUNDO=/home/formiko/voko-grundo-master \
+    GRUNDO=/home/formiko/voko-grundo-${VG_BRANCH} \
     SAXONJAR=/usr/share/java/saxonb.jar \
     JINGJAR=/usr/share/java/jing.jar \
     ANT_OPTS=-Xmx1000m
@@ -37,11 +42,11 @@ COPY bin/* /usr/local/bin/
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 
-RUN curl -LO https://github.com/revuloj/voko-grundo/archive/master.zip \
-  && unzip master.zip voko-grundo-master/xsl/* voko-grundo-master/dtd/* voko-grundo-master/cfg/* \
-     voko-grundo-master/dok/* voko-grundo-master/jsc/* voko-grundo-master/stl/* \
-     voko-grundo-master/bin/* voko-grundo-master/sql/* voko-grundo-master/owl/voko.rdf \
-  && ln -s ${GRUNDO} ${VOKO} && rm master.zip \
+RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_BRANCH}.zip \
+  && unzip ${VG_BRANCH}.zip voko-grundo-${VG_BRANCH}/xsl/* voko-grundo-${VG_BRANCH}/dtd/* voko-grundo-${VG_BRANCH}/cfg/* \
+     voko-grundo-${VG_BRANCH}/dok/* voko-grundo-${VG_BRANCH}/jsc/* voko-grundo-${VG_BRANCH}/stl/* \
+     voko-grundo-${VG_BRANCH}/bin/* voko-grundo-${VG_BRANCH}/sql/* voko-grundo-${VG_BRANCH}/owl/voko.rdf \
+  && ln -s ${GRUNDO} ${VOKO} && rm ${VG_BRANCH}.zip \
   && chmod go+w ${GRUNDO}/xsl \
   && chown formiko ${GRUNDO}/cfg/klasoj.xml ${GRUNDO}/xsl/revo_tez.xsl ${GRUNDO}/xsl/revohtml2.xsl ${GRUNDO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp && mkdir -p log && chown -R formiko:users revo tmp log \
@@ -63,7 +68,7 @@ COPY jav ${VOKO}/jav
 # ni poste kopios tion al ${REVO}/cfg
 # ĉar ${REVO} estos injektita nur ĉe lanĉo de Formiko
 COPY cfg/* /etc/
-COPY --from=metapost --chown=root:root voko-grundo-master/smb/ /home/formiko/voko/smb/
+COPY --from=metapost --chown=root:root voko-grundo-${VG_BRANCH}/smb/ /home/formiko/voko/smb/
 
 # FARENDA:
 # uzu ant-regulon por krei respiro.jar...?
