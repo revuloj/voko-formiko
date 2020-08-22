@@ -2,7 +2,7 @@
 FROM silkeh/latex:small as metapost
 LABEL Author=<diestel@steloj.de>
 
-ARG VG_BRANCH=html5
+ARG VG_BRANCH=master
 
 COPY mp2png.sh .
 RUN apk --update add curl unzip librsvg --no-cache && rm -f /var/cache/apk/* 
@@ -15,7 +15,7 @@ RUN cd voko-grundo-${VG_BRANCH} && ../mp2png.sh # && cd ${HOME}
 FROM openjdk:jre-slim
 LABEL Author=<diestel@steloj.de>
 
-ARG VG_BRANCH=html5
+ARG VG_BRANCH=master
 
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
