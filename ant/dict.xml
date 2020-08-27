@@ -31,6 +31,9 @@
     <tstamp>
       <format pattern="yyyy-MM-dd" property="dato"/>
     </tstamp>
+
+    <mkdir dir="${user.dir}/tmp/inx" />
+
   </target>
 
 
