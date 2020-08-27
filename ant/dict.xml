@@ -9,10 +9,8 @@
   <property name="v.voko" location="${ENV.VOKO}"/>
   <property name="v.revo" location="${ENV.REVO}"/>
 
-<!--
   <property name="v.bazo" location="${user.dir}"/>
-  <property name="v.tmp" location="${v.bazo}/.tmp"/>
--->
+  <property name="v.tmp" location="${v.bazo}/tmp"/>
 
   <property name="v.revo.xml" location="${v.revo}/xml"/>
   <property name="v.voko.bin" location="${v.voko}/bin"/>
@@ -32,7 +30,7 @@
       <format pattern="yyyy-MM-dd" property="dato"/>
     </tstamp>
 
-    <mkdir dir="${user.dir}/tmp/inx" />
+    <mkdir dir="${v.tmp}/dict" />
 
   </target>
 
@@ -51,7 +49,7 @@
   </target>
 
   <target name="dict-conf" depends="dict-preparo" description="kreas agordodosieron por dictd">
-    <echo file="${v.bazo}/dictd.conf">
+    <echo file="${v.tmp}/dict/dictd.conf">
        database revo_eo {
           data ${v.bazo}/revo.dat.dz
           index ${v.bazo}/revo.eo.inx
@@ -145,11 +143,11 @@
 
   <target name="dict-zip" depends="dict-preparo"
         description="kunpakas la vortaron">
-    <!--exec executable="${dictzip}">
+    <!-- exec executable="${dictzip}" dir="${v.tmp}/dict">
       <arg value="revo.dat"/>
-    </exec-->
+    </exec -->
 
-    <zip destfile="${v.tgz}/revodict_${dato}.zip" basedir="${v.bazo}" includes="revo.dat.dz revo.*.inx dictd.conf">
+    <zip destfile="${v.tgz}/revodict_${dato}.zip" basedir="${v.tmp}/dict" includes="revo.dat.dz revo.*.inx dictd.conf">
     </zip>
   </target>
 
@@ -169,7 +167,7 @@
      logError="true">
          <!-- arg value="-v"/-->
          <arg path="${v.revo.xml}/../xml"/>
-         <arg file="${v.voko.xsl}/revo_xdxf.xsl"/>
+         <arg file="${v.voko.xsl}/revoxdxf.xsl"/>
          <arg file="${v.tmp}/revo-tmp.xdxf"/>
          <classpath>
            <pathelement location="${v.voko.ant}/respiro.jar"/>
@@ -211,7 +209,7 @@
       <arg value="-V"/>
       <arg value="-D"/>
       <arg value="xdxf"/>
-      <arg value="file:/home/revo/revo/dtd/xdxf_lousy.dtd"/>
+      <arg value="file:${v.revo}/dtd/xdxf_lousy.dtd"/>
       <arg file="${v.tmp}/revo.xdxf"/>
    </exec>
 

@@ -20,7 +20,8 @@ ARG VG_BRANCH=master
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl unzip rsync git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
-    libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils lynx xsltproc \
+    libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
+    dictzip lynx xsltproc rxp \
 	&& rm -rf /var/lib/apt/lists/* \
   && ln -s /usr/share/java/commons-net.jar /usr/share/ant/lib/commons-net.jar \
   && ln -s /usr/share/java/oro.jar /usr/share/ant/lib/oro.jar
