@@ -143,7 +143,12 @@
 
   <target name="dict-zip" depends="dict-preparo"
         description="kunpakas la vortaron">
-    <!-- exec executable="${dictzip}" dir="${v.tmp}/dict">
+    <!-- 
+      Ni aplikas dictzip en dictfaru.pl, 
+      ni bezonus ankoraŭ apliki dictd2dic por krei formaton StarDict,
+      por tio pli bona nomo estus revo.dict.dz!
+      
+      exec executable="${dictzip}" dir="${v.tmp}/dict">
       <arg value="revo.dat"/>
     </exec -->
 
