@@ -48,7 +48,7 @@ RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_BRANCH}.zip \
      voko-grundo-${VG_BRANCH}/dok/* voko-grundo-${VG_BRANCH}/jsc/* voko-grundo-${VG_BRANCH}/stl/* voko-grundo-${VG_BRANCH}/smb/*.gif \
      voko-grundo-${VG_BRANCH}/bin/* voko-grundo-${VG_BRANCH}/sql/* voko-grundo-${VG_BRANCH}/owl/voko.rdf \
   && ln -s ${GRUNDO} ${VOKO} && rm ${VG_BRANCH}.zip \
-  && chmod go+w ${GRUNDO}/xsl \
+  && chmod go+w ${GRUNDO}/xsl  \
   && chown formiko ${GRUNDO}/cfg/klasoj.xml ${GRUNDO}/xsl/revo_tez.xsl ${GRUNDO}/xsl/revohtml2.xsl ${GRUNDO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp && mkdir -p log && chown -R formiko:users revo tmp log \
   && ln -s /usr/local/bin/jing2xml.sh ${VOKO}/bin/ \
