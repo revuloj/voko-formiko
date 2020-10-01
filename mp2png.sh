@@ -3,8 +3,10 @@ set +e
 set +x
 
 MP=mpost
-# tiu ne bone funkcias por eltondi formon el alia kiel ĉe GRA, FON
-# anstataŭe mpost kreas ambau svg kaj png el mp-dosiero!
+
+# pro cimo en mpost-PNG 1.999 ni uzis rsvg-convert
+# sed nun rsvg-convert fuŝas kaj mpost-PNG denove funkcias:
+# specifa problemo kun rsvg-convert: ne bone funkcias eltondi formon el alia kiel ĉe GRA, FON
 # RSVG=rsvg-convert
 
 cd smb
