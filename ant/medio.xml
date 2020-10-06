@@ -323,8 +323,7 @@ rezulto en:
   </target>
 
 
-  <target name="med-medio" depends="med-preparo,med-kadro,med-bib,med-kls,med-dok,med-dtd,med-stl,med-smb,med-xsl,med-jsc"
+  <target name="med-medio" depends="med-preparo,med-kadro,med-bib,med-dok,med-dtd,med-stl,med-smb,med-xsl,med-jsc"
      description="(re)kreas la medion por la vortaro, dosierujoj cfg,dok,dtd,stl,smb,xsl kun enhavo"/>
-
 
 </project>
