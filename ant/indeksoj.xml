@@ -257,6 +257,8 @@
        logError="true">
          <!-- arg value="-v"/ -->
          <!-- arg value="-Dhttp://saxon.sf.net/feature/allow-external-functions=true"/ -->
+         <arg value="-p"/>
+         <arg value="agordo-pado=${v.cfg}"/>
          <arg path="${v.bazo.xml}"/>
          <arg file="${v.voko.xsl}/inx_eraroj.xsl"/>
          <arg file="${v.tmp}/eraroj.xml"/>

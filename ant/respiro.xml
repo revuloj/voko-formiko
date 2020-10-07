@@ -3,6 +3,12 @@
        Reta Vortaro, reguloj por (re)krei Java-klasojn en respiro.jar. 
     </description>
 
+ <!--
+   necesas medio-variabloj BOKO kaj SAXONJAR, vi povas aparte transdoni ilin por loke kompili:
+
+      VOKO=$(pwd) SAXONJAR=/usr/share/java//usr/share/java/saxonb{-9.1.0.8}.jar ant -f ant/respiro.xml rsp-klasoj
+ -->
+
   <!-- legu agorditajn variablojn el dosiero -->
   <property file="${user.dir}/cfg/agordo" prefix="v."/>
 
@@ -26,7 +32,7 @@
   </target>
 
   <target name="rsp-klasoj" description="kompilas la Javo-klasojn" depends="rsp-agordo">
-    <javac srcdir="${v.voko.jav}" destdir="${v.voko.jav}" classpathref="saxon.classpath"/> 
+    <javac srcdir="${v.voko.jav}" destdir="${v.voko.jav}" classpathref="saxon.classpath" includeantruntime="false"/> 
   </target>
 
   <target name="rsp-jar" description="kunigas la Javo-klasojn an Jar-arhhivo"

@@ -29,6 +29,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.File;
+import java.util.Map;
+import java.util.HashMap;
 
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.XsltCompiler;
@@ -36,6 +38,9 @@ import net.sf.saxon.s9api.XsltExecutable;
 import net.sf.saxon.s9api.XsltTransformer;
 import net.sf.saxon.s9api.Serializer;
 import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.QName;
+import net.sf.saxon.s9api.XdmValue;
+import net.sf.saxon.s9api.XdmAtomicValue;
 
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.OutputKeys;
@@ -52,6 +57,7 @@ import javax.xml.transform.OutputKeys;
 public class DirectoryTransformerSaxon {
 
 	static boolean verbose = false;
+	static Map<String, String> params = new HashMap<String, String>();
 	
 	/**
 	 * @param args
@@ -63,8 +69,15 @@ public class DirectoryTransformerSaxon {
 		
 		// options
 		while (args[i].charAt(0)=='-') {
-			if (args[0].equals("-v")) {
+			if (args[i].equals("-v")) {
 				verbose = true;
+			} else if (args[i].equals("-p")) {
+				// XSL parametroj por "transformer" - vd. malsupre
+				i++;
+				String[] kval = args[i].split("=");
+				if (kval.length == 2) {
+					params.put(kval[0],kval[1]);
+				}
 			}
 			i++;
 		}
@@ -94,7 +107,16 @@ public class DirectoryTransformerSaxon {
 		XsltCompiler compiler = processor.newXsltCompiler();
 		XsltExecutable stylesheet = compiler.compile(new StreamSource(style));
 		XsltTransformer transformer = stylesheet.load();
-		//transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION,"yes");			
+		//transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION,"yes");	
+		
+		// trransdonu XSL parametrojn
+		// https://www.saxonica.com/html/documentation/javadoc/net/sf/saxon/s9api/XsltTransformer.html#setParameter-net.sf.saxon.s9api.QName-net.sf.saxon.s9api.XdmValue-
+			
+			for (Map.Entry<String, String> par : params.entrySet()) {
+			transformer.setParameter(
+				new QName(par.getKey()),
+				new XdmAtomicValue(par.getValue()));
+		}
 
 		File inpath = new File(pathname);		
 
