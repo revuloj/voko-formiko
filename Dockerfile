@@ -34,7 +34,7 @@ ENV REVO=/home/formiko/revo \
     VOKO=/home/formiko/voko \
     GRUNDO=/home/formiko/voko-grundo-${VG_BRANCH} \
     SAXONJAR=/usr/share/java/saxonb.jar \
-    JINGJAR=/usr/share/java/jing.jar  \
+    JINGJAR=/usr/share/java/jing.jar \
     ANT_OPTS=-Xmx1000m
 # problemo kun normlaizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar
