@@ -1,4 +1,6 @@
-##### staĝo 1: Ni bezonas TeX kaj metapost por konverti simbolojn al png
+#######################################################
+# staĝo 1: Ni bezonas TeX kaj metapost por konverti simbolojn al png
+#######################################################
 FROM silkeh/latex:small as metapost
 LABEL Author=<diestel@steloj.de>
 
@@ -10,15 +12,23 @@ RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_BRANCH}.zip \
   && unzip ${VG_BRANCH}.zip voko-grundo-${VG_BRANCH}/smb/*.mp
 RUN cd voko-grundo-${VG_BRANCH} && ../mp2png.sh # && cd ${HOME}
 
+#######################################################
+# staĝo 2: Ni bezonas Javon kaj Ant, Saxon ktp.
+#######################################################
+FROM ubuntu:focal
 
-##### staĝo 2: Ni bezonas Javon kaj Ant, Saxon ktp.
-FROM openjdk:jre-slim
+# problemo en Debian Buster: Could not perform immediate configuration on 'libnss-nis:amd64'
+# vd ankaŭ https://bugs.launchpad.net/ubuntu/+source/ubuntu-release-upgrader/+bug/1899272
+#FROM openjdk:jre-slim
+#FROM openjdk:11.0.9-slim-buster
 LABEL Author=<diestel@steloj.de>
 
 ARG VG_BRANCH=master
+ARG DEBIAN_FRONTEND=noninteractive
 
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  openjdk-11-jre-headless \
     curl unzip rsync git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
     libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
     dictzip lynx xsltproc rxp \
