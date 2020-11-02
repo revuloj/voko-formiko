@@ -10,3 +10,5 @@ el la fontoj de la artikoloj iom similas
 la laboron de la diligenta popolo de fomikoj. 
 Cetere la programo uzata por stiri la
 tutan procedon nomiĝas "Ant", do Formiko.
+
+![Revo-procedo](Revoprocedo.png)
