@@ -259,7 +259,7 @@ rezulto en:
      <copy todir="${v.bazo.smb}">
       <fileset dir="${v.voko.smb}" casesensitive="yes">
         <include name="*.png"/>
-        <include name="*.svg"/>
+        <!-- include name="*.svg"/-->
         <include name="*.gif"/>
       </fileset>
      </copy>
