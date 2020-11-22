@@ -9,7 +9,7 @@ ARG VG_BRANCH=master
 COPY mp2png.sh .
 RUN apk --update add curl unzip librsvg --no-cache && rm -f /var/cache/apk/* 
 RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_BRANCH}.zip \
-  && unzip ${VG_BRANCH}.zip voko-grundo-${VG_BRANCH}/smb/*.mp
+    && unzip ${VG_BRANCH}.zip voko-grundo-${VG_BRANCH}/smb/*.mp
 RUN cd voko-grundo-${VG_BRANCH} && ../mp2png.sh # && cd ${HOME}
 
 #######################################################
