@@ -95,7 +95,7 @@ rezulto en:
     - https://www.saxonica.com/html/documentation/configuration/config-features.html
 -->
   <target name="med-kadro" depends="med-preparo" description="kreas index.hml kaj titolo.html el enhavo.xml">
-    <xslt in="${v.bazo.cfg}/enhavo.xml" out="${v.bazo}/index.html"
+    <xslt in="${v.bazo.cfg}/enhavo.xml" out="${v.bazo}/index-malnova.html"
       style="${v.voko.xsl}/dok_enhavo.xsl" classpathref="saxon.classpath">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
       <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
