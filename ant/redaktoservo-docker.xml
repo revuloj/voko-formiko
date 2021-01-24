@@ -216,7 +216,7 @@
 
    <target name="srv-art-listo" depends="srv-preparo"
       if="art-listo"
-      description = "refaras nur la artikolojn el la listo donita kiel argumento art-listo">
+      description = "refaras nur la artikolojn el la listo donita kiel argumento art-listo (vd bin/git_shanghitaj.sh)">
 
       <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
@@ -228,7 +228,8 @@
         <property name="revo.dato" value="${v.dato}"/>
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-tar-art"/>
-        <target name="revo-upload"/>
+        <!-- target name="revo-upload"/ -->
+        <target name="revo-upload2"/>
      </ant>
    </target>   
 
@@ -250,10 +251,8 @@
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="revo.dato" value="${v.dato}"/>
         <property name="revo.tempo" value="${v.tempo}"/>
-        <property name="cvs.dato" value="${v.dato}"/>
-        <property name="cvs.tempo" value="${v.tempo}"/>
-        <target name="cvs-upload"/>
-        <target name="revo-upload"/>
+        <!--target name="revo-upload"/-->
+        <target name="revo-upload2"/>
       </ant>
    </target>
 
@@ -317,7 +316,8 @@
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo 
           de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-diferenco"/>
-        <target name="revo-upload"/>
+        <!-- target name="revo-upload"/ -->
+        <target name="revo-upload2"/>
      </ant>        
 
 <!--  ni rezignas tie ĉi pri la pakaĵo, ni nun alpendigas plurajn ZIP-dosierojn al ĉiutatagaj eldonoj anst.
@@ -385,7 +385,7 @@
 
 
    <target name="srv-servo-github-hore" depends="srv-agordo,srv-preparo" 
-      description="Kuro de la servo ene de Github-ago: aktualigu ŝanĝitajn artikolojn kaj historiojn ekde ${sha} kaj forigu malaperintajn artikolojn"
+      description="Kuro de la servo ene de Github-ago: aktualigu ŝanĝitajn artikolojn kaj historiojn inter ${sha1} kaj ${sha2}, kaj forigu malaperintajn artikolojn"
       if="sha1">
 
       <!-- se ambaŭ tempo-punktoj identas, ni rezignas pri la procedo per "fail" -->
@@ -408,7 +408,8 @@
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo 
           de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-tar-art-hst"/>
-        <target name="revo-upload"/>
+        <!--target name="revo-upload"/-->
+        <target name="revo-upload2"/>
      </ant>   
    </target>     
 
