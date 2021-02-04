@@ -32,10 +32,20 @@
 <!-- ################### prenado de redaktanto-listo ####################### -->
 
    <target name="revo-redaktantoj" description="prenas la liston de redaktantoj el la servilo">
-     <get src="${revo.redaktantoj.url}" 
+     <!--get src="${revo.redaktantoj.url}" 
        dest="${revo.redaktantoj.listo}" 
+       ignoreerrors="true"
        username="${revo.redaktantoj.user}"
-       password="${revo.redaktantoj.password}" verbose="true"/>
+       password="${revo.redaktantoj.password}" verbose="true"/ -->
+
+     <exec executable="${curl}">
+       <arg value="-k"/>
+       <arg value="-u"/>
+       <arg value="${revo.redaktantoj.user}:${revo.redaktantoj.password}"/>
+       <arg value="-o"/>
+       <arg value="${revo.redaktantoj.listo}"/>
+       <arg value="${revo.redaktantoj.url}"/>
+     </exec>   
    </target>
 
 
@@ -355,10 +365,19 @@ ant -f ~/voko/ant/spegulo.xml -Drevo-tar-file-exists=true -Drevo.filename=revo-J
    <target name="revo-tempo" depends="revo-preparo" 
      description="demandas la tempon de la Revo-servilo">
 
-     <get src="${revo.tempo.url}" 
+     <!-- get src="${revo.tempo.url}" 
        dest="${revo.logdir}/revo_time.html" 
        username="${revo.upload.user}"
-       password="${revo.upload.password}"/>
+       password="${revo.upload.password}"/ -->
+
+     <exec executable="${curl}">
+       <arg value="-k"/>
+       <arg value="-u"/>
+       <arg value="${revo.upload.user}:${revo.upload.password}"/>
+       <arg value="-o"/>
+       <arg value="${revo.logdir}/revo_time.html"/>
+       <arg value="${revo.tempo.url}"/>
+     </exec>   
   
      <loadfile srcFile="${revo.logdir}/revo_time.html" property="timefile">
        <filterchain>

@@ -314,6 +314,8 @@ delete FROM art WHERE art_amrk = 'singult';
     <echo message="traktante la tutan historion de la arĥivo, tio daŭros plurajn ĝis multajn minutojn!"/>
     <exec executable="${v.voko.bin}/gitlogxml.sh" dir="${v.fonto}"
 	        logError="true" output="${v.tmp}/inx_shanghoj_cxiuj.xml"/> 
+
+        <!-- saxonb-xslt -xsl:hst_html.xsl -ext:on inx_shanghoj_cxiuj.xml -->
     <xslt in="${v.tmp}/inx_shanghoj_cxiuj.xml" destdir="${v.tmp}/hst" out="${v.tmp}/hst/.tempo" 
         style="${v.voko.xsl}/hst_html.xsl"
         classpathref="saxon.classpath">

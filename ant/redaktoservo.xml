@@ -33,6 +33,7 @@
 
 
    <target name="srv-shlosu" description="shlosas la servon dum ghi laboras por eviti konkurencajn procedojn">
+    <!-- https://ant.apache.org/manual/Tasks/conditions.html -->
      <fail message="La redaktoservo estas shlosita. Atendu ghis ghi finighis. Esceptokaze vi povas forigi ${srv.seruro}.">
        <condition>
            <available file="${srv.seruro}"/>
