@@ -228,8 +228,8 @@
         <property name="revo.dato" value="${v.dato}"/>
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-tar-art"/>
-        <target name="revo-upload"/>
-        <target name="revo-upload2"/>
+        <!-- ne plu sendu al la origina servilo: target name="revo-upload"/ -->
+        <target name="revo-upload2"/> <!-- tio sendas al la nova 1blu-servilo -->
      </ant>
    </target>   
 
@@ -251,8 +251,8 @@
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="revo.dato" value="${v.dato}"/>
         <property name="revo.tempo" value="${v.tempo}"/>
-        <target name="revo-upload"/>
-        <target name="revo-upload2"/>
+        <!-- ne plu sendu al la origina servilo: target name="revo-upload"/ -->
+        <target name="revo-upload2"/> <!-- tio sendas al la nova 1blu-servilo -->
       </ant>
    </target>
 
@@ -316,8 +316,9 @@
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo 
           de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-diferenco"/>
-        <target name="revo-upload"/>
-        <target name="revo-upload2"/>
+        <!-- ne plu sendu al la origina servilo: target name="revo-upload"/ -->
+        <target name="revo-upload2"/> <!-- tio sendas al la nova 1blu-servilo -->
+        <target name="revo-viki-ligoj"/> <!-- aktualigu Vikipedio-referencojn -->
      </ant>        
 
 <!--  ni rezignas tie ĉi pri la pakaĵo, ni nun alpendigas plurajn ZIP-dosierojn al ĉiutatagaj eldonoj anst.
@@ -408,8 +409,8 @@
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo 
           de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-tar-art-hst"/>
-        <target name="revo-upload"/>
-        <target name="revo-upload2"/>
+        <!-- ne plu sendu al la origina servilo: target name="revo-upload"/ -->
+        <target name="revo-upload2"/> <!-- tio sendas al la nova 1blu-servilo -->
      </ant>   
    </target>     
 
