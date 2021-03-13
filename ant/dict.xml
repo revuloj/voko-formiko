@@ -184,10 +184,15 @@
     <xslt in="${v.tmp}/revo-tmp.xdxf" out="${v.tmp}/revo-tmp-2.xdxf"
       style="${v.voko.xsl}/revo_xdxf_kadro.xsl"/>
 
+<!--
+   Manke de Perl en voko-formiko ni uzas <filterchain> malsupre...
+   anstataŭ voko-grundo/perl/xdxf_belformat.pl !
+
     <exec executable="${v.voko.bin}/xdxf_belformat.pl">   
       <arg value="${v.tmp}/revo-tmp-2.xdxf"/>
       <arg file="${v.tmp}/revo.xdxf"/>
     </exec>
+    -->
 
     <!-- indent - could be removed later 
     <exec executable="${xmllint}">   
@@ -198,15 +203,28 @@
     </exec>
 -->
 
-    <!-- input spaces before line breaks - GoldenDict need them 
-    <copy file="${v.tmp}/revo-tmp-3.xdxf" tofile="${v.tmp}/revo.xdxf">
+    <!-- Necesas normaligi por ke GoldenDict montru la artikolojn bone -->
+    <copy file="${v.tmp}/revo-tmp-2.xdxf" tofile="${v.tmp}/revo.xdxf" encoding="utf-8">
        <filterchain>
          <tokenfilter>
-           <replaceregex pattern="$" replace=" "/>
+           <filetokenizer/>
+         <!-- normaligi artikolojn -->
+           <replaceregex pattern="\s*$" replace=" " flags="mg"/>
+           <replaceregex pattern="\s+" replace=" " flags="mg"/>
+           <!-- aldonante linirompojn ĉe XML-strukturiloj samtempe forigante ĉirkaŭajn spacojn -->
+           <replaceregex pattern=" *&lt;(def|sr|)&gt; *" replace="&#10;&#10;&lt;\1&gt;" flags="sg"/>
+           <replaceregex pattern=" *&lt;(/def)&gt; *" replace="&lt;\1&gt;&#10;" flags="sg"/>
+           <replaceregex pattern=" *&lt;(/ar)&gt; *" replace="&lt;\1&gt;&#10;&#10;" flags="sg"/>
+           <!-- aldonante punkton komence de ĉiu ekzemplo -->
+           <replaceregex pattern=" *(&lt;ex\b[^&gt;]*&gt;) *" replace="&#10;\1•  " flags="sg"/>
+           <!-- aldonante sagon antaŭ referencoj -->
+           <replaceregex pattern=" *&lt;sr&gt; *" replace="&#10;&lt;sr&gt;► " flags="sg"/>
+           <replaceregex pattern=" *&lt;dtrn&gt; *" replace="&#10;&lt;dtrn&gt; " flags="sg"/>
+
          </tokenfilter>
        </filterchain>
     </copy>
--->
+ 
 
    <!-- check -->
    <exec executable="${rxp}">   
@@ -223,7 +241,7 @@
   <target name="dict-xdxf-zip" depends="dict-preparo, dict-xdxf" 
 	  description="Pakas revo.xdxf en zip-dosieron">
 
-     <copy file="${v.voko}/smb/revo_ico.png" tofile="${v.tmp}/icon32.png"/>
+     <copy file="${v.voko}/smb/revo.png" tofile="${v.tmp}/icon32.png"/>
 
      <zip destfile="${v.tgz}/revoxdxf_${dato}.zip">
        <zipfileset file="${v.tmp}/revo.xdxf" prefix="reta-vortaro-xdxf"/>
@@ -232,11 +250,3 @@
    </target>
 
 </project>
-
-
-
-
-
-
-
-

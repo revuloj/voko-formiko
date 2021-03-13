@@ -71,6 +71,9 @@ revo)
 sql)
   cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/sqlite.xml $target
   ;;  
+dict)
+  cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/dict.xml $target
+  ;;   
 vrt)
   if [[ "$target" != "-projecthelp" ]]; then
     target=${target#*-}
@@ -79,5 +82,5 @@ vrt)
   ;;  
 *)
   echo "ERARO: Nekonata aŭ mankanta prefikso en celo '$1'!"
-  echo "Konataj prefiksoj estas srv- inx- tez- art- med- red- sql- vrt-."
+  echo "Konataj prefiksoj estas srv- inx- tez- art- med- red- sql- dict- vrt-."
 esac
