@@ -35,7 +35,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \
   && ln -s /usr/share/java/commons-net.jar /usr/share/ant/lib/commons-net.jar \
   && ln -s /usr/share/java/oro.jar /usr/share/ant/lib/oro.jar
-#   openssh-server 	&& mkdir -p /var/run/sshd 
+# openssh-server 	&& mkdir -p /var/run/sshd 
 # libsaxonhe-java: havas problemon transformante multajn artikolojn: normalizationData.xml not found...
 
 RUN useradd -ms /bin/bash -u 1001 formiko
