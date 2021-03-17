@@ -213,7 +213,7 @@
            <replaceregex pattern="\s+" replace=" " flags="mg"/>
            <!-- aldonante linirompojn ĉe XML-strukturiloj samtempe forigante ĉirkaŭajn spacojn -->
            <replaceregex pattern=" *&lt;(def|sr)&gt; *" replace="&#10;&#10;&lt;\1&gt;" flags="sg"/>
-           <replaceregex pattern=" *&lt;(/def|/sr)&gt; *" replace="&lt;\1&gt;&#10;" flags="sg"/>
+           <replaceregex pattern=" *&lt;(/def)&gt; *" replace="&lt;\1&gt;&#10;" flags="sg"/>
            <replaceregex pattern=" *&lt;(/ar)&gt; *" replace="&lt;\1&gt;&#10;&#10;" flags="sg"/>
            <!-- aldonante punkton komence de ĉiu ekzemplo -->
            <replaceregex pattern=" *(&lt;ex\b[^&gt;]*&gt;) *" replace="&#10;\1•  " flags="sg"/>
