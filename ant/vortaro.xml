@@ -362,6 +362,7 @@ rezulto en:
         <target name="inx-git"/>
         <target name="inx-eraroj"/>
         <target name="inx-relax"/> 
+        <target name="inx-viki-listo"/> 
         <target name="inx-tuto"/>
       </ant>
 

@@ -334,7 +334,7 @@
         output="${v.tmp}/viki_listo.xml"
         logError="true"/>
 
-     <xslt in="${v.tmp}/inx_kat.xml" out="${v.tmp}/vikiref.xml" style="${v.voko.xsl}/revo_viki.xsl"
+     <xslt in="${v.tmp}/inx_kat.xml" out="${v.tmp}/inx/vikiref.xml" style="${v.voko.xsl}/revo_viki.xsl"
         classpathref="saxon.classpath">
         <param name="viki_xml" expression="${v.tmp}/viki_listo.xml"/>
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
