@@ -69,8 +69,8 @@ RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_BRANCH}.zip \
   && ln -s /usr/local/bin/git_shanghitaj.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/git_forigitaj.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/git_bv_forigu_lst.sh ${VOKO}/bin/ \
-  && ln -s /usr/local/bin/insert-art-blobs.sh ${VOKO}/bin/ 
-
+  && ln -s /usr/local/bin/insert-art-blobs.sh ${VOKO}/bin/ \
+  && ln -s /usr/local/bin/viki_listo.sh ${VOKO}/bin/ 
 COPY ant ${VOKO}/ant
 COPY jav ${VOKO}/jav
 

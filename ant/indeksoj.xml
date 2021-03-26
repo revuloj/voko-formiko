@@ -31,6 +31,7 @@
   <property name="jing.errors.html" location="${v.tmp}/inx/relax_eraroj.html"/>
   <property name="jing2xml" location="${v.voko.bin}/jing2xml.sh"/>
   <property name="gitlogxml2w" location="${v.voko.bin}/gitlogxml2w.sh"/>
+  <property name="viki_listo" location="${v.voko.bin}/viki_listo.sh"/>
   <property name="voko-relax" location="${v.voko}/dtd/vokoxml.rnc"/>
 
   <property name="saxon" location="${ENV.SAXONJAR}"/> 
@@ -324,9 +325,21 @@
          <param name="agordo-pado" expression="${v.cfg}"/>
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
-
   </target>
 
+  <target name="inx-viki-listo" depends="inx-preparo,inx-kategorioj"
+     description="eltiras la markojn el la indeks-dosiero kaj provas trovi koncernajn vikipaĝojn">
+
+     <exec executable="${viki_listo}"     
+        output="${v.tmp}/viki_listo.xml"
+        logError="true"/>
+
+     <xslt in="${v.tmp}/inx_kat.xml" out="${v.tmp}/vikiref.xml" style="${v.voko.xsl}/revo_viki.xsl"
+        classpathref="saxon.classpath">
+        <param name="viki_xml" expression="${v.tmp}/viki_listo.xml"/>
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      </xslt>
+  </target>    
 
   <target name="inx-tuto" depends="inx-preparo,inx-html"
      description="kopias fine chiujn enhave shanghitajn dosierojn al la
