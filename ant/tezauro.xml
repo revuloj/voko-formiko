@@ -152,7 +152,7 @@
   </target>
 
 
-  <target name="tez-json-tuto" depends="tez-preparotez-json"
+  <target name="tez-json-tuto" depends="tez-preparo,tez-json"
      description="kopias fine chiujn enhave kreitajn JSON-dosierojn al la
      tezaurodosierujo kaj tie forigas forfalintajn">
 
