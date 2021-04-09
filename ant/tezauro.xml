@@ -16,6 +16,8 @@
   <property name="v.voko" location="${ENV.VOKO}"/>
   <property name="v.voko.ant" location="${v.voko}/ant"/>
   <property name="v.bazo" location="${user.dir}"/>
+  <property name="v.bazo.xml" location="${v.bazo}/xml"/>
+
   <property name="v.cfg" value="${user.dir}/cfg"/>
   <!-- property name="v.bazo.inx" location="${v.bazo}/inx"/ -->
   <!-- property name="v.bazo.xml" location="${v.bazo}/xml"/ -->
@@ -113,6 +115,61 @@
        </factory>
      </xslt>
   </target>
+
+
+  <target name="tez-json" depends="tez-preparo"
+     description="kreas la JSON-dosierojn de la tezauro, per kiuj oni povas ŝargi la datumbazon">
+
+    <xslt basedir="${v.bazo.xml}" includes="*.xml" destdir="${v.tmp}/tez" extension=".json"
+       style="${v.voko.xsl}/tez-json.xsl" classpathref="saxon.classpath">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+
+  </target>
+
+
+  <target name="tez-json-mil" depends="tez-preparo,tez-json"
+     description="kopias fine maksimume mil shanghitajn JSON-dosierojn al la
+     tezaurodosierujo kaj tie forigas forfalintajn">
+
+    <copy todir="${v.bazo.tez}">
+      <fileset dir="${v.tmp}/tez" includes="*.json">
+        <!-- different targetdir="${v.tez}" ignoreFileTimes="true"/ -->
+        <custom classname="de.steloj.respiro.DiffMaxFilesSelector" classpath="${v.voko.ant}/respiro.jar">
+          <param name="targetDir" value="${v.bazo.tez}"/>
+          <param name="ignoreFileTimes" value="true"/>
+          <param name="maxFiles" value="1000"/> <!-- aktualigu maksimume 1000 dosierojn de la tezauro -->
+        </custom>
+      </fileset>
+    </copy>
+
+    <delete>
+      <fileset dir="${v.bazo.tez}" includes="*.json">
+         <present present="srconly" targetdir="${v.tmp}/tez"/>
+      </fileset>
+    </delete>
+
+  </target>
+
+
+  <target name="tez-json-tuto" depends="tez-preparotez-json"
+     description="kopias fine chiujn enhave kreitajn JSON-dosierojn al la
+     tezaurodosierujo kaj tie forigas forfalintajn">
+
+    <copy todir="${v.bazo.tez}">
+      <fileset dir="${v.tmp}/tez" includes="*.json">
+        <different targetdir="${v.tez}" ignoreFileTimes="true"/>
+      </fileset>
+    </copy>
+
+    <delete>
+      <fileset dir="${v.bazo.tez}" includes="*.json">
+         <present present="srconly" targetdir="${v.tmp}/tez"/>
+      </fileset>
+    </delete>
+
+  </target>
+
 
 
   <target name="tez-mil" depends="tez-preparo,tez-html,tez-lst-html"

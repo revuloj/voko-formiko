@@ -386,7 +386,7 @@
 
 
    <target name="srv-servo-github-hore" depends="srv-agordo,srv-preparo" 
-      description="Kuro de la servo ene de Github-ago: aktualigu ŝanĝitajn artikolojn kaj historiojn inter ${sha1} kaj ${sha2}, kaj forigu malaperintajn artikolojn"
+      description="Kuro de la servo ene de Github-ago: aktualigu ŝanĝitajn artikolojn, historiojn, tezaŭron inter ${sha1} kaj ${sha2}, kaj forigu malaperintajn artikolojn"
       if="sha1">
 
       <!-- se ambaŭ tempo-punktoj identas, ni rezignas pri la procedo per "fail" -->

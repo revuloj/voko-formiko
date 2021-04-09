@@ -129,6 +129,8 @@
       <filelist dir="${v.fonto}" files="${artikoloj}"/>
     </copy>
 
+    <!-- la sekvajn du pasojn ni povos kunigi al unu, kiam ni iom post iom
+      forigas la manlnovan tezaŭron kun statikaj dosieroj -->
     <xslt destdir="${v.tmp}/art" extension=".xml" useImplicitFileset="false"
         failOnNoResources="false" force="true" style="${v.voko.xsl}/revo_tez.xsl" classpathref="saxon.classpath">
        <filelist dir="${v.bazo.xml}" files="${artikoloj}"/>
@@ -142,6 +144,13 @@
        <param name="xml-ref-pado" expression="${v.bazo.xml}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
+
+    <xslt destdir="${v.tmp}/tez" extension=".json" useImplicitFileset="false" 
+       failOnNoResources="false" force="true" style="${v.voko.xsl}/tez-json.xsl" classpathref="saxon.classpath">
+       <filelist dir="${v.bazo.xml}" files="${artikoloj}"/>
+       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+
 
 <!--
     <apply executable="${v.voko.bin}/gitlogart.sh" dir="${v.fonto}"

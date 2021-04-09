@@ -192,7 +192,7 @@ rezulto en:
 
 
   <target name="art-hst-aktualigo" depends="preparo" 
-      description="aktualigu ŝanĝitajn artikolojn kaj historiojn ekde ${sha} kaj forigu malaperintajn artikolojn"
+      description="aktualigu ŝanĝitajn artikolojn, inkl historio kaj tezaŭro ekde ${sha} kaj forigu malaperintajn artikolojn"
       if="sha1">
 
     <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
@@ -202,7 +202,11 @@ rezulto en:
         <target name="art-git-co"/>
     </ant>   
 
-    <!-- ni fakte bezonas la tezaŭron por aldoni la ligilojn en la artikoloj -->
+    <!-- ni fakte bezonas la tezaŭron por aldoni 
+    la ligilojn en la artikoloj
+    NOTO: post ekfunkcio de nova tezaŭro ni povos forigi
+    tiun ŝtupon en la artikol-kreado!
+     -->
     <ant antfile="${v.voko.ant}/tezauro.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
        <target name="tez-agordo"/>
@@ -288,7 +292,7 @@ rezulto en:
         <target name="art-git-co"/>
     </ant>   
 
-<!-- ĉu ni beonas tion...?
+<!-- ĉu ni bezonas tion...?
     <ant antfile="${v.voko.ant}/medio.xml" inheritAll="false">
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="med-dok"/>
