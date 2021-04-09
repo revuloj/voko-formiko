@@ -237,6 +237,7 @@
         <arg value="./art"/>
         <arg value="./xml"/>
         <arg value="./hst"/>
+        <arg value="./tez/*.json"/>
         <arg value="bv_forigu_tiujn.lst"/>
       </exec>
 
