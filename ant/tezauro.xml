@@ -71,6 +71,9 @@
   </target>
 
 
+  <!-- tiun ni nun ne plu bezonas por HTML-doserio de tezaŭro,
+    nur anikoraŭ por la vortlistoj, ĉu ni trovu alian manieron krei la vortlistojn,
+    ekz-e el la datumbazo aŭ JSON - simile kiel nun la tezaŭron? -->
   <target name="tez-retigo" depends="tez-preparo,tez-eltiro"
      description="retigi la tezauronodojn">
      <xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/tez_ret.xml"
@@ -81,9 +84,6 @@
   <target name="tez-kontrolu-mrk" depends="tez-preparo,tez-retigo"
      description="eltiras la markojn el la tezaŭro-dosiero kaj kontrolas unikecon">
      <xslt in="${v.tmp}/tez_ret.xml" out="${v.tmp}/tez_mrk.xml"  style="${v.voko.xsl}/inx_markoj.xsl"/>
-<!--       classpathref="saxon.classpath">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-      </xslt> -->
       <exec executable="bash">
         <arg value="-c"/>
         <arg value="echo 'trovi duoblajn markojn en ${v.tmp}/tez_mrk.xml...'; sort ${v.tmp}/tez_mrk.xml | uniq -cd"/>
@@ -96,7 +96,7 @@
 
   </target>    
 
-
+<!-- malnova HTML-tezaŭro, nin nun kreas ĝin per JSON+DB+Ajax!
   <target name="tez-html" depends="tez-preparo,tez-retigo,tez-kontrolu-mrk"
      description="kreas la HTML-dosierojn de la tezauro">
 
@@ -111,11 +111,10 @@
        <factory name="net.sf.saxon.TransformerFactoryImpl">
           <attribute name="http://saxon.sf.net/feature/allow-external-functions" 
                      value="true"/>      
-          <!-- param name="verbose" expression="'true'"/-->
        </factory>
      </xslt>
   </target>
-
+-->
 
   <target name="tez-json" depends="tez-preparo"
      description="kreas la JSON-dosierojn de la tezauro, per kiuj oni povas ŝargi la datumbazon">
@@ -152,7 +151,7 @@
   </target>
 
 
-  <target name="tez-json-tuto" depends="tez-preparotez-json"
+  <target name="tez-json-tuto" depends="tez-preparo,tez-json"
      description="kopias fine chiujn enhave kreitajn JSON-dosierojn al la
      tezaurodosierujo kaj tie forigas forfalintajn">
 
@@ -171,8 +170,7 @@
   </target>
 
 
-
-  <target name="tez-mil" depends="tez-preparo,tez-html,tez-lst-html"
+  <target name="tez-mil" depends="tez-preparo,tez-lst-html"
      description="kopias fine maksimume mil shanghitajn dosierojn al la
      tezaurodosierujo kaj tie forigas forfalintajn">
 
@@ -183,18 +181,18 @@
       </fileset>
     </copy>
 
-
+<!--
     <copy todir="${v.bazo.tez}">
       <fileset dir="${v.tmp}/tez" includes="tz_*">
-        <!-- different targetdir="${v.tez}" ignoreFileTimes="true"/ -->
+        <!- - different targetdir="${v.tez}" ignoreFileTimes="true"/ - ->
         <custom classname="de.steloj.respiro.DiffMaxFilesSelector" classpath="${v.voko.ant}/respiro.jar">
           <param name="targetDir" value="${v.bazo.tez}"/>
           <param name="ignoreFileTimes" value="true"/>
-          <param name="maxFiles" value="1000"/> <!-- aktualigu maksimume 1000 dosierojn de la tezauro -->
+          <param name="maxFiles" value="1000"/> <!- - aktualigu maksimume 1000 dosierojn de la tezauro - ->
         </custom>
       </fileset>
     </copy>
-
+-->
     <delete>
       <fileset dir="${v.bazo.tez}" includes="*">
          <present present="srconly" targetdir="${v.tmp}/tez"/>
@@ -225,7 +223,7 @@
   </target>
 
 
-  <target name="tez-tuto" depends="tez-preparo,tez-html,tez-lst-html"
+  <target name="tez-tuto" depends="tez-preparo,tez-lst-html"
      description="kopias fine chiujn enhave shanghitajn dosierojn al la
      tezaurodosierujo kaj tie forigas forfalintajn">
 
@@ -269,12 +267,13 @@
 	    style="${v.voko.xsl}/onto_lst.xsl"/>
   </target>
 
+<!--
   <target name="tez-servo-tuto" depends="tez-preparo,tez-onto-turtle"
      description="kopias fine la ttl-dosieron al la rezono-servo">
 
-    <!-- poste, kiam la rezono-servo estas en alia komputilo necesos "scp" -->
-    <!-- copy file="${v.tmp}/tez/revo-tezauro.ttl"
-	 todir="${v.rezono-servo-data}"/ -->
+    <!- - poste, kiam la rezono-servo estas en alia komputilo necesos "scp" - ->
+    <!- - copy file="${v.tmp}/tez/revo-tezauro.ttl"
+	 todir="${v.rezono-servo-data}"/ - ->
     <exec executable="/usr/bin/scp" logError="true">
       <arg file="${v.tmp}/revo-tezauro.ttl"/>
       <arg
@@ -282,6 +281,7 @@
     </exec>
 
   </target>
+-->
 
 </project>
 

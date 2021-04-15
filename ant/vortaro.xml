@@ -81,11 +81,13 @@ rezulto en:
   <target name="html" depends="preparo" 
        description="(re)kreas indeksojn, tezauron kaj shanghitajn artikolojn en provizora dosierujo">
   
+  <!--
     <ant antfile="${v.voko.ant}/tezauro.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
        <target name="tez-agordo"/>
        <target name="tez-html"/>
     </ant>
+    -->
 
     <ant antfile="${v.voko.ant}/indeksoj.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
@@ -144,6 +146,7 @@ rezulto en:
 
   </target>
 
+<!--
   <target name="tezauro" depends="preparo" 
        description="kreas tezauron kiel ttl-dosiero
          kaj provizas als rezono-servo">
@@ -155,6 +158,7 @@ rezulto en:
     </ant>
 
   </target>
+  -->
 
   <target name="tuto" depends="preparo" 
        description="shovas (re)kreitajn indeksojn, tezauron kaj artikolojn el provizora dosierujo al la vortaro">
