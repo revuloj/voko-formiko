@@ -210,12 +210,12 @@ rezulto en:
     la ligilojn en la artikoloj
     NOTO: post ekfunkcio de nova tezaŭro ni povos forigi
     tiun ŝtupon en la artikol-kreado!
-     -->
     <ant antfile="${v.voko.ant}/tezauro.xml" inheritAll="false">   
        <property name="v.bazo" location="${v.bazo}"/>
        <target name="tez-agordo"/>
        <target name="tez-tuto"/>
     </ant>
+     -->
 
     <ant antfile="${v.voko.ant}/artikoloj.xml" inheritAll="false">
       <property name="v.bazo" location="${v.bazo}"/>
