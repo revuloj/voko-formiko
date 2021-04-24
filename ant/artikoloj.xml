@@ -465,7 +465,7 @@ delete FROM art WHERE art_amrk = 'singult';
   </target>
 
   <target name="art-git-co" depends="art-preparo" 
-       description="metas la fontojn al pozicio de certa 'sha'"
+       description="metas la fontojn al pozicio de certa 'sha' (eblas ankaŭ -D sha=master; antaŭe mem voku git pull!)"
        if="sha">
 
     <exec executable="${git}" dir="${v.fonto}">
