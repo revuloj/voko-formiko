@@ -12,5 +12,6 @@ do
   art=${file%*.xml}
   echo revo/art/${art}.html
   echo revo/hst/${art}.html
+  echo revo/tez/${art}.json
   echo revo/xml/${art}.xml
 done

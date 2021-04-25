@@ -17,6 +17,7 @@
   <property name="v.bazo.xml" location="${v.bazo}/xml"/>
   <property name="v.bazo.art" location="${v.bazo}/art"/>
   <property name="v.bazo.hst" location="${v.bazo}/hst"/>
+  <property name="v.bazo.tez" location="${v.bazo}/tez"/>
   <property name="v.voko.bin" location="${v.voko}/bin"/>
   <property name="v.voko.xsl" location="${v.voko}/xsl"/>
   <property name="v.fonto" location="${user.home}/revo-fonto/revo"/>
@@ -162,7 +163,7 @@
     </xslt>
 
     <xslt destdir="${v.tmp}/tez" extension=".json" useImplicitFileset="false" 
-       failOnNoResources="false" force="true" style="${v.voko.xsl}/tez-json.xsl" classpathref="saxon.classpath">
+       failOnNoResources="false" force="true" style="${v.voko.xsl}/revo_json.xsl" classpathref="saxon.classpath">
        <filelist dir="${v.bazo.xml}" files="${artikoloj}"/>
        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
@@ -251,8 +252,10 @@
     <delete file="${v.tmp}/art/${dosiero}.xml"/>
     <delete file="${v.tmp}/art/${dosiero}.html"/>
     <delete file="${v.tmp}/hst/${dosiero}.html"/>
+    <delete file="${v.tmp}/tez/${dosiero}.json"/>
     <delete file="${v.bazo.art}/${dosiero}.html"/>
     <delete file="${v.bazo.hst}/${dosiero}.html"/>
+    <delete file="${v.bazo.tez}/${dosiero}.json"/>
 <!--
     <sql
 	driver="com.mysql.jdbc.Driver"

@@ -120,7 +120,7 @@
      description="kreas la JSON-dosierojn de la tezauro, per kiuj oni povas ŝargi la datumbazon">
 
     <xslt basedir="${v.bazo.xml}" includes="*.xml" destdir="${v.tmp}/tez" extension=".json"
-       style="${v.voko.xsl}/tez-json.xsl" classpathref="saxon.classpath">
+       style="${v.voko.xsl}/revo_json.xsl" classpathref="saxon.classpath">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
 
