@@ -28,13 +28,17 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  openjdk-11-jre-headless \
+  locales openjdk-11-jre-headless \
     curl unzip rsync git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
     libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
     dictzip lynx xsltproc rxp \
 	&& rm -rf /var/lib/apt/lists/* \
   && ln -s /usr/share/java/commons-net.jar /usr/share/ant/lib/commons-net.jar \
-  && ln -s /usr/share/java/oro.jar /usr/share/ant/lib/oro.jar
+  && ln -s /usr/share/java/oro.jar /usr/share/ant/lib/oro.jar \
+  && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
 # openssh-server 	&& mkdir -p /var/run/sshd 
 # libsaxonhe-java: havas problemon transformante multajn artikolojn: normalizationData.xml not found...
 
@@ -45,7 +49,8 @@ ENV REVO=/home/formiko/revo \
     GRUNDO=/home/formiko/voko-grundo-${VG_BRANCH} \
     SAXONJAR=/usr/share/java/saxonb.jar \
     JINGJAR=/usr/share/java/jing.jar \
-    ANT_OPTS=-Xmx1000m
+    ANT_OPTS=-Xmx1000m \
+    LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 # problemo kun normlaizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar
 
