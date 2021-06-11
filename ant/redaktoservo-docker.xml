@@ -318,7 +318,7 @@
         <target name="revo-diferenco"/>
         <!-- ne plu sendu al la origina servilo: target name="revo-upload"/ -->
         <target name="revo-upload2"/> <!-- tio sendas al la nova 1blu-servilo -->
-        <!-- kauzas ankorau problemojn ĉe var (ekz- viv/): target name="revo-viki-ligoj"/ --> <!-- aktualigu Vikipedio-referencojn -->
+        <target name="revo-viki-ligoj"/> <!-- aktualigu Vikipedio-referencojn -->
      </ant>        
 
 <!--  ni rezignas tie ĉi pri la pakaĵo, ni nun alpendigas plurajn ZIP-dosierojn al ĉiutatagaj eldonoj anst.
