@@ -59,7 +59,7 @@ COPY bin/* /usr/local/bin/
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 
 RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_BRANCH}.zip \
-  && unzip ${VG_BRANCH}.zip voko-grundo-${VG_BRANCH}/xsl/* voko-grundo-${VG_BRANCH}/dtd/* voko-grundo-${VG_BRANCH}/cfg/* \
+  && unzip ${VG_BRANCH}.zip voko-grundo-${VG_BRANCH}/xsl/* voko-grundo-${VG_BRANCH}/dtd/*  voko-grundo-${VG_BRANCH}/cfg/* \
      voko-grundo-${VG_BRANCH}/dok/* voko-grundo-${VG_BRANCH}/jsc/* voko-grundo-${VG_BRANCH}/stl/* voko-grundo-${VG_BRANCH}/smb/*.gif \
      voko-grundo-${VG_BRANCH}/bin/* voko-grundo-${VG_BRANCH}/sql/* voko-grundo-${VG_BRANCH}/owl/voko.rdf \
   && ln -s ${GRUNDO} ${VOKO} && rm ${VG_BRANCH}.zip \
