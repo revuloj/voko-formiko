@@ -3,8 +3,8 @@
   <element>
     <id>UMLObject</id>
     <coordinates>
-      <x>120</x>
-      <y>230</y>
+      <x>160</x>
+      <y>250</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -64,23 +64,23 @@ bg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>170</x>
-      <y>260</y>
-      <w>30</w>
-      <h>100</h>
+      <y>280</y>
+      <w>70</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;50.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>200</x>
-      <y>260</y>
-      <w>130</w>
-      <h>100</h>
+      <x>240</x>
+      <y>280</y>
+      <w>90</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>110.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>70.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -120,31 +120,31 @@ bg=green</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>200</x>
-      <y>120</y>
+      <x>60</x>
+      <y>150</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>akceptu-redaktojn
+    <panel_attributes>akceptu-submetojn
 bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>150</y>
-      <w>100</w>
-      <h>100</h>
+      <x>150</x>
+      <y>180</y>
+      <w>70</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;80.0;10.0</additional_attributes>
+    <additional_attributes>50.0;70.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLObject</id>
     <coordinates>
-      <x>290</x>
-      <y>230</y>
+      <x>40</x>
+      <y>250</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -155,14 +155,14 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>150</y>
-      <w>120</w>
-      <h>100</h>
+      <x>80</x>
+      <y>180</y>
+      <w>80</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;uzas&gt;&gt;</panel_attributes>
-    <additional_attributes>50.0;80.0;50.0;30.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;70.0;10.0;20.0;40.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLObject</id>
@@ -191,31 +191,31 @@ bg=green</panel_attributes>
   <element>
     <id>UMLObject</id>
     <coordinates>
-      <x>250</x>
-      <y>40</y>
+      <x>20</x>
+      <y>20</y>
       <w>210</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>gist.github.com/reta-vortaro
+    <panel_attributes>tabelo submeto
 bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>70</y>
-      <w>30</w>
-      <h>70</h>
+      <x>50</x>
+      <y>50</y>
+      <w>90</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>70.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>70</x>
-      <y>120</y>
+      <x>250</x>
+      <y>150</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -226,19 +226,19 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>110</x>
-      <y>150</y>
-      <w>70</w>
-      <h>100</h>
+      <x>220</x>
+      <y>180</y>
+      <w>80</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>50.0;80.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;70.0;60.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLObject</id>
     <coordinates>
-      <x>30</x>
-      <y>40</y>
+      <x>440</x>
+      <y>20</y>
       <w>210</w>
       <h>40</h>
     </coordinates>
@@ -249,13 +249,13 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>100</x>
-      <y>70</y>
-      <w>30</w>
-      <h>70</h>
+      <x>330</x>
+      <y>50</y>
+      <w>210</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;190.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLObject</id>
@@ -343,5 +343,28 @@ lt=.
 valign=top
 </panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>140</x>
+      <y>70</y>
+      <w>210</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>gist.github.com/reta-vortaro
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>100</y>
+      <w>60</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;40.0;10.0</additional_attributes>
   </element>
 </diagram>
