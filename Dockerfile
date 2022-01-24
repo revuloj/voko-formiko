@@ -39,6 +39,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     dpkg-reconfigure --frontend=noninteractive locales && \
     update-locale LANG=en_US.UTF-8
 
+# ni aldone instalas antunit por ebligi testojn de la instalaĵo
+# plibonigu: ni povus ŝovi ĉion pri testado en apartan staĝon, kiun ni
+# uzas ekskluzive por testado
+RUN curl -LO https://dlcdn.apache.org//ant/antlibs/antunit/binaries/apache-ant-antunit-1.4.1-bin.tar.bz2 \
+#  && apt-get install -y --no-install-recommends gpg
+#  && curl -O https://downloads.apache.org/ant/antlibs/antunit/source/apache-ant-antunit-1.4.1-src.tar.bz2.asc \
+#  && curl -O https://downloads.apache.org/ant/KEYS \
+#  && gpg --import KEYS && gpg --verify apache-ant-antunit*.asc \
+  && tar -xf apache-ant-antunit* \
+  && ln -s /apache-ant-antunit-*/ant-antunit-*.jar /usr/share/ant/lib/
+
 # openssh-server 	&& mkdir -p /var/run/sshd 
 # libsaxonhe-java: havas problemon transformante multajn artikolojn: normalizationData.xml not found...
 
