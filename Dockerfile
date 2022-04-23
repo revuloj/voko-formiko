@@ -27,7 +27,7 @@ ARG VG_BRANCH=master
 ARG DEBIAN_FRONTEND=noninteractive
 
 # libcommons-net-java, liboro-java required for ant ftp task
-RUN apt-get update && apt-get install -y --no-install-recommends  \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   locales openjdk-11-jre-headless \
     curl unzip rsync git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
     libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
