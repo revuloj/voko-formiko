@@ -4,7 +4,7 @@
 FROM silkeh/latex:small as metapost
 LABEL Author=<diestel@steloj.de>
 
-ARG VG_BRANCH=master
+ARG VG_BRANCH=2f
 
 COPY mp2png.sh .
 RUN apk --update add curl unzip librsvg --no-cache && rm -f /var/cache/apk/* 
@@ -23,7 +23,7 @@ FROM ubuntu:focal
 #FROM openjdk:11.0.9-slim-buster
 LABEL Author=<diestel@steloj.de>
 
-ARG VG_BRANCH=master
+ARG VG_BRANCH=2f
 ARG DEBIAN_FRONTEND=noninteractive
 
 # libcommons-net-java, liboro-java required for ant ftp task
