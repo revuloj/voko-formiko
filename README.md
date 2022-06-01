@@ -29,42 +29,59 @@ La indeksoj rekreiĝas ĉiunokte, do malpli ofte, same per voko-formiko. Krome �
 La centraj dosieroj (agordo, DTD, XSL) estas en [voko-grundo](https://github.com/revuloj/voko-grundo). Do antaŭ nova eldono de voko-formiko kutime necesas pretigi novan eldonon de voko-grundo.
 
 Poste helpas la skripto bin/eldono.sh por organizi la novan eldonon. Eldono kreiĝas en sia aparta git-branĉo, kiun vi kreas komence. Eldonojn ni nomas cifero+litero, ekzemple `2f`, sed malsupre montras per ĵokero `<ELD>`.
+
 Jen konciza paŝaro:
 
-```
-# krei kaj eniri novan git-branĉon
-git checkout -b <ELD>
+1. Prepari novan eldonon en aparta git-branĉo
 
-# prepari la eldonon, skribante la nomon supre en la helpskripton
+Krei kaj eniri novan git-branĉon:
+```
+git checkout -b <ELD>
+```
+
+Prepari la eldonon, skribante la nomon supre en la helpskripton kaj poste vokante ĝin:
+```
 vi bin/eldono.sh
 release=<ELD>
 
 bin/eldono.sh preparo
+```
 
-# nun faru ĉiujn bezonatajn ŝanĝojn en la kodo. Novan procezujon `voko-formiko` vi povas krei loke per
+2. Fari kaj konservi ŝanĝojn por la nova eldono
+
+Novan procezujon `voko-formiko` vi povas krei loke per:
+```
 bin/eldono.sh kreo
+```
 
-# Tiun vi povas uzi kune kun aliaj en revo-medioj/formiko-testo 
-# aŭ revo-medioj/formikujo kaj do elprovi izolite
+Tiun vi povas uzi kune kun aliaj en `revo-medioj/formiko-testo`
+aŭ `revo-medioj/formikujo` kaj do elprovi izolite.
 
-# konfirmu kaj puŝu viajn ŝanĝojn
+Konfirmu kaj puŝu viajn ŝanĝojn:
+```
 git add <dosieroj>
 git commit -m"<kion vi ŝanĝis>"
 git push --set-upstream origin <ELD>
+```
 
-# donu aŭ ŝovu etikedon <ELD> al la nuna stato de la kodo,
-# tio puŝas la etikedon ankaŭ al github kaj tie kreiĝas nova procezujo kun tiu etikedo
+3. Marki la eldonon per etikedo (git tag)
+
+Donu aŭ ŝovu etikedon `<ELD>` al la nuna stato de la kodo,
+tio puŝas la etikedon ankaŭ al github kaj tie kreiĝas nova procezujo kun tiu etikedo:
+```
 bin/eldono.sh etikedo
+```
 
-# Fine, kiam vi ne plu faras ŝanĝojn en la eldono vi povas movi ĉion al la ĉefa branĉo, etikedi la eldonon tie 
-# kaj forigi la flankan branĉon
+4. Integrigi la eldonon en la ĉefan branĉon
+
+Fine, kiam vi ne plu faras ŝanĝojn en la eldono vi povas movi ĉion al la ĉefa branĉo, 
+etikedi la eldonon tie kaj forigi la flankan branĉon:
+```
 git checkout master
 git merge <ELD>
 git tag v<ELD>
 git push --tags
 git -d <ELD>
-
-
-
-
+git push --delete origin <ELD>
+```
 
