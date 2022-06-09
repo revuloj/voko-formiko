@@ -4,13 +4,18 @@
 FROM silkeh/latex:small as metapost
 LABEL Author=<diestel@steloj.de>
 
-ARG VG_BRANCH=2f
+# la variablon oni povas ŝanĝi ankaŭ per komandlinio, ekz-e --build-arg VG_TAG=v1e
+ARG VG_TAG=master
+# por etikedoj kun nomo vXXX estas la problemo, ke GH en la ZIP-nomo kaj dosierujo forprenas la "v"
+# do se VG_TAG estas "v1e", ZIP_SUFFIX estu "1e"
+# la variablon oni povas ŝanĝi ankaŭ per komandlinio --build-arg VG_TAG=...
+ARG ZIP_SUFFIX=master
 
 COPY mp2png.sh .
 RUN apk --update add curl unzip librsvg --no-cache && rm -f /var/cache/apk/* 
-RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_BRANCH}.zip \
-    && unzip ${VG_BRANCH}.zip voko-grundo-${VG_BRANCH}/smb/*.mp
-RUN cd voko-grundo-${VG_BRANCH} && ../mp2png.sh # && cd ${HOME}
+RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_TAG}.zip \
+    && unzip ${VG_TAG}.zip voko-grundo-${ZIP_SUFFIX}/smb/*.mp
+RUN cd voko-grundo-${ZIP_SUFFIX} && ../mp2png.sh # && cd ${HOME}
 
 #######################################################
 # staĝo 2: Ni bezonas Javon kaj Ant, Saxon ktp.
@@ -23,7 +28,9 @@ FROM ubuntu:focal
 #FROM openjdk:11.0.9-slim-buster
 LABEL Author=<diestel@steloj.de>
 
-ARG VG_BRANCH=2f
+ARG VG_TAG
+ARG ZIP_SUFFIX
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 # libcommons-net-java, liboro-java required for ant ftp task
@@ -57,7 +64,7 @@ RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
 ENV REVO=/home/formiko/revo \
     VOKO=/home/formiko/voko \
-    GRUNDO=/home/formiko/voko-grundo-${VG_BRANCH} \
+    GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
     SAXONJAR=/usr/share/java/saxonb.jar \
     JINGJAR=/usr/share/java/jing.jar \
     ANT_OPTS=-Xmx1000m \
@@ -69,11 +76,11 @@ COPY bin/* /usr/local/bin/
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 
-RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_BRANCH}.zip \
-  && unzip ${VG_BRANCH}.zip voko-grundo-${VG_BRANCH}/xsl/* voko-grundo-${VG_BRANCH}/dtd/* voko-grundo-${VG_BRANCH}/cfg/* \
-     voko-grundo-${VG_BRANCH}/dok/* voko-grundo-${VG_BRANCH}/jsc/* voko-grundo-${VG_BRANCH}/stl/* voko-grundo-${VG_BRANCH}/smb/*.gif \
-     voko-grundo-${VG_BRANCH}/bin/* voko-grundo-${VG_BRANCH}/sql/* voko-grundo-${VG_BRANCH}/owl/voko.rdf \
-  && ln -s ${GRUNDO} ${VOKO} && rm ${VG_BRANCH}.zip \
+RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_TAG}.zip \
+  && unzip ${VG_TAG}.zip voko-grundo-${ZIP_SUFFIX}/xsl/* voko-grundo-${ZIP_SUFFIX}/dtd/* voko-grundo-${ZIP_SUFFIX}/cfg/* \
+     voko-grundo-${ZIP_SUFFIX}/dok/* voko-grundo-${ZIP_SUFFIX}/jsc/* voko-grundo-${ZIP_SUFFIX}/stl/* voko-grundo-${ZIP_SUFFIX}/smb/*.gif \
+     voko-grundo-${ZIP_SUFFIX}/bin/* voko-grundo-${ZIP_SUFFIX}/sql/* voko-grundo-${ZIP_SUFFIX}/owl/voko.rdf \
+  && ln -s ${GRUNDO} ${VOKO} && rm ${VG_TAG}.zip \
   && chmod go+w ${GRUNDO}/xsl \
   && chown formiko ${GRUNDO}/cfg/klasoj.xml ${GRUNDO}/xsl/revo_tez.xsl ${GRUNDO}/xsl/revohtml2.xsl ${GRUNDO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp && mkdir -p log && chown -R formiko:users revo tmp log \
@@ -95,7 +102,7 @@ COPY jav ${VOKO}/jav
 # ni poste kopios tion al ${REVO}/cfg
 # ĉar ${REVO} estos injektita nur ĉe lanĉo de Formiko
 COPY cfg/* /etc/
-COPY --from=metapost --chown=root:root voko-grundo-${VG_BRANCH}/smb/ /home/formiko/voko/smb/
+COPY --from=metapost --chown=root:root voko-grundo-${ZIP_SUFFIX}/smb/ /home/formiko/voko/smb/
 
 # FARENDA:
 # uzu ant-regulon por krei respiro.jar...?
