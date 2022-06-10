@@ -36,7 +36,7 @@ preparo)
     #sed -ri 's/ARG VG_BRANCH=.*?$/ARG VG_BRANCH='${eldono}'/' Dockerfile
     ;;
 kreo)
-    echo "Kreante lokan procezujon (por docker) voko-formiko"
+    echo "Kreante lokan procezujon (por docker) voko-formiko kiel eldono ${eldono}"
     docker pull ghcr.io/revuloj/voko-grundo/voko-formiko:${eldono}
     docker build --build-arg VG_TAG=v${eldono} --build-arg ZIP_SUFFIX=${eldono} -t voko-formiko .
     ;;
