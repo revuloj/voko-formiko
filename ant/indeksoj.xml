@@ -165,12 +165,15 @@
 
   <target name="inx-oficialaj" depends="inx-preparo,inx-eltiro"
      description="kolekti la oficialajn radikojn el la indeks-dosiero">
-     <xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/inx_ofc.xml"  style="${v.voko.xsl}/inx_ofc.xsl"
+     <!--xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/inx_ofc.xml"  style="${v.voko.xsl}/inx_ofc.xsl"
+       classpathref="saxon.classpath">
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      </xslt -->
+     <xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/inx/inx_ofc.json"  style="${v.voko.xsl}/inx_ofc_json.xsl"
        classpathref="saxon.classpath">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
       </xslt>
   </target>
-
 
 
   <target name="inx-cvs"
