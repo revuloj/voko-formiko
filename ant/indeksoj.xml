@@ -145,6 +145,7 @@
 
   <target name="inx-json" depends="inx-preparo,inx-oficialaj"
      description="kreas la JSON-dosierojn de la indeksoj">
+     <!-- ni ne bezonas enhavon ĉar jam cio okazas per dependecoj -->
   </target>
 
   <target name="inx-html" depends="inx-preparo,inx-ordigo"
