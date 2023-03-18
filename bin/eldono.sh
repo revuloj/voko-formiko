@@ -45,6 +45,12 @@ etikedo)
     echo "kaj puŝante tiun staton al la centra deponejo"
     git tag -f v${eldono} && git push && git push --tags -f
     ;;
+etikedo-stabila)
+    # eble ni ne plu bezonas la etikedon "stabila", ĉar ni uzas nin eldonojn "v2a" ktp. aŭ "latest"
+    git pull --tags
+    git tag -f stabila HEAD
+    git push -f --tags
+    ;;
 helpo | *)
     echo "---------------------------------------------------------------------------"
     echo "Tiu skripto servas por prepari kaj eldoni procezujon voko-formiko."
