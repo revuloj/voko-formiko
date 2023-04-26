@@ -79,7 +79,7 @@ COPY bin/* /usr/local/bin/
 RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_TAG}.zip \
   && unzip ${VG_TAG}.zip voko-grundo-${ZIP_SUFFIX}/xsl/* voko-grundo-${ZIP_SUFFIX}/dtd/* voko-grundo-${ZIP_SUFFIX}/cfg/* \
      voko-grundo-${ZIP_SUFFIX}/dok/* voko-grundo-${ZIP_SUFFIX}/jsc/* voko-grundo-${ZIP_SUFFIX}/stl/* voko-grundo-${ZIP_SUFFIX}/smb/*.gif \
-     voko-grundo-${ZIP_SUFFIX}/bin/* voko-grundo-${ZIP_SUFFIX}/sql/*  voko-grundo-${ZIP_SUFFIX}/owl/voko.rdf \
+     voko-grundo-${ZIP_SUFFIX}/bin/* voko-grundo-${ZIP_SUFFIX}/sql/* voko-grundo-${ZIP_SUFFIX}/owl/voko.rdf \
   && ln -s ${GRUNDO} ${VOKO} && rm ${VG_TAG}.zip \
   && chmod go+w ${GRUNDO}/xsl \
   && chown formiko ${GRUNDO}/cfg/klasoj.xml ${GRUNDO}/xsl/revo_tez.xsl ${GRUNDO}/xsl/revohtml2.xsl ${GRUNDO}/xsl/revohtml.xsl \

@@ -143,6 +143,10 @@
       </xslt>
   </target>
 
+  <target name="inx-json" depends="inx-preparo,inx-oficialaj"
+     description="kreas la JSON-dosierojn de la indeksoj">
+     <!-- ni ne bezonas enhavon ĉar jam cio okazas per dependecoj -->
+  </target>
 
   <target name="inx-html" depends="inx-preparo,inx-ordigo"
      description="kreas la HTML-dosierojn de la indeksoj">
@@ -345,7 +349,7 @@
       </xslt>
   </target>    
 
-  <target name="inx-tuto" depends="inx-preparo,inx-html"
+  <target name="inx-tuto" depends="inx-preparo,inx-html,inx-json"
      description="kopias fine chiujn enhave shanghitajn dosierojn al la
      indeksdosierujo kaj tie forigas forfalintajn">
 
