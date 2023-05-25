@@ -20,7 +20,7 @@ RUN cd voko-grundo-${ZIP_SUFFIX} && ../mp2png.sh # && cd ${HOME}
 #######################################################
 # staĝo 2: Ni bezonas Javon kaj Ant, Saxon ktp.
 #######################################################
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 # problemo en Debian Buster: Could not perform immediate configuration on 'libnss-nis:amd64'
 # vd ankaŭ https://bugs.launchpad.net/ubuntu/+source/ubuntu-release-upgrader/+bug/1899272
@@ -36,7 +36,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
   locales openjdk-11-jre-headless \
-    curl unzip rsync git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
+    curl lbzip2 unzip rsync git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
     libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
     dictzip lynx xsltproc rxp \
 	&& rm -rf /var/lib/apt/lists/* \
@@ -67,7 +67,7 @@ ENV REVO=/home/formiko/revo \
     GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
     SAXONJAR=/usr/share/java/saxonb.jar \
     JINGJAR=/usr/share/java/jing.jar \
-    ANT_OPTS=-Xmx1000m \
+    ANT_OPTS=-Xmx4000m \
     LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 # problemo kun normlaizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar

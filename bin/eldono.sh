@@ -17,7 +17,7 @@
 # Ni ankaŭ supozas, ke nova eldono okazas en git-branĉo kun la sama nomo
 # Ĉe publikigo marku la kodstaton per etikedo (git-tag) v${eldono}.
 # Dum la realigo vi povas ŝovi la etikedon ĉiam per celo "etikedo".
-eldono=2h
+eldono=2i
 
 # ni komprenas preparo | etikedo | helpo
 target="${1:-helpo}"
@@ -37,7 +37,7 @@ preparo)
     ;;
 kreo)
     echo "Kreante lokan procezujon (por docker) voko-formiko kiel eldono ${eldono}"
-    docker pull ghcr.io/revuloj/voko-grundo/voko-formiko:${eldono}
+    docker pull ghcr.io/revuloj/voko-grundo/voko-grundo:${eldono}
     docker build --build-arg VG_TAG=v${eldono} --build-arg ZIP_SUFFIX=${eldono} -t voko-formiko .
     ;;
 etikedo)
