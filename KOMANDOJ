@@ -1,0 +1,102 @@
+
+==== deplojo ====
+
+ | Deplojas (post eventuala kompilo) partojn de la kodo al procezujo formikujo_formiko
+
+ Voku kiel:
+    depolojo <celo>
+
+ kie <celo> estas unu el la sekvaj:
+    docker      : momente sama kiel la sekva 'docker-ant'
+     docker-ant : Kopias la stir-dosierojn el ant/ al la procezujo formikujo_formiko
+     helpo      : baza informo  
+
+==== docker-entrypoint.sh ====
+
+
+==== eldono ====
+
+ | Subtenas prepari kaj publikigi eldonojn de voko-formiko
+
+ Voku kiel:
+    eldono <celo>
+
+ kie <celo> estas unu el la sekvaj:
+     preparo    : preparas novan eldonon. Antaŭe kreu branĉon kun la nomo de la eldono
+                  kaj adaptu la parametron 'eldono' en ambaŭ skriptoj 'eldono' kaj 'deplojo'
+     kreo       : kompilas la procezujon voko-formiko. Antaŭe kreu la koncernan eldonon de
+                  voko-grundo, ĝi elŝutiĝos el la Github-deponejo (Ghcr)  
+     etikedo    : puŝas la lastajn ŝanĝojn al Github ŝovante la eldonetikedon tiel,
+                  ke en Github kompiliĝu nova aktuala pakaĵo
+     etikedo    : puŝas la lastajn ŝanĝojn al Github ŝovante la etikedon 'stabila' tiel,
+                  ke en Github kompiliĝu nova aktuala pakaĵo
+                  La etikedo 'stabila' permesas marki eldonon/staton uzeblan de la redaktoservo,
+                  dum ni laboras pri nova eldono.
+     helpo      : baza informo  
+
+==== formiko ====
+
+
+==== formiko-testo ====
+
+
+==== git_bv_forigu_lst.sh ====
+
+
+==== git_forigitaj.sh ====
+
+
+==== gitlogart.sh ====
+
+
+==== gitlogxml2w.sh ====
+
+
+==== gitlogxmllst.sh ====
+
+
+==== gitlogxml.sh ====
+
+
+==== git_shanghitaj.sh ====
+
+
+==== health_check_cron.sh ====
+
+
+==== helpo ====
+
+ | Elfiltras helpinformojn el la diversaj komanddosieroj
+
+ - Sen argumento ĝi listigas koncizajn informojn pri la unuopaj skriptoj
+   trovitaj en dosierujo respektiva ./bin (relative al aktuala situo)
+ - Kun skriptnomo kiel argumento ĝi montras helpinformojn pri ĝuste tiu
+ - Kun argumento 'komandoj' kreiĝas dosiero LEGUMIN kun helpinformoj 
+   pri la skriptoj en ./bin
+
+==== insert-art-blobs.sh ====
+
+
+==== jing2html.sh ====
+
+
+==== jing2xml.sh ====
+
+
+==== redaktoservo.sh ====
+
+
+==== setup_crontab.sh ====
+
+
+==== setup_redaktoservo.sh ====
+
+
+==== setup_revo.sh ====
+
+
+==== setup_upload.sh ====
+
+
+==== viki_listo.sh ====
+
