@@ -38,7 +38,7 @@ kreo)
     ##              voko-grundo, ĝi elŝutiĝos el la Github-deponejo (Ghcr)  
     echo "Kreante lokan procezujon (por docker) voko-formiko kiel eldono ${eldono}"
     docker pull ghcr.io/revuloj/voko-grundo/voko-grundo:${eldono}
-    docker build --build-arg VG_TAG=v${eldono} --build-arg ZIP_SUFFIX=${eldono} -t voko-formiko .
+    docker build --build-arg VERSION=${eldono} --build-arg VG_TAG=v${eldono} --build-arg ZIP_SUFFIX=${eldono} -t voko-formiko .
     ;;
 etikedo)
     ## etikedo    : puŝas la lastajn ŝanĝojn al Github ŝovante la eldonetikedon tiel,
