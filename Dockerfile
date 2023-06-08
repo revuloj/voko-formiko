@@ -59,20 +59,21 @@ COPY bin/* /usr/local/bin/
 
 #RUN mkdir /home/revo/voko && ln -s /home/revo/revo/dtd /home/revo/voko/dtd
 
-RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_TAG}.zip \
-  && unzip ${VG_TAG}.zip voko-grundo-${ZIP_SUFFIX}/cfg/* \
-     voko-grundo-${ZIP_SUFFIX}/dok/* voko-grundo-${ZIP_SUFFIX}/smb/*.gif \
-     voko-grundo-${ZIP_SUFFIX}/sql/* voko-grundo-${ZIP_SUFFIX}/owl/voko.rdf \
-  && ln -s ${GRUNDO} ${VOKO} && rm ${VG_TAG}.zip
+## RUN curl -LO https://github.com/revuloj/voko-grundo/archive/${VG_TAG}.zip \
+##   && unzip ${VG_TAG}.zip voko-grundo-${ZIP_SUFFIX}/cfg/* \
+##      voko-grundo-${ZIP_SUFFIX}/dok/* voko-grundo-${ZIP_SUFFIX}/smb/*.gif \
+##      voko-grundo-${ZIP_SUFFIX}/sql/* voko-grundo-${ZIP_SUFFIX}/owl/voko.rdf \
+##   && ln -s ${GRUNDO} ${VOKO} && rm ${VG_TAG}.zip
 
-COPY --from=grundo --chown=root:root build/smb/ /home/formiko/voko/smb/
-COPY --from=grundo build/jsc/ ${VOKO}/jsc/
-COPY --from=grundo build/stl/ ${VOKO}/stl/
-COPY --from=grundo build/dtd/ ${VOKO}/dtd/
-COPY --from=grundo build/xsl/ ${VOKO}/xsl/
+COPY --from=grundo build/ ${VOKO}/
+# COPY --from=grundo --chown=root:root build/smb/ /home/formiko/voko/smb/
+#COPY --from=grundo build/jsc/ ${VOKO}/jsc/
+#COPY --from=grundo build/stl/ ${VOKO}/stl/
+#COPY --from=grundo build/dtd/ ${VOKO}/dtd/
+#COPY --from=grundo build/xsl/ ${VOKO}/xsl/
 
-RUN chmod go+w ${VOKO}/xsl \
-  && chown formiko ${GRUNDO}/cfg/klasoj.xml ${VOKO}/xsl/revo_tez.xsl ${VOKO}/xsl/revohtml2.xsl ${VOKO}/xsl/revohtml.xsl \
+RUN chmod go+w ${VOKO}/xsl && chown root:root ${VOKO}/smb \
+  && chown formiko ${VOKO}/cfg/klasoj.xml ${VOKO}/xsl/revo_tez.xsl ${VOKO}/xsl/revohtml2.xsl ${VOKO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp \
   && mkdir -p log && chown -R formiko:users revo tmp log \
   && mkdir -p ${VOKO}/bin \
