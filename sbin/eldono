@@ -45,7 +45,7 @@ etikedo)
     ##              ke en Github kompiliĝu nova aktuala pakaĵo
     echo "Provizante la aktualan staton per etikedo (git tag) v${eldono}"
     echo "kaj puŝante tiun staton al la centra deponejo"
-    git tag -f v${eldono} && git push && git push --tags -f
+    git tag -f v${eldono} && git push && && git push origin v${eldono} -f
     ;;
 etikedo-stabila)
     ## etikedo    : puŝas la lastajn ŝanĝojn al Github ŝovante la etikedon 'stabila' tiel,
@@ -55,7 +55,7 @@ etikedo-stabila)
     # eble ni ne plu bezonas la etikedon "stabila", ĉar ni uzas nin eldonojn "v2a" ktp. aŭ "latest"
     git pull --tags
     git tag -f stabila HEAD
-    git push -f --tags
+    git git push origin stabila -f 
     ;;
 helpo | *)
     ## helpo      : baza informo  
