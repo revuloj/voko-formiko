@@ -11,8 +11,8 @@ FROM ubuntu:jammy
 # vd ankaŭ https://bugs.launchpad.net/ubuntu/+source/ubuntu-release-upgrader/+bug/1899272
 LABEL Author=<diestel@steloj.de>
 
-ARG VG_TAG
-ARG ZIP_SUFFIX
+# ARG VG_TAG
+# ARG ZIP_SUFFIX
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -47,11 +47,12 @@ RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
 ENV REVO=/home/formiko/revo \
     VOKO=/home/formiko/voko \
-    GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
     SAXONJAR=/usr/share/java/saxonb.jar \
     JINGJAR=/usr/share/java/jing.jar \
     ANT_OPTS=-Xmx4000m \
     LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
+#    GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
+
 # problemo kun normlaizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar
 
