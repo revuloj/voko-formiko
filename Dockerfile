@@ -24,8 +24,6 @@ FROM ubuntu:jammy
 
 # problemo en Debian Buster: Could not perform immediate configuration on 'libnss-nis:amd64'
 # vd ankaŭ https://bugs.launchpad.net/ubuntu/+source/ubuntu-release-upgrader/+bug/1899272
-#FROM openjdk:jre-slim
-#FROM openjdk:11.0.9-slim-buster
 LABEL Author=<diestel@steloj.de>
 
 ARG VG_TAG
@@ -35,7 +33,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  locales openjdk-11-jre-headless \
+  locales openjdk-17-jre-headless \
     curl lbzip2 unzip rsync git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
     libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
     dictzip lynx xsltproc rxp \
