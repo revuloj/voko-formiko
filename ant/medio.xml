@@ -117,6 +117,9 @@ rezulto en:
     <xslt in="${v.bazo.cfg}/bibliogr.xml" out="${v.bazo.dok}/bibltit.html"
 	  style="${v.voko.xsl}/bibtithtml.xsl"/>
 
+    <xslt in="${v.bazo.cfg}/bibliogr.xml" out="${v.bazo.dok}/bibliogr.json"
+      style="${v.voko.xsl}/bibjson.xsl"/>    
+
   </target>
 
   <target name="med-dok" depends="med-preparo"
