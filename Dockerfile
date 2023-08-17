@@ -77,7 +77,7 @@ RUN chmod go+w ${VOKO}/xsl && chown root:root ${VOKO}/smb \
   && chown formiko ${VOKO}/cfg/klasoj.xml ${VOKO}/xsl/revo_tez.xsl ${VOKO}/xsl/revohtml2.xsl ${VOKO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp \
   && mkdir -p log && chown -R formiko:users revo tmp log \
-  && mkdir -p ${VOKO}/bin  \
+  && mkdir -p ${VOKO}/bin \
   && ln -s /usr/local/bin/jing2xml.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogart.sh ${VOKO}/bin/ \
   && ln -s /usr/local/bin/gitlogxml.sh ${VOKO}/bin/ \
