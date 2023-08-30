@@ -46,7 +46,7 @@ jobs:
       - name: Kreo de ${{ env.IMAGE_NAME }}
         run: |
            # kreu la procezujon
-           ./bin/eldono.sh kreo
+           ./sbin/eldono kreo
 
       - name: Testoj de ${{ env.IMAGE_NAME }}
         run: |

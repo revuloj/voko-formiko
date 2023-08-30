@@ -1,29 +1,27 @@
 #!/bin/bash
 
-# provizas kelkajn komandojn utilajn por prepari specifajn eldonojn
-# de voko-formiko
-#
-# jen kelkaj informoj kiel eviti plurfoje doni la pasvorton por scp:
-# https://linux.101hacks.com/unix/ssh-controlmaster/
-# + ControlPersist 2m
-# http://blogs.perl.org/users/smylers/2011/08/ssh-productivity-tips.html
+## | Subtenas prepari kaj publikigi eldonojn de voko-formiko
+##
+## Voku kiel:
+##    eldono <celo>
+##
+## kie <celo> estas unu el la sekvaj:
 
-# aldonu en /etc/hosts!
-#host=retavortaro.de
-
-# Tio estas la eldono de voko-grundo kontraŭ kiu ni kompilas ĉion
+# LA malsupra variablo estas la eldono de voko-grundo kontraŭ kiu ni kompilas ĉion
 # ĝi devas ekzisti jam kiel git-tag (kaj sekve kiel kodarĥivo kaj procezujo) en Github
-# en celo "preparo" ni metas tiun eldonon ankaŭ por dosiernomoj kc. de voko-araneo
+# en celo "preparo" ni metas tiun eldonon ankaŭ por dosiernomoj kc. de voko-formiko
 # Ni ankaŭ supozas, ke nova eldono okazas en git-branĉo kun la sama nomo
 # Ĉe publikigo marku la kodstaton per etikedo (git-tag) v${eldono}.
 # Dum la realigo vi povas ŝovi la etikedon ĉiam per celo "etikedo".
-eldono=2h
+eldono=2i
 
 # ni komprenas preparo | etikedo | helpo
 target="${1:-helpo}"
 
 case $target in
 preparo)
+    ## preparo    : preparas novan eldonon. Antaŭe kreu branĉon kun la nomo de la eldono
+    ##              kaj adaptu la parametron 'eldono' en ambaŭ skriptoj 'eldono' kaj 'deplojo'
     # kontrolu ĉu la branĉo kongruas kun la agordita versio
     branch=$(git symbolic-ref --short HEAD)
     if [ "${branch}" != "${eldono}" ]; then
@@ -36,22 +34,31 @@ preparo)
     #sed -ri 's/ARG VG_BRANCH=.*?$/ARG VG_BRANCH='${eldono}'/' Dockerfile
     ;;
 kreo)
+    ## kreo       : kompilas la procezujon voko-formiko. Antaŭe kreu la koncernan eldonon de
+    ##              voko-grundo, ĝi elŝutiĝos el la Github-deponejo (Ghcr)  
     echo "Kreante lokan procezujon (por docker) voko-formiko kiel eldono ${eldono}"
-    docker pull ghcr.io/revuloj/voko-grundo/voko-formiko:${eldono}
-    docker build --build-arg VG_TAG=v${eldono} --build-arg ZIP_SUFFIX=${eldono} -t voko-formiko .
+    docker pull ghcr.io/revuloj/voko-grundo/voko-grundo:${eldono}
+    docker build --build-arg VERSION=${eldono} -t voko-formiko .
     ;;
 etikedo)
+    ## etikedo    : puŝas la lastajn ŝanĝojn al Github ŝovante la eldonetikedon tiel,
+    ##              ke en Github kompiliĝu nova aktuala pakaĵo
     echo "Provizante la aktualan staton per etikedo (git tag) v${eldono}"
     echo "kaj puŝante tiun staton al la centra deponejo"
-    git tag -f v${eldono} && git push && git push --tags -f
+    git tag -f v${eldono} && git push && git push origin v${eldono} -f
     ;;
 etikedo-stabila)
+    ## etikedo    : puŝas la lastajn ŝanĝojn al Github ŝovante la etikedon 'stabila' tiel,
+    ##              ke en Github kompiliĝu nova aktuala pakaĵo
+    ##              La etikedo 'stabila' permesas marki eldonon/staton uzeblan de la redaktoservo,
+    ##              dum ni laboras pri nova eldono.
     # eble ni ne plu bezonas la etikedon "stabila", ĉar ni uzas nin eldonojn "v2a" ktp. aŭ "latest"
     git pull --tags
     git tag -f stabila HEAD
-    git push -f --tags
+    git git push origin stabila -f 
     ;;
 helpo | *)
+    ## helpo      : baza informo  
     echo "---------------------------------------------------------------------------"
     echo "Tiu skripto servas por prepari kaj eldoni procezujon voko-formiko."
     echo "Tiucele ekzistas celoj 'preparo', 'etikedo'."

@@ -117,6 +117,9 @@ rezulto en:
     <xslt in="${v.bazo.cfg}/bibliogr.xml" out="${v.bazo.dok}/bibltit.html"
 	  style="${v.voko.xsl}/bibtithtml.xsl"/>
 
+    <xslt in="${v.bazo.cfg}/bibliogr.xml" out="${v.bazo.dok}/bibliogr.json"
+      style="${v.voko.xsl}/bibjson.xsl"/>    
+
   </target>
 
   <target name="med-dok" depends="med-preparo"
@@ -201,7 +204,7 @@ rezulto en:
 
 
  <target name="med-dtd" depends="med-preparo"
-       description="dokumenttip-difinoj">
+       description="(malnova) dokumenttip-difinoj">
 
     <xslt in="${v.voko.cfg}/literoj.xml" out="${v.bazo.dtd}/vokosgn.dtd"
           style="${v.voko.xsl}/dtd_vokosgn.xsl"/>
@@ -223,7 +226,7 @@ rezulto en:
   </target>
 
   <target name="med-stl" depends="med-preparo"
-       description="kopias CSS-stildifinojn el voko">
+       description="(malnova) kopias CSS-stildifinojn el voko">
 
     <copy todir="${v.bazo.stl}">
       <fileset dir="${v.voko.stl}" casesensitive="yes">
@@ -234,7 +237,7 @@ rezulto en:
   </target>
 
   <target name="med-smb" depends="med-preparo"
-       description="kopias simbolojn el voko">
+       description="(malnova) kopias simbolojn el voko">
 <!--
     <apply dir="${v.voko.smb}" executable="${mpost}" dest="${v.voko.smb}">
        <srcfile/>
@@ -267,7 +270,7 @@ rezulto en:
   </target>
 
   <target name="med-svg-png" depends="med-preparo"
-    description="transformas svg bildojn al png">
+    description="(malnova) transformas svg bildojn al png">
 
       <apply dir="${v.bazo.bld}" executable="${rsvgconv}" dest="${v.bazo.bld}" verbose="true">
        <arg value="-w"/>
@@ -285,7 +288,7 @@ rezulto en:
   </target>
 
   <target name="med-xsl" depends="med-preparo"
-       description="kopias transformregulojn (xsl) el voko">
+       description="(malnova) kopias transformregulojn (xsl) el voko">
     <copy todir="${v.bazo.xsl}">
       <fileset dir="${v.voko.xsl}" casesensitive="yes">
         <include name="*.*"/>
@@ -294,7 +297,7 @@ rezulto en:
   </target>
 
   <target name="med-jsc" depends="med-preparo"
-       description="kopias Javoscripton pro Revo-paĝoj el voko">
+       description="(malnova) kopias Javoscripton por Revo-paĝoj el voko">
     <copy todir="${v.bazo.jsc}">
       <fileset dir="${v.voko.jsc}" casesensitive="yes">
         <include name="*.*"/>
@@ -302,16 +305,6 @@ rezulto en:
     </copy>
   </target>
 
-<!--
-  <target name="med-eta" depends="med-preparo"
-       description="kopias Revo-paĝojn por ekranetoj el voko">
-    <copy todir="${v.bazo.eta}">
-      <fileset dir="${v.voko.eta}" casesensitive="yes">
-        <include name="*.*"/>
-      </fileset>
-    </copy>
-  </target>
--->
 
   <target name="med-kls" depends="med-preparo"
         description="kreas liston de klasoj (vortlistoj) el rdf" >
@@ -323,8 +316,18 @@ rezulto en:
 
   </target>
 
+<!--
+  la enhavon de stl/smb/xsl/jsc/dtd ni ne plu kopias el voko/, sed en docker-procezujo voko-araneo
+  ni kopias smb/jsc/stl/dtd rekte per reguloj en Dockerfile dum xsl/ estas ne plu sub revo/ sed nur sub voko/
+
+  Al la publika servilo ni deplojas rekte per skripto voko-grundo/sbin/eldono servilo (k.s.)
 
   <target name="med-medio" depends="med-preparo,med-kadro,med-bib,med-dok,med-dtd,med-stl,med-smb,med-xsl,med-jsc"
      description="(re)kreas la medion por la vortaro, dosierujoj cfg,dok,dtd,stl,smb,xsl kun enhavo"/>
+     -->
+
+  <target name="med-medio" depends="med-preparo,med-kadro,med-bib,med-dok"
+     description="(re)kreas la medion por la vortaro, dokumentaro, malnova kadro/indekso, bibliografio"/>
+
 
 </project>
