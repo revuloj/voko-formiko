@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # ni aldone instalas antunit por ebligi testojn de la instalaĵo
 # plibonigu: ni povus ŝovi ĉion pri testado en apartan staĝon, kiun ni
 # uzas ekskluzive por testado
-RUN curl -LO https://dlcdn.apache.org//ant/antlibs/antunit/binaries/apache-ant-antunit-1.4.1-bin.tar.bz2 \
+RUN curl -LO https://dlcdn.apache.org/ant/antlibs/antunit/binaries/apache-ant-antunit-1.4.1-bin.tar.bz2 \
 #  && apt-get install -y --no-install-recommends gpg
 #  && curl -O https://downloads.apache.org/ant/antlibs/antunit/source/apache-ant-antunit-1.4.1-src.tar.bz2.asc \
 #  && curl -O https://downloads.apache.org/ant/KEYS \
@@ -53,7 +53,7 @@ ENV REVO=/home/formiko/revo \
     LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 #    GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
 
-# problemo kun normlaizeData.xml en Saxon-HE!
+# problemo kun normalizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar
 
 COPY bin/* /usr/local/bin/
