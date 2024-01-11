@@ -1,4 +1,6 @@
-#### staĝo 1: certigu, ke vi antaŭe kompilis voko-grundo aŭ ŝargis de Github kiel pakaĵo
+#######################################################
+# staĝo 1: certigu, ke vi antaŭe kompilis voko-grundo aŭ ŝargis de Github kiel pakaĵo
+#######################################################
 ARG VERSION=latest
 FROM ghcr.io/revuloj/voko-grundo/voko-grundo:${VERSION} as grundo
 
