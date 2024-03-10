@@ -1,4 +1,6 @@
-#### staĝo 1: certigu, ke vi antaŭe kompilis voko-grundo aŭ ŝargis de Github kiel pakaĵo
+#######################################################
+# staĝo 1: certigu, ke vi antaŭe kompilis voko-grundo aŭ ŝargis de Github kiel pakaĵo
+#######################################################
 ARG VERSION=latest
 FROM ghcr.io/revuloj/voko-grundo/voko-grundo:${VERSION} as grundo
 
@@ -74,7 +76,7 @@ COPY --from=grundo build/ ${VOKO}/
 #COPY --from=grundo build/xsl/ ${VOKO}/xsl/
 
 RUN chmod go+w ${VOKO}/xsl && chown root:root ${VOKO}/smb \
-  && chown formiko ${VOKO}/cfg/klasoj.xml ${VOKO}/xsl/revo_tez.xsl ${VOKO}/xsl/revohtml2.xsl ${VOKO}/xsl/revohtml.xsl \
+  && chown formiko ${VOKO}/cfg/klasoj.xml ${VOKO}/xsl/revohtml2.xsl ${VOKO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp \
   && mkdir -p log && chown -R formiko:users revo tmp log \
   && mkdir -p ${VOKO}/bin \

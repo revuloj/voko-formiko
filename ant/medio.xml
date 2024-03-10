@@ -108,6 +108,7 @@ rezulto en:
   <target name="med-bib" depends="med-preparo"
         description="bibliografio" >
 
+<!--
     <xslt in="${v.bazo.cfg}/bibliogr.xml" out="${v.bazo.dok}/bibliogr.html"
       style="${v.voko.xsl}/bibhtml.xsl"/>
 
@@ -116,6 +117,7 @@ rezulto en:
 
     <xslt in="${v.bazo.cfg}/bibliogr.xml" out="${v.bazo.dok}/bibltit.html"
 	  style="${v.voko.xsl}/bibtithtml.xsl"/>
+-->
 
     <xslt in="${v.bazo.cfg}/bibliogr.xml" out="${v.bazo.dok}/bibliogr.json"
       style="${v.voko.xsl}/bibjson.xsl"/>    
