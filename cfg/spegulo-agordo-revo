@@ -1,6 +1,6 @@
 # ~/etc/spegulo-agordo-revo
 # la elkomentitaj agordoj de uzantoj kaj pasvortoj estu
-# aldonotoj al la dosiero per entrypoint.sh legante ilin
+# aldonotoj al la dosiero per bin/docker-entrypoint.sh legante ilin
 # el sekretoj
 
 pado=/home/formiko/revo
