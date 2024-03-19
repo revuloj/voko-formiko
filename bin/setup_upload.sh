@@ -90,9 +90,9 @@ servilo2.host=${FTP_SERVER2}
 servilo2.user=${FTP_USER2}
 servilo2.password=${FTP_PASSWD2}
 
-tempo.url=http://${CGI_SERVER}/cgi-bin/admin/time.pl
+tempo.url=https://${CGI_SERVER}/cgi-bin/admin/time.pl
 
-upload.url=http://${CGI_SERVER}/cgi-bin/admin/uprevo.pl?fname=
+upload.url=https://${CGI_SERVER}/cgi-bin/admin/uprevo.pl?fname=
 upload.user=${CGI_USER}
 upload.password=${CGI_PASSWD}
 
@@ -100,7 +100,7 @@ upload2.url=https://${CGI_SERVER2}/cgi-bin/admin/uprevo.pl?fname=
 upload2.user=${CGI_USER2}
 upload2.password=${CGI_PASSWD2}
 
-vikio.url=http://${CGI_SERVER}/cgi-bin/admin/upviki.pl?download=0
+vikio.url=https://${CGI_SERVER}/cgi-bin/admin/upviki.pl?download=0
 vikio.user=${CGI_USER}
 vikio.password=${CGI_PASSWD}
 
