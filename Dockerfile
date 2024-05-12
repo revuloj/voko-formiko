@@ -51,7 +51,7 @@ ENV REVO=/home/formiko/revo \
     VOKO=/home/formiko/voko \
     SAXONJAR=/usr/share/java/saxonb.jar \
     JINGJAR=/usr/share/java/jing.jar \
-    ANT_OPTS=-Xmx4000m \
+    ANT_OPTS="-Xms4048m -Xmx12144m" \
     LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 #    GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
 
