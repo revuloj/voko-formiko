@@ -266,6 +266,10 @@
         </condition>
       </fail>      
 
+      <!-- tempo -->
+      <tstamp><format property="srv.tempo-ek" pattern="hhmmss"/></tstamp>
+      <echo message="srv-servo-github-diurne, tempo-ek: ${srv.tempo-ek}"/>      
+
       <!-- ### 1a kalkulu la bazon ### -->
 
      <ant antfile="${v.voko.ant}/vortaro.xml" inheritAll="false">
@@ -274,10 +278,18 @@
         <target name="inxtez-bazo"/>
      </ant>  
 
+      <!-- tempo -->
+      <tstamp><format property="srv.tempo-baz" pattern="hhmmss"/></tstamp>
+      <echo message="srv-servo-github-diurne, tempo-baz: ${srv.tempo-baz}"/>      
+
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
         <target name="revo-referenco"/>
      </ant>
+
+      <!-- tempo -->
+      <tstamp><format property="srv.tempo-ref" pattern="hhmmss"/></tstamp>
+      <echo message="srv-servo-github-diurne, tempo-ref: ${srv.tempo-ref}"/>      
 
      <!-- ### 2a kalkulu la diferencon ### -->
 
@@ -287,16 +299,36 @@
         <target name="inxtez-pluso"/>
      </ant>  
 
+      <!-- tempo -->
+      <tstamp><format property="srv.tempo-plus" pattern="hhmmss"/></tstamp>
+      <echo message="srv-servo-github-diurne, tempo-plus: ${srv.tempo-plus}"/>      
+
+
      <ant antfile="${v.voko.ant}/spegulo.xml" inheritAll="false">   
         <property name="v.bazo" location="${v.bazo}"/>
         <property name="revo.dato" value="${v.dato}"/>
         <property name="revo.tempo" value="${v.tempo}"/> <!-- uzata en la dosiernomo 
           de la arkivo, do devas koincidi en revo-tar-gh kaj revo-upload -->
         <target name="revo-diferenco"/>
+
+      <!-- tempo -->
+      <tstamp><format property="srv.tempo-dif" pattern="hhmmss"/></tstamp>
+      <echo message="srv-servo-github-diurne, tempo-dif: ${srv.tempo-dif}"/>      
+
         <!-- ne plu sendu al la origina servilo: target name="revo-upload"/ -->
         <target name="revo-upload2"/> <!-- tio sendas al la nova 1blu-servilo -->
+
+      <!-- tempo -->
+      <tstamp><format property="srv.tempo-upl" pattern="hhmmss"/></tstamp>
+      <echo message="srv-servo-github-diurne, tempo-upl: ${srv.tempo-upl}"/>      
+
         <target name="revo-viki-ligoj"/> <!-- aktualigu Vikipedio-referencojn -->
      </ant>        
+
+      <!-- tempo -->
+      <tstamp><format property="srv.tempo-fin" pattern="hhmmss"/></tstamp>
+      <echo message="srv-servo-github-diurne, tempo-fin: ${srv.tempo-fin}"/>      
+
 
 <!--  ni rezignas tie ĉi pri la pakaĵo, ni nun alpendigas plurajn ZIP-dosierojn al ĉiutatagaj eldonoj anst.
      <ant antfile="${v.voko.ant}/pakajhoj.xml" inheritAll="false">   
