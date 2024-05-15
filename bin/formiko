@@ -48,6 +48,7 @@ echo "celo: $target"
 
 case $prefix in
 srv)
+  ant -diagnostics
   cd ${REVO} && /usr/bin/ant -f ${VOKO}/ant/redaktoservo-docker.xml $target
   ;;
 inx)
