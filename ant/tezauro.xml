@@ -83,7 +83,9 @@
 
   <target name="tez-kontrolu-mrk" depends="tez-preparo,tez-retigo"
      description="eltiras la markojn el la tezaŭro-dosiero kaj kontrolas unikecon">
-     <xslt in="${v.tmp}/tez_ret.xml" out="${v.tmp}/tez_mrk.xml"  style="${v.voko.xsl}/inx_markoj.xsl"/>
+     <xslt in="${v.tmp}/tez_ret.xml" out="${v.tmp}/tez_mrk.xml"  style="${v.voko.xsl}/inx_markoj.xsl">
+             <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+     </xslt>
       <exec executable="bash">
         <arg value="-c"/>
         <arg value="echo 'trovi duoblajn markojn en ${v.tmp}/tez_mrk.xml...'; sort ${v.tmp}/tez_mrk.xml | uniq -cd"/>
@@ -259,12 +261,14 @@
 		  (baza formato 'turtle')">
 
       <xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/revo-tezauro.ttl"  
-	    style="${v.voko.xsl}/revo_onto.xsl"/>
-<!--       classpathref="saxon.classpath">
+	    style="${v.voko.xsl}/revo_onto.xsl">
+<!--       classpathref="saxon.classpath" -->
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-      </xslt> -->
+      </xslt>
       <xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/revo-listoj.ttl"  
-	    style="${v.voko.xsl}/onto_lst.xsl"/>
+	      style="${v.voko.xsl}/onto_lst.xsl">
+              <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      </xslt>
   </target>
 
 <!--

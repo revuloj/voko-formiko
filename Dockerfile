@@ -45,6 +45,9 @@ RUN curl -LO https://dlcdn.apache.org/ant/antlibs/antunit/binaries/apache-ant-an
 # openssh-server 	&& mkdir -p /var/run/sshd 
 # libsaxonhe-java: havas problemon transformante multajn artikolojn: normalizationData.xml not found...
 
+# tion oni povos forigi: -Djava.security.manager=allow"
+# metante ĉie <java fork="true"
+
 RUN useradd -ms /bin/bash -u 1001 formiko
 WORKDIR /home/formiko
 ENV REVO=/home/formiko/revo \
@@ -52,8 +55,9 @@ ENV REVO=/home/formiko/revo \
     SAXONJAR=/usr/share/java/saxonb.jar \
     JINGJAR=/usr/share/java/jing.jar \
     ANT_OPTS="-Xms3072m -Xmx6144m -Djava.security.manager=allow" \
-    ANT_ARGS="-logger org.apache.tools.ant.listener.ProfileLogger" \
     LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
+
+#    ANT_ARGS="-logger org.apache.tools.ant.listener.ProfileLogger" \
 #    GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
 
 # problemo kun normalizeData.xml en Saxon-HE!
