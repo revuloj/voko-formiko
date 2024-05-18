@@ -168,8 +168,8 @@
   <target name="dict-xdxf" depends="dict-xdxf-preparo" description="kreas xdxf-dosieron de la vortaro"
     unless="xdxf.aktuala">
 
-    <java classname="de.steloj.respiro.DirectoryTransformer"
-     logError="true">
+    <java classname="de.steloj.respiro.DirectoryTransformerSaxon"
+      fork="true" logError="true">
          <!-- arg value="-v"/-->
          <arg path="${v.revo.xml}/../xml"/>
          <arg file="${v.voko.xsl}/revoxdxf.xsl"/>
@@ -177,7 +177,7 @@
          <classpath>
            <pathelement location="${v.voko.ant}/respiro.jar"/>
            <pathelement path="${java.class.path}"/>
-           <pathelement location="${v.xalan-ser}"/>
+           <pathelement location="${saxon}"/>
        </classpath>
     </java>
 

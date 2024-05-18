@@ -10,8 +10,10 @@
   <property environment="ENV"/>
   <property name="v.voko" location="${ENV.VOKO}"/>
   <!-- property name="v.saxon" location="${ENV.SAXON}/saxon8.jar"/ -->
+  <!-- ne plu uzu xalan, ĝi ne plu estas flegata kaj eble eĉ estas sekurrisko
   <property name="v.xalan" location="${ENV.XALAN}/xalan-j2.jar"/>
   <property name="v.xalan-ser" location="${ENV.XALAN}/xalan-j2-serializer.jar"/>
+  -->
   <property name="v.voko.ant" location="${v.voko}/ant"/>
   <property name="v.bazo" location="${user.dir}"/>
   <property name="v.bazo.inx" location="${v.bazo}/inx"/>
@@ -89,17 +91,31 @@
     description="faras la dosieron indekso.xml el chiuj artikoloj kiel bazo por chiuj indeksoj" 
     depends="inx-preparo">
 
-    <java classname="de.steloj.respiro.DirectoryTransformer"
+    <java classname="de.steloj.respiro.DirectoryTransformerSaxon"
      fork="true" logError="true">
          <!-- arg value="-v"/ -->
+         <!-- arg value="-Dhttp://saxon.sf.net/feature/allow-external-functions=true"/ -->
+         <!--
+         <arg value="-p"/>
+         <arg value="verbose=true"/>
+        -->
          <arg path="${v.bazo.xml}"/>
          <arg file="${v.voko.xsl}/inx_eltiro.xsl"/>
          <arg file="${v.tmp}/indekso.xml"/>
+
+         <classpath>
+           <pathelement location="${saxon}"/>
+	         <pathelement location="${v.voko.ant}/respiro.jar"/>
+           <pathelement path="${java.class.path}"/>
+       </classpath>
+
+<!-- ne plu uzu xalan
          <classpath>
            <pathelement location="${v.voko.ant}/respiro.jar"/>
            <pathelement path="${java.class.path}"/>
            <pathelement location="${v.xalan-ser}"/>
        </classpath>
+       -->
     </java>
 
   </target>

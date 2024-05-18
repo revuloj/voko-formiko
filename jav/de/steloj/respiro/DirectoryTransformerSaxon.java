@@ -109,7 +109,7 @@ public class DirectoryTransformerSaxon {
 		XsltTransformer transformer = stylesheet.load();
 		//transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION,"yes");	
 		
-		// trransdonu XSL parametrojn
+		// transdonu XSL parametrojn
 		// https://www.saxonica.com/html/documentation/javadoc/net/sf/saxon/s9api/XsltTransformer.html#setParameter-net.sf.saxon.s9api.QName-net.sf.saxon.s9api.XdmValue-
 			
 			for (Map.Entry<String, String> par : params.entrySet()) {

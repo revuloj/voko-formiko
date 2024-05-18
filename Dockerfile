@@ -19,10 +19,11 @@ LABEL Author=<diestel@steloj.de>
 ARG DEBIAN_FRONTEND=noninteractive
 
 # libcommons-net-java, liboro-java required for ant ftp task
+# evitu uzu malnoviĝintan, eble nesekuran: libxalan2-java
 RUN apt-get update && apt-get install -y --no-install-recommends \
   locales openjdk-21-jre-headless \
     curl lbzip2 unzip rsync git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
-    libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
+    libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
     dictzip lynx xsltproc rxp \
 	&& rm -rf /var/lib/apt/lists/* \
   && ln -s /usr/share/java/commons-net.jar /usr/share/ant/lib/commons-net.jar \
@@ -46,6 +47,7 @@ RUN curl -LO https://dlcdn.apache.org/ant/antlibs/antunit/binaries/apache-ant-an
 # libsaxonhe-java: havas problemon transformante multajn artikolojn: normalizationData.xml not found...
 
 # tion oni povos forigi: -Djava.security.manager=allow"
+# ANT_OPTS="-Xms3072m -Xmx6144m -Djava.security.manager=allow" 
 # metante ĉie <java fork="true"
 
 RUN useradd -ms /bin/bash -u 1001 formiko
@@ -54,7 +56,7 @@ ENV REVO=/home/formiko/revo \
     VOKO=/home/formiko/voko \
     SAXONJAR=/usr/share/java/saxonb.jar \
     JINGJAR=/usr/share/java/jing.jar \
-    ANT_OPTS="-Xms3072m -Xmx6144m -Djava.security.manager=allow" \
+    ANT_OPTS="-Xms3072m -Xmx6144m" \
     LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
 #    ANT_ARGS="-logger org.apache.tools.ant.listener.ProfileLogger" \
