@@ -90,7 +90,7 @@
     depends="inx-preparo">
 
     <java classname="de.steloj.respiro.DirectoryTransformer"
-     logError="true">
+     fork="true" logError="true">
          <!-- arg value="-v"/ -->
          <arg path="${v.bazo.xml}"/>
          <arg file="${v.voko.xsl}/inx_eltiro.xsl"/>
@@ -124,11 +124,10 @@
 
   <target name="inx-kategorioj" depends="inx-preparo,inx-eltiro"
      description="eltiri la kapvortojn, tradukojn, fakindikojn ktp. el la indeks-dosiero">
-     <xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/inx_kat.xml"  style="${v.voko.xsl}/inx_kategorioj.xsl"/>
-<!--       classpathref="saxon.classpath">
+     <xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/inx_kat.xml"  style="${v.voko.xsl}/inx_kategorioj.xsl">
+<!--       classpathref="saxon.classpath"> -->
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-      </xslt> -->
-      
+      </xslt>      
   </target>
 
   <target name="inx-ordigo" depends="inx-preparo,inx-kategorioj"
@@ -262,7 +261,7 @@
      description="kreas raporton pri diversaj eraroj en la artikoloj">
 
      <java classname="de.steloj.respiro.DirectoryTransformerSaxon"
-       logError="true">
+       fork="true" logError="true">
          <!-- arg value="-v"/ -->
          <!-- arg value="-Dhttp://saxon.sf.net/feature/allow-external-functions=true"/ -->
          <arg value="-p"/>

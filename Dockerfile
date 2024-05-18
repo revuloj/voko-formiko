@@ -20,7 +20,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # libcommons-net-java, liboro-java required for ant ftp task
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  locales openjdk-17-jre-headless \
+  locales openjdk-21-jre-headless \
     curl lbzip2 unzip rsync git cron ssh libjsch-java libcommons-net-java liboro-java ant ant-optional \
     libxalan2-java libsaxonb-java libjing-java jing sqlite3 bsdmainutils \
     dictzip lynx xsltproc rxp \
@@ -51,7 +51,7 @@ ENV REVO=/home/formiko/revo \
     VOKO=/home/formiko/voko \
     SAXONJAR=/usr/share/java/saxonb.jar \
     JINGJAR=/usr/share/java/jing.jar \
-    ANT_OPTS="-Xms4048m -Xmx12144m" \
+    ANT_OPTS="-Xms3072m -Xmx6144m -Djava.security.manager=allow" \
     ANT_ARGS="-logger org.apache.tools.ant.listener.ProfileLogger" \
     LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 #    GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
