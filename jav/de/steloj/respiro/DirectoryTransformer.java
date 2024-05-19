@@ -2,7 +2,7 @@
 //  #
 //  #    $Id$
 //  #
-//  #    Copyright (C) 2006-{year}  Wolfram Diestel
+//  #    Copyright (C) 2006-2020  Wolfram Diestel
 //  #
 //  #    This program is free software; you can redistribute it and/or modify
 //  #    it under the terms of the GNU General Public License as published by
@@ -21,6 +21,11 @@
 //  #    Send comments and bug fixes to diestel@steloj.de
 //  #
 //  #**************************************************************************/
+
+/*
+Uzu DirectoryTransformerSaxon anstataŭe, ĉar tiu ĉi uzas aprioran libxalan2-java,
+kiuj ne plu estas flegata kaj povas kaŭzi do iajn problemojn.
+*/
 
 package de.steloj.respiro;
 
