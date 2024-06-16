@@ -38,7 +38,7 @@
        username="${revo.redaktantoj.user}"
        password="${revo.redaktantoj.password}" verbose="true"/ -->
 
-     <exec executable="${curl}">
+     <exec executable="${curl}" failonerror="true">
        <arg value="-u"/>
        <arg value="${revo.redaktantoj.user}:${revo.redaktantoj.password}"/>
        <arg value="-o"/>
@@ -86,7 +86,7 @@
      <echo>enpakas shanghojn en ${revo.tmpdir}/${revo.filename}, 
          protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
 
-     <exec executable="${mirror}" output="${revo.logdir}/${revo.tarlog}">
+     <exec executable="${mirror}" output="${revo.logdir}/${revo.tarlog}" failonerror="true">
        <arg value="-t"/>
        <arg value="${revo.filename}"/>
        <arg value="revo"/>
@@ -139,7 +139,7 @@
    <target name="revo-forigendaj" depends="revo-preparo"
      description="eltrovas dosierojn, kiuj estas en la referenco, sed ne en aktuala versio kaj listigas en bv_forigu_tiujn.lst">
 
-     <exec executable="${rsync}" output="${revo.logdir}/rsync-delete.log">
+     <exec executable="${rsync}" output="${revo.logdir}/rsync-delete.log" failonerror="true">
       <arg value="-nrv"/>
       <arg value="--existing"/>
       <arg value="--ignore-existing"/>
@@ -176,7 +176,7 @@
       <!-- aktualigu dosierojn el revo al tmp/revo nur, se ili enhave ŝanĝiĝis,
          sed ne surbaze de la tempo-stampo. Tiel ni povos paki malsupre (-newer) 
          nur la vere diferencajn dosierojn -->
-      <exec executable="${rsync}" output="${revo.logdir}/${revo.tarlog}.rsync">
+      <exec executable="${rsync}" output="${revo.logdir}/${revo.tarlog}.rsync" failonerror="true">
         <arg value="--checksum"/>
         <arg value="-rv"/>
         <arg value="${revo.pado}/"/>
@@ -187,7 +187,7 @@
          protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
 
       <exec executable="${tar}" dir="${revo.tmpdir}"
-        output="${revo.logdir}/${revo.tarlog}">
+        output="${revo.logdir}/${revo.tarlog}" failonerror="true">
         <arg value="--newer"/>
         <arg file="${v.tgz}/.reftempo"/>
         <arg value="--ignore-failed-read"/>
@@ -226,7 +226,7 @@
          protokolo en  ${revo.logdir}/${revo.tarlog}</echo>
 
       <exec executable="${tar}" dir="${revo.tmpdir}/inx_tmp"
-        output="${revo.logdir}/${revo.tarlog}">
+        output="${revo.logdir}/${revo.tarlog}" failonerror="true">
         <arg value="--ignore-failed-read"/>
         <arg value="--exclude"/>
         <arg value="art/*.xml"/>
@@ -282,7 +282,7 @@
   </target>
 
   <!-- 
-     por sendi dosieron per ftp super TLS (ftps) ni ne povas uzi la ant-ftp-takson
+     por sendi dosieron per ftp per TLS (ftps) ni ne povas uzi la ant-ftp-takson
      Ni povas uzi curl kun - -ssl kaj -T por sendi dosieron tra ftps
 
      Ni uzas tion nur sur la nova servilo, kiu havas duan agordon servilo2.*
@@ -291,7 +291,7 @@
     <echo>sendas ${revo.tmpdir}/${revo.filename}
            al ${revo.servilo2.host}/${revo.servilo2.dir}</echo>
 
-     <exec executable="${curl}" output="${revo.logdir}/${revo.uploadlog}">
+     <exec executable="${curl}" output="${revo.logdir}/${revo.uploadlog}" failonerror="true">
        <arg value="--ssl"/>
        <arg value="-k"/>
        <arg value="-u"/>
@@ -370,7 +370,7 @@ ant -f ~/voko/ant/spegulo.xml -Drevo-tar-file-exists=true -Drevo.filename=revo-J
        username="${revo.upload.user}"
        password="${revo.upload.password}"/ -->
 
-     <exec executable="${curl}">
+     <exec executable="${curl}" failonerror="true">
        <arg value="-u"/>
        <arg value="${revo.upload.user}:${revo.upload.password}"/>
        <arg value="-o"/>
