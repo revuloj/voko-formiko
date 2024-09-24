@@ -184,6 +184,13 @@
 
   <target name="inx-oficialaj" depends="inx-preparo,inx-eltiro"
      description="kolekti la oficialajn radikojn el la indeks-dosiero">
+    <!-- kreas indekson de fundamentaj kaj oficialaj radikoj/vortoj,
+         kiujn ni poste bezonos kun voko-araneo/cgi/upofc.pl por referenci al
+         la oficialaj dokumentoj el la koncernaj Revo-artikoloj (en la tezaŭraj kadroj) 
+
+        Atentu, ke por novaj OA necesas aldoni koncernajn liniojn en voko-grundo/inx_ofc.xsl    
+    -->
+
      <!--xslt in="${v.tmp}/indekso.xml" out="${v.tmp}/inx_ofc.xml"  style="${v.voko.xsl}/inx_ofc.xsl"
        classpathref="saxon.classpath">
         <factory name="net.sf.saxon.TransformerFactoryImpl"/>
