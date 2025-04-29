@@ -3,11 +3,14 @@
 # tuj finu se unuopa komando fiaskas 
 # - necesas por distingi sukcesan de malsukcesa testaro
 set -e
+#set -x
 
 docker_image="${1:-voko-formiko:latest}"
 
+docker run --rm --name formiko-test --entrypoint '' ${docker_image} bash -c "ls -l /usr/local/bin && bash -n /usr/local/bin/*.sh"
+
 # lanĉi la test-procezujon
-docker run --name formiko-test --rm -d ${docker_image}
+docker run --rm --name formiko-test --rm -d ${docker_image}
 
 echo ""; echo "Ni petas helpon..."
 docker exec formiko-test formiko art-helpo

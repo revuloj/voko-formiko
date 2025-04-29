@@ -48,7 +48,10 @@ jobs:
            # kreu la procezujon
            ./sbin/eldono kreo
 
-      - name: Testoj de ${{ env.IMAGE_NAME }}
+      - name: Testo 1 de ${{ env.IMAGE_NAME }}
+        run: tst/docker-test.sh $IMAGE_NAME
+
+      - name: Testo 2 de ${{ env.IMAGE_NAME }}
         run: |
            docker run $IMAGE_NAME formiko med-kls
            docker run $IMAGE_NAME formiko-testo
