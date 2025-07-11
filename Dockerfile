@@ -59,8 +59,8 @@ ENV REVO=/home/formiko/revo \
     ANT_OPTS="-Xms3072m -Xmx6144m" \
     LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
-#    ANT_ARGS="-logger org.apache.tools.ant.listener.ProfileLogger" \
-#    GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
+#   ANT_ARGS="-logger org.apache.tools.ant.listener.ProfileLogger" \
+#   GRUNDO=/home/formiko/voko-grundo-${ZIP_SUFFIX} \
 
 # problemo kun normalizeData.xml en Saxon-HE!
 #ENV SAXONJAR /usr/share/java/Saxon-HE.jar
