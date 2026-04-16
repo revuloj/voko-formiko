@@ -7,7 +7,7 @@ FROM ghcr.io/revuloj/voko-grundo/voko-grundo:${VERSION} AS grundo
 #######################################################
 # staĝo 2: Ni bezonas Javon kaj Ant, Saxon ktp.
 #######################################################
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
 # problemo en Debian Buster: Could not perform immediate configuration on 'libnss-nis:amd64'
 # vd ankaŭ https://bugs.launchpad.net/ubuntu/+source/ubuntu-release-upgrader/+bug/1899272
