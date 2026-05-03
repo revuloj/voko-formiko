@@ -8,9 +8,11 @@ FROM ghcr.io/revuloj/voko-grundo/voko-grundo:${VERSION} AS grundo
 # staĝo 2: Ni bezonas Javon kaj Ant, Saxon ktp.
 #######################################################
 FROM ubuntu:noble
-
-# problemo en Debian Buster: Could not perform immediate configuration on 'libnss-nis:amd64'
+# Pro problemo en Debian Buster: Could not perform immediate configuration on 'libnss-nis:amd64'
 # vd ankaŭ https://bugs.launchpad.net/ubuntu/+source/ubuntu-release-upgrader/+bug/1899272
+# ni ŝanĝis de openjdk:jre-slim al ubuntu:... (2020-11-01)
+# Principe oni povus reiri al openjdk:... iam, forigante la pakaĵon openjdk-21-jre-headless
+
 LABEL Author=<diestel@steloj.de>
 
 # ARG VG_TAG
@@ -83,7 +85,7 @@ COPY --from=grundo build/ ${VOKO}/
 #COPY --from=grundo build/xsl/ ${VOKO}/xsl/
 
 RUN chmod go+w ${VOKO}/xsl && chown root:root ${VOKO}/smb \
-  && chown formiko ${VOKO}/cfg/klasoj.xml ${VOKO}/xsl/revohtml2.xsl ${VOKO}/xsl/revohtml.xsl \
+  && chown formiko ${VOKO}/cfg/klasoj.xml ${VOKO}/xsl/revohtml2.xsl  ${VOKO}/xsl/revohtml.xsl \
   && mkdir -p revo && mkdir -p tmp/inx_tmp \
   && mkdir -p log && chown -R formiko:users revo tmp log \
   && mkdir -p ${VOKO}/bin \
